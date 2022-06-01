@@ -20,21 +20,21 @@ const chooseCarrots = [
     {
         id: 16,
         name: "Choose A Carrot",
-        type: "Carrot",
+        type: "carrot",
         quantity: 1,
         color: "orange",
     },
     {
         id: 17,
         name: "Choose A Carrot",
-        type: "Carrot",
+        type: "carrot",
         quantity: 1,
         color: "orange",
     },
     {
         id: 18,
         name: "Choose A Carrot",
-        type: "Carrot",
+        type: "carrot",
         quantity: 1,
         color: "orange",
     },
@@ -48,28 +48,28 @@ const chooseCarrots = [
     {
         id: 20,
         name: "Choose A Carrot",
-        type: "Carrot",
+        type: "carrot",
         quantity: 1,
         color: "orange",
     },
     {
         id: 21,
         name: "Choose 2 Carrots",
-        type: "Carrot",
+        type: "carrot",
         quantity: 2,
         color: "orange",
     },
     {
         id: 22,
         name: "Choose 2 Carrots",
-        type: "Carrot",
+        type: "carrot",
         quantity: 2,
         color: "orange",
     },
     {
         id: 23,
         name: "Choose 2 Carrots",
-        type: "Carrot",
+        type: "carrot",
         quantity: 2,
         color: "orange",
     },
@@ -249,24 +249,93 @@ const dolla = [
     },
 ];
 
-// 31	Weapon	 Kitchen Whisk 	1
-// 32	Weapon	 Green Gelatin with Evil Pineapple Chunks 	2
-// 33	Weapon	 Ice Pick 	3
-// 34	Weapon	 Butcher’s Cleaver 	4
-// 35	Weapon	 Food Processor 	4
-// 36	Weapon	 Boiling Tar 	5
-// 37	Weapon	 Roaches 	5
-// 38	Weapon	 Bow & Arrow 	6
-// 39	Weapon	 Chain Saw 	6
-// 40	Weapon	 Guillotine 	7
-// 41	Weapon	 Sword 	7
-// 42	Weapon	 Flame Thrower 	8
-// 43	Weapon	 Torus Ring 	8
-// 44	Weapon	 Fluorine Gas 	9
-// 45	Weapon	 Laser Gun 	9
-// 46	Weapon	 The Trojan Bunny 	10
-// 47	Weapon	 The Ebola Virus 	11
-// 48	Weapon	 Nuclear Warhead 	12
+const weapons = [
+    {
+        id: 31,
+        type: "weapon",
+        name: "Kitchen Whisk",
+        color: "white",
+        quantity: 1,
+    },
+    {
+        id: 32,
+        type: "weapon",
+        name: "Green Gelatin with Evil Pineapple Chunks",
+        color: "white",
+        quantity: 2,
+    },
+    { id: 33, type: "weapon", name: "Ice Pick", color: "white", quantity: 3 },
+    {
+        id: 34,
+        type: "weapon",
+        name: "Butcher's Cleaver",
+        color: "white",
+        quantity: 4,
+    },
+    {
+        id: 35,
+        type: "weapon",
+        name: "Food Processor",
+        color: "white",
+        quantity: 4,
+    },
+    {
+        id: 36,
+        type: "weapon",
+        name: "Boiling Tar",
+        color: "white",
+        quantity: 5,
+    },
+    { id: 37, type: "weapon", name: "Roaches", color: "white", quantity: 5 },
+    {
+        id: 38,
+        type: "weapon",
+        name: "Bow & Arrow",
+        color: "white",
+        quantity: 6,
+    },
+    { id: 39, type: "weapon", name: "Chain Saw", color: "white", quantity: 6 },
+    { id: 40, type: "weapon", name: "Guillotine", color: "white", quantity: 7 },
+    { id: 41, type: "weapon", name: "Sword", color: "white", quantity: 7 },
+    {
+        id: 42,
+        type: "weapon",
+        name: "Flame Thrower",
+        color: "white",
+        quantity: 8,
+    },
+    { id: 43, type: "weapon", name: "Torus Ring", color: "white", quantity: 8 },
+    {
+        id: 44,
+        type: "weapon",
+        name: "Fluorine Gas",
+        color: "white",
+        quantity: 9,
+    },
+    { id: 45, type: "weapon", name: "Laser Gun", color: "white", quantity: 9 },
+    {
+        id: 46,
+        type: "weapon",
+        name: "The Trojan Bunny",
+        color: "white",
+        quantity: 10,
+    },
+    {
+        id: 47,
+        type: "weapon",
+        name: "The Ebola Virus",
+        color: "white",
+        quantity: 11,
+    },
+    {
+        id: 48,
+        type: "weapon",
+        name: "Nuclear Warhead",
+        color: "white",
+        quantity: 12,
+    },
+];
+
 // 49		 Area 51
 // 50		 Area 51
 // 51		 Bad Karma
@@ -318,6 +387,12 @@ const carrotDeckDefault = [
     { id: 110, number: "Carrot #8", name: "Seth", color: "orange" },
 ];
 
-const deckDefault = [...bunnies, ...chooseCarrots, ...feedTheBunny, ...dolla];
+const deckDefault = [
+    ...bunnies,
+    ...chooseCarrots,
+    ...feedTheBunny,
+    ...dolla,
+    ...weapons,
+];
 
 export { deckDefault, carrotDeckDefault };

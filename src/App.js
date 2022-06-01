@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./App.css";
 // import Bingo from "./bingo/Bingo.tsx";
 import { Container, Row } from "react-bootstrap";
 import Player from "./killerBunnies/Player.tsx";
-import {deckDefault, carrotDeckDefault} from "./killerBunnies/bluedeck";
-import Cell from "./killerBunnies/Card.tsx"
+import { deckDefault, carrotDeckDefault } from "./killerBunnies/bluedeck";
+import Cell from "./killerBunnies/Card.tsx";
 
 function shuffleArray(array) {
     let i = array.length - 1;
@@ -27,48 +27,61 @@ function DisplayCardsList({ cards }) {
     );
 }
 
-function App() {
-    const [deck, setDeck] = useState(shuffleArray(deckDefault));
-    const [carrotDeck, setCarrotDeck] = useState(
-        shuffleArray(carrotDeckDefault)
-    );
+const initialGameState = {
+    deck: [],
+    carrotDeck: [],
+    discardedDeck: [],
+};
 
-    function removeTopCard() {
-        setDeck(
-            deck.filter((card, idx) => {
+function App() {
+    const [gameState, setGameState] = useState(initialGameState);
+
+    useEffect(() => {
+        setGameState({
+            ...gameState,
+            deck: shuffleArray(deckDefault),
+            carrotDeck: shuffleArray(carrotDeckDefault),
+        });
+    }, []);
+
+    function takeCard(pile) {
+        setGameState({
+            ...gameState,
+            [pile]: gameState[pile].filter((card, idx) => {
                 if (idx !== 0) return card;
-            })
-        );
+            }),
+        });
     }
-    function takeCarrot() {
-        setCarrotDeck(
-            carrotDeck.filter((card, idx) => {
-                if (idx !== 0) return card;
-            })
-        );
+
+    function discardCard(card) {
+        setGameState({
+            ...gameState,
+            discardedDeck: [...gameState.discardedDeck, card],
+        });
     }
 
     return (
         <Container>
             <Row>
                 {/* <DisplayCardsList cards={deck} /> */}
-                <Cell title={deck.length} />
-                <Cell title={carrotDeck.length} color="orange" />
+                <Cell
+                    title={gameState.deck.length}
+                    handleClick={() => console.log()}
+                />
+                <Cell
+                    title={gameState.carrotDeck.length}
+                    color="orange"
+                    handleClick={() => console.log()}
+                />
             </Row>
             <div style={{ padding: "1em" }}></div>
             <Row>
                 <Player
-                    deck={deck}
-                    removeTopCard={removeTopCard}
-                    carrotDeck={carrotDeck}
-                    takeCarrot={takeCarrot}
+                    gameState={gameState}
+                    takeCard={takeCard}
+                    discardCard={discardCard}
                 />
-                <Player
-                    deck={deck}
-                    removeTopCard={removeTopCard}
-                    carrotDeck={carrotDeck}
-                    takeCarrot={takeCarrot}
-                />
+                {/* <Player gameState={gameState} takeCard={takeCard} /> */}
             </Row>
         </Container>
     );

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Col, Button } from "react-bootstrap";
 import Cell from "./Card.tsx";
 
@@ -25,7 +25,9 @@ function DisplayCardsIcons({ cards, setRun, addDolla }) {
     );
 }
 
-function Player({ deck, removeTopCard, carrotDeck, takeCarrot }) {
+function Player({ gameState, takeCard, discardCard }) {
+    const { deck, carrotDeck, discardedDeck } = gameState;
+
     const [hand, setHand] = useState([]);
     const [run, setRun] = useState([]);
     const [dolla, setDolla] = useState(0);
@@ -33,15 +35,20 @@ function Player({ deck, removeTopCard, carrotDeck, takeCarrot }) {
     const [carrots, setCarrots] = useState([]);
     const [playingCard, setPlayingCard] = useState(emptyPlayingCard);
 
+    useEffect(() => {
+        console.log(discardedDeck);
+    }, [discardedDeck]);
+
     function addDolla(card) {
         setDolla(dolla + card.quantity);
         setHand(hand.filter((c) => c.id !== card.id));
+        discardCard(card);
     }
 
     function draw() {
         if (deck.length > 0 && hand.length + run.length <= 6) {
             setHand([...hand, deck[0]]);
-            removeTopCard();
+            takeCard("deck");
         }
     }
 
@@ -64,7 +71,22 @@ function Player({ deck, removeTopCard, carrotDeck, takeCarrot }) {
             setBunnies([...bunnies, card]);
             setPlayingCard(emptyPlayingCard);
         } else if (card.type === "carrot") {
-            //
+            if (bunnies.length > 0) {
+                if (card.quantity === 1)
+                    setCarrots([...carrots, carrotDeck[0]]);
+                else if (card.quantity === 2) {
+                    setCarrots([...carrots, carrotDeck[0], carrotDeck[1]]);
+                    takeCard("carrotDeck");
+                }
+                takeCard("carrotDeck");
+            }
+            setPlayingCard(emptyPlayingCard);
+            discardCard(card);
+        } else if (card.type == "weapon") {
+            if (bunnies.length === 0) {
+                setPlayingCard(emptyPlayingCard);
+                discardCard(card);
+            }
         } else {
             console.log("click");
         }
