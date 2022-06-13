@@ -1,21 +1,11 @@
 import React, { useEffect, useState } from "react";
-import "./App.css";
-// import Bingo from "./bingo/Bingo.tsx";
 import { Container, Row } from "react-bootstrap";
 import Player from "./killerBunnies/Player.tsx";
 import { deckDefault, carrotDeckDefault } from "./killerBunnies/bluedeck";
-import Cell from "./killerBunnies/Card.tsx";
+import { Deck } from "./killerBunnies/Card.tsx";
+import { shuffleArray } from "./killerBunnies/utils";
 
-function shuffleArray(array) {
-    let i = array.length - 1;
-    for (i; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        const temp = array[i];
-        array[i] = array[j];
-        array[j] = temp;
-    }
-    return array;
-}
+import "./App.css";
 
 function DisplayCardsList({ cards }) {
     return (
@@ -66,12 +56,12 @@ function App() {
         <Container>
             <Row>
                 {/* <DisplayCardsList cards={deck} /> */}
-                <Cell
+                <Deck
                     card={{ cardType: "Deck" }}
                     title={gameState.deck.length}
                     handleClick={() => console.log()}
                 />
-                <Cell
+                <Deck
                     card={{ cardType: "Carrots" }}
                     title={gameState.carrotDeck.length}
                     color="orange"
