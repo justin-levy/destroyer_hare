@@ -3,7 +3,7 @@ body {
   background-color: #fffef2;
 }
 
-.cell {
+/* .cell {
   height: 200px;
   line-height: 200px;
   width: 200px;
@@ -16,10 +16,11 @@ body {
   display: inline-block;
   margin: 1px;
 }
+*/
 .card {
   height: 200px;
-  line-height: 200px;
   width: 143px;
+  line-height: auto;
   background-color: white;
   border-radius: 16px;
   border-color: black;
@@ -28,4 +29,7 @@ body {
   text-align: center;
   display: inline-block;
   margin: 1px;
+}
+.szh-menu-container {
+  display: inline-block;
 }

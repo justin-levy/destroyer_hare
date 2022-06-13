@@ -1,22 +1,118 @@
-const bunnies = [
-    { id: 1, name: "Congenial Bunny", type: "bunny", color: "blue" },
-    { id: 2, name: "Gleeful Bunny", type: "bunny", color: "blue" },
-    { id: 3, name: "Lumbering Bunny", type: "bunny", color: "blue" },
-    { id: 4, name: "Sinister Bunny", type: "bunny", color: "blue" },
-    { id: 5, name: "Timid Bunny", type: "bunny", color: "blue" },
-    { id: 6, name: "Congenial Bunny", type: "bunny", color: "green" },
-    { id: 7, name: "Gleeful Bunny", type: "bunny", color: "green" },
-    { id: 8, name: "Lumbering Bunny", type: "bunny", color: "green" },
-    { id: 9, name: "Sinister Bunny", type: "bunny", color: "green" },
-    { id: 10, name: "Timid Bunny", type: "bunny", color: "green" },
-    { id: 11, name: "Congenial Bunny", type: "bunny", color: "orange" },
-    { id: 12, name: "Gleeful Bunny", type: "bunny", color: "orange" },
-    { id: 13, name: "Lumbering Bunny", type: "bunny", color: "orange" },
-    { id: 14, name: "Sinister Bunny", type: "bunny", color: "orange" },
-    { id: 15, name: "Timid Bunny", type: "bunny", color: "orange" },
+const bunny = [
+    {
+        name: "Congenial Bunny",
+        id: 1,
+        cardType: "run",
+        type: "bunny",
+        background: "flat",
+        agressive: "no",
+        deck: "blue",
+        color: "blue",
+    },
+    {
+        name: "Gleeful Bunny",
+        id: 2,
+        cardType: "run",
+        type: "bunny",
+        background: "flat",
+        agressive: "no",
+        deck: "blue",
+        color: "blue",
+    },
+    {
+        id: 3,
+        cardType: "run",
+        name: "Lumbering Bunny",
+        type: "bunny",
+        color: "blue",
+    },
+    {
+        id: 4,
+        cardType: "run",
+        name: "Sinister Bunny",
+        type: "bunny",
+        color: "blue",
+    },
+    {
+        id: 5,
+        cardType: "run",
+        name: "Timid Bunny",
+        type: "bunny",
+        color: "blue",
+    },
+    {
+        id: 6,
+        cardType: "run",
+        name: "Congenial Bunny",
+        type: "bunny",
+        color: "green",
+    },
+    {
+        id: 7,
+        cardType: "run",
+        name: "Gleeful Bunny",
+        type: "bunny",
+        color: "green",
+    },
+    {
+        id: 8,
+        cardType: "run",
+        name: "Lumbering Bunny",
+        type: "bunny",
+        color: "green",
+    },
+    {
+        id: 9,
+        cardType: "run",
+        name: "Sinister Bunny",
+        type: "bunny",
+        color: "green",
+    },
+    {
+        id: 10,
+        cardType: "run",
+        name: "Timid Bunny",
+        type: "bunny",
+        color: "green",
+    },
+    {
+        id: 11,
+        cardType: "run",
+        name: "Congenial Bunny",
+        type: "bunny",
+        color: "orange",
+    },
+    {
+        id: 12,
+        cardType: "run",
+        name: "Gleeful Bunny",
+        type: "bunny",
+        color: "orange",
+    },
+    {
+        id: 13,
+        cardType: "run",
+        name: "Lumbering Bunny",
+        type: "bunny",
+        color: "orange",
+    },
+    {
+        id: 14,
+        cardType: "run",
+        name: "Sinister Bunny",
+        type: "bunny",
+        color: "orange",
+    },
+    {
+        id: 15,
+        cardType: "run",
+        name: "Timid Bunny",
+        type: "bunny",
+        color: "orange",
+    },
 ];
 
-const chooseCarrots = [
+const carrot = [
     {
         id: 16,
         name: "Choose A Carrot",
@@ -41,7 +137,7 @@ const chooseCarrots = [
     {
         id: 19,
         name: "Choose A Carrot",
-        type: "Carrot",
+        type: "carrot",
         quantity: 1,
         color: "orange",
     },
@@ -52,30 +148,30 @@ const chooseCarrots = [
         quantity: 1,
         color: "orange",
     },
-    {
-        id: 21,
-        name: "Choose 2 Carrots",
-        type: "carrot",
-        quantity: 2,
-        color: "orange",
-    },
-    {
-        id: 22,
-        name: "Choose 2 Carrots",
-        type: "carrot",
-        quantity: 2,
-        color: "orange",
-    },
-    {
-        id: 23,
-        name: "Choose 2 Carrots",
-        type: "carrot",
-        quantity: 2,
-        color: "orange",
-    },
+    // {
+    //     id: 21,
+    //     name: "Choose 2 Carrots",
+    //     type: "carrot",
+    //     quantity: 2,
+    //     color: "orange",
+    // },
+    // {
+    //     id: 22,
+    //     name: "Choose 2 Carrots",
+    //     type: "carrot",
+    //     quantity: 2,
+    //     color: "orange",
+    // },
+    // {
+    //     id: 23,
+    //     name: "Choose 2 Carrots",
+    //     type: "carrot",
+    //     quantity: 2,
+    //     color: "orange",
+    // },
 ];
 
-const feedTheBunny = [
+const feed = [
     {
         id: 24,
         name: "Feed The Bunnny",
@@ -141,115 +237,7 @@ const feedTheBunny = [
     },
 ];
 
-const dolla = [
-    {
-        id: 87,
-        type: "dolla",
-        name: "Kaballa Dolla",
-        quantity: 1,
-        color: "white",
-    },
-    {
-        id: 88,
-        type: "dolla",
-        name: "Kaballa Dolla",
-        quantity: 1,
-        color: "white",
-    },
-    {
-        id: 89,
-        type: "dolla",
-        name: "Kaballa Dolla",
-        quantity: 1,
-        color: "white",
-    },
-    {
-        id: 90,
-        type: "dolla",
-        name: "Kaballa Dolla",
-        quantity: 1,
-        color: "white",
-    },
-    {
-        id: 91,
-        type: "dolla",
-        name: "Kaballa Dolla",
-        quantity: 1,
-        color: "white",
-    },
-    {
-        id: 92,
-        type: "dolla",
-        name: "Kaballa Dolla",
-        quantity: 2,
-        color: "green",
-    },
-    {
-        id: 93,
-        type: "dolla",
-        name: "Kaballa Dolla",
-        quantity: 2,
-        color: "green",
-    },
-    {
-        id: 94,
-        type: "dolla",
-        name: "Kaballa Dolla",
-        quantity: 2,
-        color: "green",
-    },
-    {
-        id: 95,
-        type: "dolla",
-        name: "Kaballa Dolla",
-        quantity: 2,
-        color: "green",
-    },
-    {
-        id: 96,
-        type: "dolla",
-        name: "Kaballa Dolla",
-        quantity: 2,
-        color: "green",
-    },
-    {
-        id: 97,
-        type: "dolla",
-        name: "Kaballa Dolla",
-        quantity: 2,
-        color: "green",
-    },
-    {
-        id: 98,
-        type: "dolla",
-        name: "Kaballa Dolla",
-        quantity: 5,
-        color: "pink",
-    },
-    {
-        id: 99,
-        type: "dolla",
-        name: "Kaballa Dolla",
-        quantity: 5,
-        color: "pink",
-    },
-    {
-        id: 100,
-        type: "dolla",
-        name: "Kaballa Dolla",
-        quantity: 5,
-        color: "pink",
-    },
-    {
-        id: 101,
-        type: "dolla",
-        name: "Kaballa Dolla",
-        quantity: 10,
-        color: "yellow",
-    },
-];
-
-const weapons = [
+const weapon = [
     {
         id: 31,
         type: "weapon",
@@ -370,10 +358,146 @@ const weapons = [
 // 80		 The Magic Spatula
 // 81		 Rooney’s Reusables
 // 82		 Sunny Day
-// 83		 Terrible Misfortune (Fiat)
-// 84		 Terrible Misfortune (Hedge Clippers)
-// 85		 Terrible Misfortune (Plutonium)
-// 86		 Terrible Misfortune (Yogurt Truck)
+
+const misfortune = [
+    {
+        id: 83,
+        type: "misfortune",
+        name: "Fiat",
+        color: "grey",
+        description: "Terrible Misfortune",
+    },
+    {
+        id: 84,
+        type: "misfortune",
+        name: "Hedge Clippers",
+        color: "grey",
+        description: "Terrible Misfortune",
+    },
+    {
+        id: 85,
+        type: "misfortune",
+        name: "Plutonium",
+        color: "grey",
+        description: "Terrible Misfortune",
+    },
+    {
+        id: 86,
+        type: "misfortune",
+        name: "Yogurt Truck",
+        color: "grey",
+        description: "Terrible Misfortune",
+    },
+];
+
+const dolla = [
+    {
+        id: 87,
+        type: "dolla",
+        name: "Kaballa Dolla",
+        quantity: 1,
+        color: "white",
+    },
+    {
+        id: 88,
+        type: "dolla",
+        name: "Kaballa Dolla",
+        quantity: 1,
+        color: "white",
+    },
+    {
+        id: 89,
+        type: "dolla",
+        name: "Kaballa Dolla",
+        quantity: 1,
+        color: "white",
+    },
+    {
+        id: 90,
+        type: "dolla",
+        name: "Kaballa Dolla",
+        quantity: 1,
+        color: "white",
+    },
+    {
+        id: 91,
+        type: "dolla",
+        name: "Kaballa Dolla",
+        quantity: 1,
+        color: "white",
+    },
+    {
+        id: 92,
+        type: "dolla",
+        name: "Kaballa Dolla",
+        quantity: 2,
+        color: "green",
+    },
+    {
+        id: 93,
+        type: "dolla",
+        name: "Kaballa Dolla",
+        quantity: 2,
+        color: "green",
+    },
+    {
+        id: 94,
+        type: "dolla",
+        name: "Kaballa Dolla",
+        quantity: 2,
+        color: "green",
+    },
+    {
+        id: 95,
+        type: "dolla",
+        name: "Kaballa Dolla",
+        quantity: 2,
+        color: "green",
+    },
+    {
+        id: 96,
+        type: "dolla",
+        name: "Kaballa Dolla",
+        quantity: 2,
+        color: "green",
+    },
+    {
+        id: 97,
+        type: "dolla",
+        name: "Kaballa Dolla",
+        quantity: 2,
+        color: "green",
+    },
+    {
+        id: 98,
+        type: "dolla",
+        name: "Kaballa Dolla",
+        quantity: 5,
+        color: "pink",
+    },
+    {
+        id: 99,
+        type: "dolla",
+        name: "Kaballa Dolla",
+        quantity: 5,
+        color: "pink",
+    },
+    {
+        id: 100,
+        type: "dolla",
+        name: "Kaballa Dolla",
+        quantity: 5,
+        color: "pink",
+    },
+    {
+        id: 101,
+        type: "dolla",
+        name: "Kaballa Dolla",
+        quantity: 10,
+        color: "yellow",
+    },
+];
+
 // 102		 Kaballa’s Market (Starter Card)
 
 const carrotDeckDefault = [
@@ -388,11 +512,12 @@ const carrotDeckDefault = [
 ];
 
 const deckDefault = [
-    ...bunnies,
-    ...chooseCarrots,
-    ...feedTheBunny,
-    ...dolla,
-    ...weapons,
+    ...bunny,
+    // ...carrot,
+    ...feed,
+    // ...weapon,
+    // ...misfortune,
+    // ...dolla,
 ];
 
 export { deckDefault, carrotDeckDefault };

@@ -8,6 +8,15 @@ const emptyPlayingCard = {
     name: "",
 };
 
+const defaultPlayerState = {
+    hand: [],
+    run: [],
+    dolla: [],
+    bunnies: [],
+    carrots: [],
+    playingCard: emptyPlayingCard,
+};
+
 function DisplayCardsIcons({ cards, setRun, addDolla }) {
     return (
         <>
@@ -28,26 +37,31 @@ function DisplayCardsIcons({ cards, setRun, addDolla }) {
 function Player({ gameState, takeCard, discardCard }) {
     const { deck, carrotDeck, discardedDeck } = gameState;
 
-    const [hand, setHand] = useState([]);
-    const [run, setRun] = useState([]);
-    const [dolla, setDolla] = useState(0);
-    const [bunnies, setBunnies] = useState([]);
-    const [carrots, setCarrots] = useState([]);
-    const [playingCard, setPlayingCard] = useState(emptyPlayingCard);
+    const [playerState, setPlayerState] = useState(defaultPlayerState);
+    const { hand, run, dolla, bunnies, carrots, playingCard } = playerState;
 
-    useEffect(() => {
-        console.log(discardedDeck);
-    }, [discardedDeck]);
+    // useEffect(() => {
+    //     console.log(discardedDeck);
+    // }, [discardedDeck]);
+
+    // useEffect(() => {
+    //     console.log(playerState);
+    // }, [playerState]);
 
     function addDolla(card) {
-        setDolla(dolla + card.quantity);
-        setHand(hand.filter((c) => c.id !== card.id));
-        discardCard(card);
+        setPlayerState({
+            ...playerState,
+            dolla: [...dolla, card],
+            hand: hand.filter((c) => c.id !== card.id),
+        });
     }
 
     function draw() {
         if (deck.length > 0 && hand.length + run.length <= 6) {
-            setHand([...hand, deck[0]]);
+            setPlayerState({
+                ...playerState,
+                hand: [...hand, deck[0]],
+            });
             takeCard("deck");
         }
     }
@@ -55,36 +69,60 @@ function Player({ gameState, takeCard, discardCard }) {
     function runRun(cardMoved) {
         if (run.length >= 2) return;
 
-        setHand(hand.filter((card) => cardMoved.id !== card.id));
-        setRun([...run, cardMoved]);
+        setPlayerState({
+            ...playerState,
+            hand: hand.filter((card) => cardMoved.id !== card.id),
+            run: [...run, cardMoved],
+        });
     }
 
     function myTurn() {
         if (playingCard.id !== 0) return;
 
-        setPlayingCard(run[0]);
-        setRun(run.filter((card, idx) => idx !== 0));
+        setPlayerState({
+            ...playerState,
+            playingCard: run[0],
+            run: run.filter((card, idx) => idx !== 0),
+        });
     }
 
     function playCard(card) {
         if (card.type === "bunny") {
-            setBunnies([...bunnies, card]);
-            setPlayingCard(emptyPlayingCard);
+            setPlayerState({
+                ...playerState,
+                bunnies: [...bunnies, card],
+                playingCard: emptyPlayingCard,
+            });
         } else if (card.type === "carrot") {
-            if (bunnies.length > 0) {
-                if (card.quantity === 1)
-                    setCarrots([...carrots, carrotDeck[0]]);
-                else if (card.quantity === 2) {
-                    setCarrots([...carrots, carrotDeck[0], carrotDeck[1]]);
-                    takeCard("carrotDeck");
-                }
+            if (bunnies.length === 0) {
+                setPlayerState({
+                    ...playerState,
+                    playingCard: emptyPlayingCard,
+                });
+                discardCard(card);
+            } else {
+                setPlayerState({
+                    ...playerState,
+                    playingCard: emptyPlayingCard,
+                    carrots: [...carrots, carrotDeck[0]],
+                });
+                discardCard(card);
                 takeCard("carrotDeck");
             }
-            setPlayingCard(emptyPlayingCard);
-            discardCard(card);
         } else if (card.type == "weapon") {
             if (bunnies.length === 0) {
-                setPlayingCard(emptyPlayingCard);
+                setPlayerState({
+                    ...playerState,
+                    playingCard: emptyPlayingCard,
+                });
+                discardCard(card);
+            }
+        } else if (card.type == "feed") {
+            if (bunnies.length === 0) {
+                setPlayerState({
+                    ...playerState,
+                    playingCard: emptyPlayingCard,
+                });
                 discardCard(card);
             }
         } else {
@@ -105,7 +143,7 @@ function Player({ gameState, takeCard, discardCard }) {
                     title={card.name}
                 />
             ))}
-            <div style={{ padding: "2em" }}>Dolla: {dolla}</div>
+            <div style={{ padding: "2em" }}>{/* Dolla: {dolla} */}</div>
 
             {playingCard.id !== 0 && (
                 <Cell

@@ -60,15 +60,19 @@ function App() {
         });
     }
 
+    // console.log(gameState);
+
     return (
         <Container>
             <Row>
                 {/* <DisplayCardsList cards={deck} /> */}
                 <Cell
+                    card={{ cardType: "Deck" }}
                     title={gameState.deck.length}
                     handleClick={() => console.log()}
                 />
                 <Cell
+                    card={{ cardType: "Carrots" }}
                     title={gameState.carrotDeck.length}
                     color="orange"
                     handleClick={() => console.log()}
