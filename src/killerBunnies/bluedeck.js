@@ -1,467 +1,555 @@
 const bunny = [
     {
-        name: "Congenial Bunny",
         id: 1,
-        cardType: "run",
-        type: "bunny",
-        background: "flat",
-        agressive: "no",
+        type: "run",
+        kind: "bunny",
         deck: "blue",
-        color: "blue",
     },
     {
-        name: "Gleeful Bunny",
         id: 2,
-        cardType: "run",
-        type: "bunny",
-        background: "flat",
-        agressive: "no",
+        type: "run",
+        kind: "bunny",
         deck: "blue",
-        color: "blue",
     },
     {
         id: 3,
-        cardType: "run",
-        name: "Lumbering Bunny",
-        type: "bunny",
-        color: "blue",
+        type: "run",
+        kind: "bunny",
+        deck: "blue",
     },
     {
         id: 4,
-        cardType: "run",
-        name: "Sinister Bunny",
-        type: "bunny",
-        color: "blue",
+        type: "run",
+        kind: "bunny",
+        deck: "blue",
     },
     {
         id: 5,
-        cardType: "run",
-        name: "Timid Bunny",
-        type: "bunny",
-        color: "blue",
+        type: "run",
+        kind: "bunny",
+        deck: "blue",
     },
     {
         id: 6,
-        cardType: "run",
-        name: "Congenial Bunny",
-        type: "bunny",
-        color: "green",
+        type: "run",
+        kind: "bunny",
+        deck: "blue",
     },
     {
         id: 7,
-        cardType: "run",
-        name: "Gleeful Bunny",
-        type: "bunny",
-        color: "green",
+        type: "run",
+        kind: "bunny",
+        deck: "blue",
     },
     {
         id: 8,
-        cardType: "run",
-        name: "Lumbering Bunny",
-        type: "bunny",
-        color: "green",
+        type: "run",
+        kind: "bunny",
+        deck: "blue",
     },
     {
         id: 9,
-        cardType: "run",
-        name: "Sinister Bunny",
-        type: "bunny",
-        color: "green",
+        type: "run",
+        kind: "bunny",
+        deck: "blue",
     },
     {
         id: 10,
-        cardType: "run",
-        name: "Timid Bunny",
-        type: "bunny",
-        color: "green",
+        type: "run",
+        kind: "bunny",
+        deck: "blue",
     },
     {
         id: 11,
-        cardType: "run",
-        name: "Congenial Bunny",
-        type: "bunny",
-        color: "orange",
+        type: "run",
+        kind: "bunny",
+        deck: "blue",
     },
     {
         id: 12,
-        cardType: "run",
-        name: "Gleeful Bunny",
-        type: "bunny",
-        color: "orange",
+        type: "run",
+        kind: "bunny",
+        deck: "blue",
     },
     {
         id: 13,
-        cardType: "run",
-        name: "Lumbering Bunny",
-        type: "bunny",
-        color: "orange",
+        type: "run",
+        kind: "bunny",
+        deck: "blue",
     },
     {
         id: 14,
-        cardType: "run",
-        name: "Sinister Bunny",
-        type: "bunny",
-        color: "orange",
+        type: "run",
+        kind: "bunny",
+        deck: "blue",
     },
     {
         id: 15,
-        cardType: "run",
-        name: "Timid Bunny",
-        type: "bunny",
-        color: "orange",
+        type: "run",
+        kind: "bunny",
+        deck: "blue",
+    },
+    {
+        id: 57,
+        type: "run",
+        kind: "bunny",
+        deck: "blue",
     },
 ];
 
 const carrot = [
     {
         id: 16,
-        name: "Choose A Carrot",
-        type: "carrot",
-        cardType: "run",
-        quantity: 1,
-        color: "orange",
+        type: "run",
+        kind: "chooseCarrot",
+        deck: "blue",
     },
     {
         id: 17,
-        name: "Choose A Carrot",
-        type: "carrot",
-        cardType: "run",
-        quantity: 1,
-        color: "orange",
+        type: "run",
+        kind: "chooseCarrot",
+        deck: "blue",
     },
     {
         id: 18,
-        name: "Choose A Carrot",
-        type: "carrot",
-        cardType: "run",
-        quantity: 1,
-        color: "orange",
+        type: "run",
+        kind: "chooseCarrot",
+        deck: "blue",
     },
     {
         id: 19,
-        name: "Choose A Carrot",
-        type: "carrot",
-        cardType: "run",
-        quantity: 1,
-        color: "orange",
+        type: "run",
+        kind: "chooseCarrot",
+        deck: "blue",
     },
     {
         id: 20,
-        name: "Choose A Carrot",
-        type: "carrot",
-        cardType: "run",
-        quantity: 1,
-        color: "orange",
+        type: "run",
+        kind: "chooseCarrot",
+        deck: "blue",
     },
     {
         id: 21,
-        name: "Choose 2 Carrots",
-        type: "carrot",
-        cardType: "run",
-        quantity: 2,
-        color: "orange",
+        type: "run",
+        kind: "chooseCarrot",
+        deck: "blue",
     },
     {
         id: 22,
-        name: "Choose 2 Carrots",
-        type: "carrot",
-        cardType: "run",
-        quantity: 2,
-        color: "orange",
+        type: "run",
+        kind: "chooseCarrot",
+        deck: "blue",
     },
     {
         id: 23,
-        name: "Choose 2 Carrots",
-        type: "carrot",
-        cardType: "run",
-        quantity: 2,
-        color: "orange",
+        type: "run",
+        kind: "chooseCarrot",
+        deck: "blue",
     },
 ];
 
 const feed = [
     {
         id: 24,
-        name: "Feed The Bunnny",
-        info: "1 Cabbage and 1 Water",
-        type: "feed",
-        cardType: "run",
-        cabbage: 1,
-        water: 1,
-        color: "pink",
+        type: "run",
+        kind: "feed",
+        deck: "blue",
     },
     {
         id: 25,
-        name: "Feed The Bunnny",
-        info: "2 Cabbage and 1 Water",
-        type: "feed",
-        cardType: "run",
-        cabbage: 2,
-        water: 1,
-        color: "pink",
+        type: "run",
+        kind: "feed",
+        deck: "blue",
     },
     {
         id: 26,
-        name: "Feed The Bunnny",
-        info: "1 Cabbage and 3 Water",
-        type: "feed",
-        cardType: "run",
-        cabbage: 1,
-        water: 3,
-        color: "pink",
+        type: "run",
+        kind: "feed",
+        deck: "blue",
     },
     {
         id: 27,
-        name: "Feed The Bunnny",
-        info: "3 Cabbage and 1 Water",
-        type: "feed",
-        cardType: "run",
-        cabbage: 3,
-        water: 1,
-        color: "pink",
+        type: "run",
+        kind: "feed",
+        deck: "blue",
     },
     {
         id: 28,
-        name: "Feed The Bunnny",
-        info: "3 Cabbage and 4 Water",
-        type: "feed",
-        cardType: "run",
-        cabbage: 3,
-        water: 4,
-        color: "pink",
+        type: "run",
+        kind: "feed",
+        deck: "blue",
     },
     {
         id: 29,
-        name: "Feed The Bunnny",
-        info: "5 Cabbage and 4 Water",
-        type: "feed",
-        cardType: "run",
-        cabbage: 5,
-        water: 4,
-        color: "pink",
+        type: "run",
+        kind: "feed",
+        deck: "blue",
     },
     {
         id: 30,
-        name: "Feed The Bunnny",
-        info: "5 Cabbage and 5 Water",
-        type: "feed",
-        cardType: "run",
-        cabbage: 5,
-        water: 5,
-        color: "pink",
+        type: "run",
+        kind: "feed",
+        deck: "blue",
     },
 ];
 
 const weapon = [
     {
         id: 31,
-        type: "weapon",
-        cardType: "run",
-        name: "Kitchen Whisk",
-        color: "white",
-        quantity: 1,
+        type: "run",
+        kind: "weapon",
+        deck: "blue",
     },
     {
         id: 32,
-        type: "weapon",
-        cardType: "run",
-        name: "Green Gelatin with Evil Pineapple Chunks",
-        color: "white",
-        quantity: 2,
+        type: "run",
+        kind: "weapon",
+        deck: "blue",
     },
     {
         id: 33,
-        type: "weapon",
-        cardType: "run",
-        name: "Ice Pick",
-        color: "white",
-        quantity: 3,
+        type: "run",
+        kind: "weapon",
+        deck: "blue",
     },
     {
         id: 34,
-        type: "weapon",
-        cardType: "run",
-        name: "Butcher's Cleaver",
-        color: "white",
-        quantity: 4,
+        type: "run",
+        kind: "weapon",
+        deck: "blue",
     },
     {
         id: 35,
-        type: "weapon",
-        cardType: "run",
-        name: "Food Processor",
-        color: "white",
-        quantity: 4,
+        type: "run",
+        kind: "weapon",
+        deck: "blue",
     },
     {
         id: 36,
-        type: "weapon",
-        cardType: "run",
-        name: "Boiling Tar",
-        color: "white",
-        quantity: 5,
+        type: "run",
+        kind: "weapon",
+        deck: "blue",
     },
     {
         id: 37,
-        type: "weapon",
-        cardType: "run",
-        name: "Roaches",
-        color: "white",
-        quantity: 5,
+        type: "run",
+        kind: "weapon",
+        deck: "blue",
     },
     {
         id: 38,
-        type: "weapon",
-        cardType: "run",
-        name: "Bow & Arrow",
-        color: "white",
-        quantity: 6,
+        type: "run",
+        kind: "weapon",
+        deck: "blue",
     },
     {
         id: 39,
-        type: "weapon",
-        cardType: "run",
-        name: "Chain Saw",
-        color: "white",
-        quantity: 6,
+        type: "run",
+        kind: "weapon",
+        deck: "blue",
     },
     {
         id: 40,
-        type: "weapon",
-        cardType: "run",
-        name: "Guillotine",
-        color: "white",
-        quantity: 7,
+        type: "run",
+        kind: "weapon",
+        deck: "blue",
     },
     {
         id: 41,
-        type: "weapon",
-        cardType: "run",
-        name: "Sword",
-        color: "white",
-        quantity: 7,
+        type: "run",
+        kind: "weapon",
+        deck: "blue",
     },
     {
         id: 42,
-        type: "weapon",
-        cardType: "run",
-        name: "Flame Thrower",
-        color: "white",
-        quantity: 8,
+        type: "run",
+        kind: "weapon",
+        deck: "blue",
     },
     {
         id: 43,
-        type: "weapon",
-        cardType: "run",
-        name: "Torus Ring",
-        color: "white",
-        quantity: 8,
+        type: "run",
+        kind: "weapon",
+        deck: "blue",
     },
     {
         id: 44,
-        type: "weapon",
-        cardType: "run",
-        name: "Fluorine Gas",
-        color: "white",
-        quantity: 9,
+        type: "run",
+        kind: "weapon",
+        deck: "blue",
     },
     {
         id: 45,
-        type: "weapon",
-        cardType: "run",
-        name: "Laser Gun",
-        color: "white",
-        quantity: 9,
+        type: "run",
+        kind: "weapon",
+        deck: "blue",
     },
     {
         id: 46,
-        type: "weapon",
-        cardType: "run",
-        name: "The Trojan Bunny",
-        color: "white",
-        quantity: 10,
+        type: "run",
+        kind: "weapon",
+        deck: "blue",
     },
     {
         id: 47,
-        type: "weapon",
-        cardType: "run",
-        name: "The Ebola Virus",
-        color: "white",
-        quantity: 11,
+        type: "run",
+        kind: "weapon",
+        deck: "blue",
     },
     {
         id: 48,
-        type: "weapon",
-        cardType: "run",
-        name: "Nuclear Warhead",
-        color: "white",
-        quantity: 12,
+        type: "run",
+        kind: "weapon",
+        deck: "blue",
     },
 ];
 
-// 49		 Area 51
-// 50		 Area 51
-// 51		 Bad Karma
-// 52		 Baker Street
-// 53		 Black Cat
-// 54		 Cyber Bunny (Roaming Red Run)
-// 55		 Defector Detector
-// 56		 Drought
-// 57		 Free Agent
-// 58		 The Heavenly Halo 	 Bunny Modifier
-// 59		 Kaballa’s Market (High)
-// 60		 Kaballa’s Market (Closed)
-// 61		 Lucky Clover 	 Bunny Modifier, Single
-// 62		 Lucky Clover 	 Bunny Modifier, Double
-// 63		 Lucky Clover 	 Bunny Modifier, Triple
-// 64		 Maggots
-// 65		 Poverty Poker
-// 66		 Carrot Top Casino
-// 67		 Carrot Top Casino
-// 68		 Free Cabbage
-// 69		 Free Water
-// 70		 Geneva Convention
-// 71		 Half Price Coupon 	 Kaballa’s Market
-// 72		 Large Prune Danish
-// 73		 Large Prune Danish
-// 74		 The Mad, Mad Donnelaith Bakery
-// 75		 The Mad, Mad Donnelaith Bakery
-// 76		 The Magic Fountain
-// 77		 The Magic Fountain
-// 78		 Supplies Surprise
-// 79		 Supplies Surprise
-// 80		 The Magic Spatula
-// 81		 Rooney’s Reusables
-// 82		 Sunny Day
+const otherRun = [
+    {
+        id: 49,
+        type: "run",
+        kind: "abduction",
+        deck: "blue",
+    },
+    {
+        id: 50,
+        type: "run",
+        kind: "abduction",
+        deck: "blue",
+    },
+    {
+        // Bad Karma
+        id: 51,
+        type: "run",
+        kind: "other",
+        deck: "blue",
+    },
+    {
+        // Baker Street
+        id: 52,
+        type: "run",
+        kind: "other",
+        deck: "blue",
+    },
+    {
+        // Black Cat
+        id: 53,
+        type: "run",
+        kind: "other",
+        deck: "blue",
+    },
+    {
+        // Cyber Bunny (Roaming Red Run)
+        id: 54,
+        type: "run",
+        kind: "roaming",
+        deck: "blue",
+    },
+    {
+        // Defector Detector
+        id: 55,
+        type: "run",
+        kind: "other",
+        deck: "blue",
+    },
+    {
+        // Drought
+        id: 56,
+        type: "run",
+        kind: "other",
+        deck: "blue",
+    },
+    // 57  - In Bunnies
+    {
+        // 58		 The Heavenly Halo 	 Bunny Modifier
+        id: 58,
+        type: "run",
+        kind: "modifier",
+        deck: "blue",
+    },
+    {
+        // 59		 Kaballa’s Market (High)
+        id: 59,
+        type: "run",
+        kind: "market",
+        deck: "blue",
+    },
+    {
+        // 60		 Kaballa’s Market (Closed)
+        id: 60,
+        type: "run",
+        kind: "market",
+        deck: "blue",
+    },
+    {
+        // 61		 Lucky Clover 	 Bunny Modifier, Single
+        id: 61,
+        type: "run",
+        kind: "modifier",
+        deck: "blue",
+    },
+    {
+        // 62		 Lucky Clover 	 Bunny Modifier, Double
+        id: 62,
+        type: "run",
+        kind: "modifier",
+        deck: "blue",
+    },
+    {
+        // 63		 Lucky Clover 	 Bunny Modifier, Triple
+        id: 63,
+        type: "run",
+        kind: "modifier",
+        deck: "blue",
+    },
+    {
+        // 64		 Maggots
+        id: 64,
+        type: "run",
+        kind: "other",
+        deck: "blue",
+    },
+    {
+        // 65		 Poverty Poker
+        id: 65,
+        type: "run",
+        kind: "other",
+        deck: "blue",
+    },
+];
+
+const special = [
+    {
+        // Carrot Top Casino
+        id: 66,
+        type: "special",
+        deck: "blue",
+    },
+    {
+        // Carrot Top Casino
+        id: 67,
+        type: "special",
+        deck: "blue",
+    },
+    {
+        // Free Cabbage
+        id: 68,
+        type: "special",
+        deck: "blue",
+    },
+    {
+        // Free Water
+        id: 69,
+        type: "special",
+        deck: "blue",
+    },
+    {
+        // Geneva Convention
+        id: 70,
+        type: "special",
+        deck: "blue",
+    },
+    {
+        // Half Price Coupon 	 Kaballa’s Market
+        id: 71,
+        type: "special",
+        deck: "blue",
+    },
+    {
+        // Large Prune Danish
+        id: 72,
+        type: "special",
+        deck: "blue",
+    },
+    {
+        // Large Prune Danish
+        id: 73,
+        type: "special",
+        deck: "blue",
+    },
+    {
+        // The Mad, Mad Donnelaith Bakery
+        id: 74,
+        type: "special",
+        deck: "blue",
+    },
+    {
+        // The Mad, Mad Donnelaith Bakery
+        id: 75,
+        type: "special",
+        deck: "blue",
+    },
+    {
+        // The Magic Fountain
+        id: 76,
+        type: "special",
+        deck: "blue",
+    },
+    {
+        // The Magic Fountain
+        id: 77,
+        type: "special",
+        deck: "blue",
+    },
+    {
+        // Supplies Surprise
+        id: 78,
+        type: "special",
+        deck: "blue",
+    },
+    {
+        // Supplies Surprise
+        id: 79,
+        type: "special",
+        deck: "blue",
+    },
+];
+
+const verySpecial = [
+    {
+        // The Magic Spatula
+        id: 80,
+        type: "verySpecial",
+        deck: "blue",
+    },
+    {
+        // Rooney’s Reusables
+        id: 81,
+        type: "verySpecial",
+        deck: "blue",
+    },
+    {
+        // Sunny Day
+        id: 82,
+        type: "verySpecial",
+        deck: "blue",
+    },
+];
 
 const misfortune = [
     {
         id: 83,
-        type: "misfortune",
-        name: "Fiat",
-        color: "grey",
-        description: "Terrible Misfortune",
+        type: "playImmediately",
+        kind: "misfortune",
+        deck: "blue",
     },
     {
         id: 84,
-        type: "misfortune",
-        name: "Hedge Clippers",
-        color: "grey",
-        description: "Terrible Misfortune",
+        type: "playImmediately",
+        kind: "misfortune",
+        deck: "blue",
     },
     {
         id: 85,
-        type: "misfortune",
-        name: "Plutonium",
-        color: "grey",
-        description: "Terrible Misfortune",
+        type: "playImmediately",
+        kind: "misfortune",
+        deck: "blue",
     },
     {
         id: 86,
-        type: "misfortune",
-        name: "Yogurt Truck",
-        color: "grey",
-        description: "Terrible Misfortune",
+        type: "playImmediately",
+        kind: "misfortune",
+        deck: "blue",
     },
 ];
 
@@ -469,130 +557,153 @@ const dolla = [
     {
         id: 87,
         type: "dolla",
-        name: "Kaballa Dolla",
-        quantity: 1,
-        color: "white",
+        kind: "dolla",
+        deck: "blue",
     },
     {
         id: 88,
         type: "dolla",
-        name: "Kaballa Dolla",
-        quantity: 1,
-        color: "white",
+        kind: "dolla",
+        deck: "blue",
     },
     {
         id: 89,
         type: "dolla",
-        name: "Kaballa Dolla",
-        quantity: 1,
-        color: "white",
+        kind: "dolla",
+        deck: "blue",
     },
     {
         id: 90,
         type: "dolla",
-        name: "Kaballa Dolla",
-        quantity: 1,
-        color: "white",
+        kind: "dolla",
+        deck: "blue",
     },
     {
         id: 91,
         type: "dolla",
-        name: "Kaballa Dolla",
-        quantity: 1,
-        color: "white",
+        kind: "dolla",
+        deck: "blue",
     },
     {
         id: 92,
         type: "dolla",
-        name: "Kaballa Dolla",
-        quantity: 2,
-        color: "green",
+        kind: "dolla",
+        deck: "blue",
     },
     {
         id: 93,
         type: "dolla",
-        name: "Kaballa Dolla",
-        quantity: 2,
-        color: "green",
+        kind: "dolla",
+        deck: "blue",
     },
     {
         id: 94,
         type: "dolla",
-        name: "Kaballa Dolla",
-        quantity: 2,
-        color: "green",
+        kind: "dolla",
+        deck: "blue",
     },
     {
         id: 95,
         type: "dolla",
-        name: "Kaballa Dolla",
-        quantity: 2,
-        color: "green",
+        kind: "dolla",
+        deck: "blue",
     },
     {
         id: 96,
         type: "dolla",
-        name: "Kaballa Dolla",
-        quantity: 2,
-        color: "green",
+        kind: "dolla",
+        deck: "blue",
     },
     {
         id: 97,
         type: "dolla",
-        name: "Kaballa Dolla",
-        quantity: 2,
-        color: "green",
+        kind: "dolla",
+        deck: "blue",
     },
     {
         id: 98,
         type: "dolla",
-        name: "Kaballa Dolla",
-        quantity: 5,
-        color: "pink",
+        kind: "dolla",
+        deck: "blue",
     },
     {
         id: 99,
         type: "dolla",
-        name: "Kaballa Dolla",
-        quantity: 5,
-        color: "pink",
+        kind: "dolla",
+        deck: "blue",
     },
     {
         id: 100,
         type: "dolla",
-        name: "Kaballa Dolla",
-        quantity: 5,
-        color: "pink",
+        kind: "dolla",
+        deck: "blue",
     },
     {
         id: 101,
         type: "dolla",
-        name: "Kaballa Dolla",
-        quantity: 10,
-        color: "yellow",
+        kind: "dolla",
+        deck: "blue",
     },
 ];
 
-// 102		 Kaballa’s Market (Starter Card)
+const marketStarterCard = {
+    id: 102,
+    kind: "market",
+    deck: "blue",
+};
 
 const carrotDeckDefault = [
-    { id: 103, number: "Carrot #1", name: "Tucker", color: "orange" },
-    { id: 104, number: "Carrot #2", name: "Abu", color: "orange" },
-    { id: 105, number: "Carrot #3", name: "Hikaru", color: "orange" },
-    { id: 106, number: "Carrot #4", name: "Flo", color: "orange" },
-    { id: 107, number: "Carrot #5", name: "Remington", color: "orange" },
-    { id: 108, number: "Carrot #6", name: "Butch", color: "orange" },
-    { id: 109, number: "Carrot #7", name: "Presto", color: "orange" },
-    { id: 110, number: "Carrot #8", name: "Seth", color: "orange" },
+    { id: 103, number: "Carrot #1", name: "Tucker", kind: "carrotCard" },
+    { id: 104, number: "Carrot #2", name: "Abu", kind: "carrotCard" },
+    { id: 105, number: "Carrot #3", name: "Hikaru", kind: "carrotCard" },
+    { id: 106, number: "Carrot #4", name: "Flo", kind: "carrotCard" },
+    { id: 107, number: "Carrot #5", name: "Remington", kind: "carrotCard" },
+    { id: 108, number: "Carrot #6", name: "Butch", kind: "carrotCard" },
+    { id: 109, number: "Carrot #7", name: "Presto", kind: "carrotCard" },
+    { id: 110, number: "Carrot #8", name: "Seth", kind: "carrotCard" },
 ];
+
+const cabbage = [
+    "1 Cabbage",
+    "1 Cabbage",
+    "1 Cabbage",
+    "1 Cabbage",
+    "1 Cabbage",
+    "2 Cabbage",
+    "2 Cabbage",
+    "2 Cabbage",
+    "2 Cabbage",
+    "2 Cabbage",
+    "5 Cabbage",
+    "5 Cabbage",
+    "10 Cabbage",
+];
+
+const water = [
+    "1 Water",
+    "1 Water",
+    "1 Water",
+    "1 Water",
+    "1 Water",
+    "2 Water",
+    "2 Water",
+    "2 Water",
+    "2 Water",
+    "5 Water",
+    "5 Water",
+    "10 Water",
+]
 
 const deckDefault = [
     ...bunny,
     ...carrot,
     ...feed,
     ...weapon,
+    ...otherRun,
+    ...special,
+    ...verySpecial,
     ...misfortune,
     ...dolla,
 ];
 
-export { deckDefault, carrotDeckDefault };
+export { deckDefault, carrotDeckDefault, marketStarterCard, cabbage, water };

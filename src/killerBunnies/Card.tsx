@@ -1,22 +1,22 @@
 import React from "react";
-import { Card } from "react-bootstrap";
+import { Card, Col } from "react-bootstrap";
 
 import { Menu, MenuItem } from "@szhsin/react-menu";
 import "@szhsin/react-menu/dist/index.css";
 import "@szhsin/react-menu/dist/transitions/slide.css";
 
-export function PlayingCard({
-    card,
-    idx,
-    handleClick,
-    color,
-    title,
-    basicFunctions,
-    deck,
-}) {
+export function PlayingCard({ card, idx, basicFunctions, deck }) {
     const cardImg = card.id ? card.id : "1";
 
-    const { addBunny, addDolla, discard, playRun } = basicFunctions;
+    const {
+        addBunny,
+        addDolla,
+        addSpecial,
+        discard,
+        playRun,
+        discardCarrot,
+        changeMarket,
+    } = basicFunctions;
 
     return (
         <>
@@ -24,56 +24,99 @@ export function PlayingCard({
                 menuButton={
                     <Card>
                         <Card.Body className="p-1">
-                            {/* <Card.Title className="text-right padding-0">
-                                {card.cardType.toUpperCase()} {card.id}
-                            </Card.Title> */}
                             <Card.Img src={`/blue/${cardImg}.png`}></Card.Img>
                         </Card.Body>
                     </Card>
                 }
                 transition
             >
-                {card.cardType === "run" && deck === "hand" && (
+                {card.type === "run" && deck === "hand" && (
                     <MenuItem onClick={() => playRun(card)}>Run</MenuItem>
                 )}
-                {card.type === "dolla" && (
+                {card.type === "special" && deck === "hand" && (
+                    <MenuItem onClick={() => playRun(card)}>Run</MenuItem>
+                )}
+                {card.type === "special" &&
+                    deck !== "hand" &&
+                    deck != "special" && (
+                        <MenuItem onClick={() => addSpecial(card, deck)}>
+                            Add to Special Cards
+                        </MenuItem>
+                    )}
+                {card.kind === "market" && deck === "playing" && (
+                    <MenuItem onClick={() => changeMarket(card)}>
+                        Change Market
+                    </MenuItem>
+                )}
+                {card.type === "dolla" && deck !== "dolla" && (
                     <MenuItem onClick={() => addDolla(card, deck)}>
                         Add Dolla
                     </MenuItem>
                 )}
-                {card.type === "bunny" && deck != "hand" && (
-                    <MenuItem onClick={() => addBunny(card)}>
-                        Add Bunny
+                {card.type === "verySpecial" && deck !== "special" && (
+                    <MenuItem onClick={() => addSpecial(card, deck)}>
+                        Add to Special Cards
                     </MenuItem>
                 )}
-                <MenuItem onClick={() => discard(card, deck)}>Discard</MenuItem>
+                {card.kind === "bunny" &&
+                    deck !== "hand" &&
+                    deck !== "bunnies" && (
+                        <MenuItem onClick={() => addBunny(card)}>
+                            Add Bunny
+                        </MenuItem>
+                    )}
+                {card.kind !== "carrotCard" && (
+                    <MenuItem onClick={() => discard(card, deck)}>
+                        Discard
+                    </MenuItem>
+                )}
+
+                {card.kind === "carrotCard" && deck === "carrots" && (
+                    <MenuItem onClick={() => discardCarrot(card, deck)}>
+                        Discard Carrot
+                    </MenuItem>
+                )}
             </Menu>
         </>
     );
 }
 
-export function Deck({ card, idx, handleClick, color, title, basicFunctions }) {
-    const cardImg = card.id ? card.id : "1";
+export function Deck({ card, handleClick, title, actionTitle, picture }) {
+    const handleMultiClicks = (e, card) => {
+        switch (e.detail) {
+            case 1:
+                console.log("click");
+                break;
+            case 2:
+                console.log("double click");
+                break;
+            case 3:
+                console.log("triple click");
+                break;
+            default:
+                return;
+        }
+    };
 
     return (
         <>
-            <Menu
-                menuButton={
-                    <Card>
-                        <Card.Body className="p-1">
-                            {/* <Card.Title className="text-right padding-0">
-                                {card.cardType.toUpperCase()} {card.id}
-                            </Card.Title> */}
-                            <Card.Img src={`/blue/${cardImg}.png`}></Card.Img>
-                        </Card.Body>
-                    </Card>
-                }
-                transition
-            >
-                {/* <MenuItem>Run</MenuItem>
-                <MenuItem>Discard</MenuItem> */}
-                <MenuItem onClick={() => addDolla(card)}>Add Dolla</MenuItem>
-            </Menu>
+            <Col>
+                <div style={{ textAlign: "left" }}>{title}</div>
+                <Menu
+                    menuButton={
+                        <Card>
+                            <Card.Body className="p-1">
+                                <Card.Img src={picture}></Card.Img>
+                            </Card.Body>
+                        </Card>
+                    }
+                    transition
+                >
+                    <MenuItem onClick={() => handleClick(card)}>
+                        {actionTitle}
+                    </MenuItem>
+                </Menu>
+            </Col>
         </>
     );
 }

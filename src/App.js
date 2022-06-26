@@ -1,7 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { Container, Row } from "react-bootstrap";
 import Player from "./killerBunnies/Player.tsx";
-import { deckDefault, carrotDeckDefault } from "./killerBunnies/bluedeck";
+import {
+    deckDefault,
+    carrotDeckDefault,
+    marketStarterCard,
+} from "./killerBunnies/bluedeck";
 import { Deck } from "./killerBunnies/Card.tsx";
 import { shuffleArray } from "./killerBunnies/utils";
 
@@ -21,6 +25,8 @@ const initialGameState = {
     deck: [],
     carrotDeck: [],
     discardedDeck: [],
+    market: marketStarterCard,
+    numberOfPlayers: 2,
 };
 
 function App() {
@@ -31,8 +37,13 @@ function App() {
             ...gameState,
             deck: shuffleArray(deckDefault),
             carrotDeck: shuffleArray(carrotDeckDefault),
+            smallCarrotDeck: shuffleArray(carrotDeckDefault),
         });
     }, []);
+
+    useEffect(() => {
+        console.log(gameState);
+    }, [gameState]);
 
     function takeCard(pile) {
         setGameState({
@@ -46,36 +57,57 @@ function App() {
     function discardCard(card) {
         setGameState({
             ...gameState,
-            discardedDeck: [...gameState.discardedDeck, card],
+            discardedDeck: [card, ...gameState.discardedDeck],
         });
     }
 
-    // console.log(gameState);
+    function discardCarrotCard(card) {
+        setGameState({
+            ...gameState,
+            carrotDeck: [...gameState.carrotDeck, card],
+        });
+    }
+
+    function setMarket(card) {
+        setGameState({
+            ...gameState,
+            market: card,
+        });
+    }
+
+    function setNumPlayers(num) {
+        setGameState({
+            ...gameState,
+            numberOfPlayers: num,
+        });
+    }
 
     return (
         <Container>
             <Row>
+                <select
+                    title="How many players?"
+                    onChange={(e) => setNumPlayers(e.target.value)}
+                >
+                    <option value="2" defaultValue={true}>
+                        2
+                    </option>
+                    <option value="3">3</option>
+                </select>
+                {
+                    // Game Master
+                }
                 {/* <DisplayCardsList cards={deck} /> */}
-                <Deck
-                    card={{ cardType: "Deck" }}
-                    title={gameState.deck.length}
-                    handleClick={() => console.log()}
-                />
-                <Deck
-                    card={{ cardType: "Carrots" }}
-                    title={gameState.carrotDeck.length}
-                    color="orange"
-                    handleClick={() => console.log()}
-                />
             </Row>
-            <div style={{ padding: "1em" }}></div>
+
             <Row>
                 <Player
                     gameState={gameState}
                     takeCard={takeCard}
                     discardCard={discardCard}
+                    discardCarrotCard={discardCarrotCard}
+                    setMarket={setMarket}
                 />
-                {/* <Player gameState={gameState} takeCard={takeCard} /> */}
             </Row>
         </Container>
     );
