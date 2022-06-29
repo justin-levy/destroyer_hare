@@ -1,32 +1,21 @@
 import React, { useEffect, useState } from "react";
-import { Container, Row } from "react-bootstrap";
-import Player from "./killerBunnies/Player.tsx";
+import { Button, Container, Row } from "react-bootstrap";
+import Player from "./killerBunnies/Player";
 import {
     deckDefault,
     carrotDeckDefault,
     marketStarterCard,
 } from "./killerBunnies/bluedeck";
-import { Deck } from "./killerBunnies/Card.tsx";
 import { shuffleArray } from "./killerBunnies/utils";
-
 import "./App.css";
-
-function DisplayCardsList({ cards }) {
-    return (
-        <div>
-            {cards.map((card) => (
-                <div>{`ID: ${card.id}`}</div>
-            ))}
-        </div>
-    );
-}
+import { GetAllData } from "./_firebase/getData";
+import { simpleAdd } from "./_firebase/simpleCD";
 
 const initialGameState = {
     deck: [],
     carrotDeck: [],
     discardedDeck: [],
     market: marketStarterCard,
-    numberOfPlayers: 2,
 };
 
 function App() {
@@ -75,32 +64,25 @@ function App() {
         });
     }
 
-    function setNumPlayers(num) {
-        setGameState({
-            ...gameState,
-            numberOfPlayers: num,
-        });
-    }
+    console.log(GetAllData());
 
     return (
         <Container>
+            <Button
+                onClick={() => {
+                    simpleAdd(`12345/gameState`, { hello: "hello" });
+                }}
+            >
+                Click
+            </Button>
             <Row>
-                <select
-                    title="How many players?"
-                    onChange={(e) => setNumPlayers(e.target.value)}
-                >
-                    <option value="2" defaultValue={true}>
-                        2
-                    </option>
-                    <option value="3">3</option>
-                </select>
-                {
-                    // Game Master
-                }
-                {/* <DisplayCardsList cards={deck} /> */}
-            </Row>
-
-            <Row>
+                <Player
+                    gameState={gameState}
+                    takeCard={takeCard}
+                    discardCard={discardCard}
+                    discardCarrotCard={discardCarrotCard}
+                    setMarket={setMarket}
+                />
                 <Player
                     gameState={gameState}
                     takeCard={takeCard}

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Col, Button, Row, Tabs, Tab } from "react-bootstrap";
-import { Deck, PlayingCard } from "./Card.tsx";
+import { Deck, PlayingCard } from "./Card";
 
 const emptyPlayingCard = {
     id: 0,

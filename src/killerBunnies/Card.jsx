@@ -5,6 +5,16 @@ import { Menu, MenuItem } from "@szhsin/react-menu";
 import "@szhsin/react-menu/dist/index.css";
 import "@szhsin/react-menu/dist/transitions/slide.css";
 
+export function DisplayCardsList({ cards }) {
+    return (
+        <div>
+            {cards.map((card) => (
+                <div>{`ID: ${card.id}`}</div>
+            ))}
+        </div>
+    );
+}
+
 export function PlayingCard({ card, idx, basicFunctions, deck }) {
     const cardImg = card.id ? card.id : "1";
 
