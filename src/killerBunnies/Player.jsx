@@ -170,7 +170,7 @@ function Player({
                     title={`Deck : ${getLength(gameState.deck)} Cards`}
                     handleClick={() => draw()}
                     actionTitle="Draw"
-                    picture="destroyer_hare/blue.png"
+                    picture="blue.png"
                 />
 
                 <Deck
@@ -178,7 +178,7 @@ function Player({
                     title={`Carrots : ${getLength(gameState.carrotDeck)} Cards`}
                     handleClick={() => drawCarrot()}
                     actionTitle="Draw"
-                    picture="destroyer_hare/carrot.png"
+                    picture="carrot.png"
                 />
 
                 <Deck
@@ -186,7 +186,7 @@ function Player({
                     title={`Market`}
                     handleClick={() => console.log()}
                     actionTitle=""
-                    picture={`destroyer_hare/${gameState.market.deck}/${gameState.market.id}.png`}
+                    picture={`${gameState.market.deck}/${gameState.market.id}.png`}
                 />
 
                 <Deck
@@ -201,7 +201,7 @@ function Player({
                     picture={
                         gameState.discardedDeck &&
                         getLength(gameState.discardedDeck)
-                            ? `destroyer_hare/blue/${
+                            ? `blue/${
                                   Object.entries(gameState.discardedDeck)[
                                       getLength(gameState.discardedDeck) - 1
                                   ][1].id
@@ -231,7 +231,7 @@ function Player({
                             title={`Run ${idx + 1}`}
                             handleClick={() => playCard()}
                             actionTitle="Move in Run"
-                            picture="destroyer_hare/carrot.png"
+                            picture="carrot.png"
                             key={idx}
                         />
                     ))}

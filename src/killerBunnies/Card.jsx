@@ -34,9 +34,7 @@ export function PlayingCard({ card, idx, basicFunctions, deck }) {
                 menuButton={
                     <Card>
                         <Card.Body className="p-1">
-                            <Card.Img
-                                src={`destroyer_hare/blue/${cardImg}.png`}
-                            ></Card.Img>
+                            <Card.Img src={`blue/${cardImg}.png`}></Card.Img>
                         </Card.Body>
                     </Card>
                 }
