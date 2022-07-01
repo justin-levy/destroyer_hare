@@ -13,3 +13,8 @@ export function getLength(object) {
     if (!object) return 0;
     return Object.keys(object).length;
 }
+
+export function capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+}
+  

@@ -15,8 +15,16 @@ export function DisplayCardsList({ cards }) {
     );
 }
 
-export function PlayingCard({ card, idx, basicFunctions, deck }) {
-    const cardImg = card.id ? card.id : "1";
+export function PlayingCard({
+    card,
+    idx,
+    basicFunctions,
+    deck,
+    allowOptions = true,
+}) {
+    if (!card) return;
+
+    const cardImg = card.id ? card.id : "0";
 
     const {
         addBunny,
@@ -40,51 +48,65 @@ export function PlayingCard({ card, idx, basicFunctions, deck }) {
                 }
                 transition
             >
-                {card.type === "run" && deck === "hand" && (
-                    <MenuItem onClick={() => playRun(idx, card)}>Run</MenuItem>
-                )}
-                {card.type === "special" && deck === "hand" && (
-                    <MenuItem onClick={() => playRun(idx, card)}>Run</MenuItem>
-                )}
-                {card.type === "special" &&
-                    deck !== "hand" &&
-                    deck !== "special" && (
-                        <MenuItem onClick={() => addSpecial(idx, card, deck)}>
-                            Add to Special Cards
-                        </MenuItem>
-                    )}
-                {card.kind === "market" && deck === "playing" && (
-                    <MenuItem onClick={() => changeMarket(card)}>
-                        Change Market
-                    </MenuItem>
-                )}
-                {card.type === "dolla" && deck !== "dolla" && (
-                    <MenuItem onClick={() => addDolla(idx, card, deck)}>
-                        Add Dolla
-                    </MenuItem>
-                )}
-                {card.type === "verySpecial" && deck !== "special" && (
-                    <MenuItem onClick={() => addSpecial(idx, card, deck)}>
-                        Add to Special Cards
-                    </MenuItem>
-                )}
-                {card.kind === "bunny" &&
-                    deck !== "hand" &&
-                    deck !== "bunnies" && (
-                        <MenuItem onClick={() => addBunny(card)}>
-                            Add Bunny
-                        </MenuItem>
-                    )}
-                {card.kind !== "carrotCard" && (
-                    <MenuItem onClick={() => discard(idx, card, deck)}>
-                        Discard
-                    </MenuItem>
-                )}
+                {card.id !== 0 && allowOptions && (
+                    <>
+                        {card.type === "run" && deck === "hand" && (
+                            <MenuItem onClick={() => playRun(idx, card)}>
+                                Run
+                            </MenuItem>
+                        )}
+                        {card.type === "special" && deck === "hand" && (
+                            <MenuItem onClick={() => playRun(idx, card)}>
+                                Run
+                            </MenuItem>
+                        )}
+                        {card.type === "special" &&
+                            deck !== "hand" &&
+                            deck !== "special" && (
+                                <MenuItem
+                                    onClick={() => addSpecial(idx, card, deck)}
+                                >
+                                    Add to Special Cards
+                                </MenuItem>
+                            )}
+                        {card.kind === "market" && deck === "playing" && (
+                            <MenuItem onClick={() => changeMarket(card)}>
+                                Change Market
+                            </MenuItem>
+                        )}
+                        {card.type === "dolla" && deck !== "dolla" && (
+                            <MenuItem onClick={() => addDolla(idx, card, deck)}>
+                                Add Dolla
+                            </MenuItem>
+                        )}
+                        {card.type === "verySpecial" && deck !== "special" && (
+                            <MenuItem
+                                onClick={() => addSpecial(idx, card, deck)}
+                            >
+                                Add to Special Cards
+                            </MenuItem>
+                        )}
+                        {card.kind === "bunny" &&
+                            deck !== "hand" &&
+                            deck !== "bunnies" && (
+                                <MenuItem onClick={() => addBunny(card)}>
+                                    Add Bunny
+                                </MenuItem>
+                            )}
+                        {card.kind !== "carrotCard" && (
+                            <MenuItem onClick={() => discard(idx, card, deck)}>
+                                Discard
+                            </MenuItem>
+                        )}
 
-                {card.kind === "carrotCard" && deck === "carrots" && (
-                    <MenuItem onClick={() => discardCarrot(idx, card, deck)}>
-                        Discard Carrot
-                    </MenuItem>
+                        {card.kind === "carrotCard" && deck === "carrots" && (
+                            <MenuItem
+                                onClick={() => discardCarrot(idx, card, deck)}
+                            >
+                                Discard Carrot
+                            </MenuItem>
+                        )}
+                    </>
                 )}
             </Menu>
         </>
@@ -111,7 +133,6 @@ export function Deck({ card, handleClick, title, actionTitle, picture }) {
     return (
         <>
             <Col>
-                <div style={{ textAlign: "left" }}>{title}</div>
                 <Menu
                     menuButton={
                         <Card>
@@ -126,6 +147,7 @@ export function Deck({ card, handleClick, title, actionTitle, picture }) {
                         {actionTitle}
                     </MenuItem>
                 </Menu>
+                <div style={{ textAlign: "left" }}>{title}</div>
             </Col>
         </>
     );

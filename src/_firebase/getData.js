@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { database } from "./firebase";
+import {} from "./firebase";
 
 import { getDatabase, ref, child, get, onValue } from "firebase/database";
 
@@ -52,4 +52,50 @@ export const GetPlayerState = (gameId, player) => {
     }, [gameId, player]);
 
     return data;
+};
+
+export const GetPlayingCards = (gameId) => {
+    const [lizzie, setLizzie] = useState({});
+    const [marie, setMarie] = useState({});
+    const [justin, setJustin] = useState({});
+    const dbRef1 = ref(db, `${gameId}/Lizzie/playingCard`);
+    const dbRef2 = ref(db, `${gameId}/Marie/playingCard`);
+    const dbRef3 = ref(db, `${gameId}/Justin/playingCard`);
+
+    useEffect(() => {
+        onValue(dbRef1, (snapshot) => {
+            setLizzie(snapshot.toJSON());
+        });
+        onValue(dbRef2, (snapshot) => {
+            setMarie(snapshot.toJSON());
+        });
+        onValue(dbRef3, (snapshot) => {
+            setJustin(snapshot.toJSON());
+        });
+    }, [gameId]);
+
+    return { lizzie, marie, justin };
+};
+
+export const GetBunnyCircle = (gameId) => {
+    const [lizzie, setLizzie] = useState({});
+    const [marie, setMarie] = useState({});
+    const [justin, setJustin] = useState({});
+    const dbRef1 = ref(db, `${gameId}/Lizzie/bunnies`);
+    const dbRef2 = ref(db, `${gameId}/Marie/bunnies`);
+    const dbRef3 = ref(db, `${gameId}/Justin/bunnies`);
+
+    useEffect(() => {
+        onValue(dbRef1, (snapshot) => {
+            setLizzie(snapshot.toJSON());
+        });
+        onValue(dbRef2, (snapshot) => {
+            setMarie(snapshot.toJSON());
+        });
+        onValue(dbRef3, (snapshot) => {
+            setJustin(snapshot.toJSON());
+        });
+    }, [gameId]);
+
+    return { lizzie, marie, justin };
 };

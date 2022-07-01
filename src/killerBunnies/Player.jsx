@@ -1,9 +1,13 @@
 import React from "react";
 import { Col, Row, Tabs, Tab } from "react-bootstrap";
-import { GetPlayerState } from "../_firebase/getData";
+import {
+    GetBunnyCircle,
+    GetPlayerState,
+    GetPlayingCards,
+} from "../_firebase/getData";
 import { simpleDelete, simplePush, simpleUpdate } from "../_firebase/simpleCD";
 import { Deck, PlayingCard } from "./Card";
-import { getLength } from "./utils";
+import { capitalizeFirstLetter, getLength } from "./utils";
 
 const emptyPlayingCard = {
     id: 0,
@@ -44,6 +48,9 @@ function Player({
 
     const { hand, run, dolla, special, bunnies, carrots, playingCard } =
         playerState;
+
+    const allPlayingCards = GetPlayingCards(gameId);
+    const bunnyCircle = GetBunnyCircle(gameId);
 
     // useEffect(() => {
     //     console.log(discardedDeck);
@@ -146,7 +153,16 @@ function Player({
         changeMarket,
     };
 
+    const currentPlayer = allPlayingCards.lizzie.id
+        ? "lizzie"
+        : allPlayingCards.marie.id
+        ? "marie"
+        : allPlayingCards.justin.id
+        ? "justin"
+        : "";
+
     function playCard() {
+        if (currentPlayer !== "") return;
         if (playingCard.id !== 0) return;
 
         simpleUpdate(`${gameId}/${playerName}`, "playingCard", run[0]);
@@ -160,6 +176,18 @@ function Player({
     return (
         <Col md>
             <Row>
+                <Col>
+                    <PlayingCard
+                        card={allPlayingCards[currentPlayer] || playingCard}
+                        idx={0}
+                        basicFunctions={basicFunctions}
+                        deck="playing"
+                        allowOptions={
+                            playerName === capitalizeFirstLetter(currentPlayer)
+                        }
+                    />
+                    <div>Playing : {capitalizeFirstLetter(currentPlayer)}</div>
+                </Col>
                 <Deck
                     card={{ cardType: "Deck" }}
                     title={`Deck : ${getLength(gameState.deck)} Cards`}
@@ -205,33 +233,35 @@ function Player({
                     }
                 />
             </Row>
-            <div style={{ padding: "1em" }}></div>
-
+            <div style={{ padding: ".5em" }}></div>
             <Row>
-                {playingCard && playingCard.id !== 0 && (
-                    <Col>
-                        <div>Playing</div>
-                        <PlayingCard
-                            card={playingCard}
-                            idx={0}
-                            basicFunctions={basicFunctions}
-                            deck="playing"
-                        />
-                    </Col>
-                )}
-                {run &&
-                    Object.entries(run).map((card, idx) => (
-                        <Deck
-                            card={card}
-                            title={`Run ${idx + 1}`}
-                            handleClick={() => playCard()}
-                            actionTitle="Move in Run"
-                            picture="carrot.png"
-                            key={idx}
-                        />
-                    ))}
+                <Col>
+                    <div>Justin</div>
+                    <DisplayCardsIcons
+                        name={"bunnies"}
+                        cards={bunnyCircle.justin}
+                        basicFunctions={basicFunctions}
+                    />
+                </Col>
+
+                <Col>
+                    <div>Lizzie</div>
+                    <DisplayCardsIcons
+                        name={"bunnies"}
+                        cards={bunnyCircle.lizzie}
+                        basicFunctions={basicFunctions}
+                    />
+                </Col>
+                <Col>
+                    <div>Marie</div>
+                    <DisplayCardsIcons
+                        name={"bunnies"}
+                        cards={bunnyCircle.marie}
+                        basicFunctions={basicFunctions}
+                    />
+                </Col>
             </Row>
-            <div style={{ padding: "1em" }}></div>
+            <div style={{ padding: ".5em" }}></div>
 
             <Tabs
                 defaultActiveKey="hand"
@@ -239,11 +269,24 @@ function Player({
                 className="mb-3"
             >
                 <Tab eventKey="hand" title="Hand">
-                    <DisplayCardsIcons
-                        name={"hand"}
-                        cards={hand}
-                        basicFunctions={basicFunctions}
-                    />
+                    <Row>
+                        {run &&
+                            Object.entries(run).map((card, idx) => (
+                                <Deck
+                                    card={card}
+                                    title={`Run ${idx + 1}`}
+                                    handleClick={() => playCard()}
+                                    actionTitle="Move in Run"
+                                    picture="blue.png"
+                                    key={idx}
+                                />
+                            ))}
+                        <DisplayCardsIcons
+                            name={"hand"}
+                            cards={hand}
+                            basicFunctions={basicFunctions}
+                        />
+                    </Row>
                 </Tab>
                 <Tab eventKey="bunnies" title={`${getLength(bunnies)} Bunnies`}>
                     <DisplayCardsIcons
