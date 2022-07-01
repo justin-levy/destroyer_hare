@@ -8,3 +8,8 @@ export function shuffleArray(array) {
     }
     return array;
 }
+
+export function getLength(object) {
+    if (!object) return 0;
+    return Object.keys(object).length;
+}

@@ -1,40 +1,41 @@
 import React, { useEffect, useState } from "react";
 import { Col, Button, Row, Tabs, Tab } from "react-bootstrap";
+import { GetPlayerState } from "../_firebase/getData";
+import {
+    simpleAdd,
+    simpleDelete,
+    simplePush,
+    simpleUpdate,
+} from "../_firebase/simpleCD";
 import { Deck, PlayingCard } from "./Card";
+import { getLength } from "./utils";
 
 const emptyPlayingCard = {
     id: 0,
 };
 
-const defaultPlayerState = {
-    hand: [],
-    run: [],
-    dolla: [],
-    special: [],
-    bunnies: [],
-    carrots: [],
-    playingCard: emptyPlayingCard,
-};
-
 function DisplayCardsIcons({ cards, basicFunctions, name }) {
     return (
         <>
-            {cards.map((card, idx) => (
-                <PlayingCard
-                    card={card}
-                    idx={idx}
-                    key={idx}
-                    basicFunctions={basicFunctions}
-                    title={card.name}
-                    deck={name}
-                />
-            ))}
+            {cards &&
+                Object.entries(cards).map((card) => (
+                    <PlayingCard
+                        card={card[1]}
+                        idx={card[0]}
+                        key={card[0]}
+                        basicFunctions={basicFunctions}
+                        title={card[1].name}
+                        deck={name}
+                    />
+                ))}
         </>
     );
 }
 
 function Player({
+    gameId,
     gameState,
+    playerName,
     takeCard,
     discardCard,
     discardCarrotCard,
@@ -42,7 +43,10 @@ function Player({
 }) {
     const { deck, carrotDeck, discardedDeck } = gameState;
 
-    const [playerState, setPlayerState] = useState(defaultPlayerState);
+    const playerState = GetPlayerState(gameId, playerName);
+    // console.log(playerName, playerState);
+    if (!playerState) return;
+
     const { hand, run, dolla, special, bunnies, carrots, playingCard } =
         playerState;
 
@@ -55,104 +59,86 @@ function Player({
     // }, [playerState]);
 
     function draw() {
-        if (deck.length > 0 && hand.length + run.length <= 6) {
-            setPlayerState({
-                ...playerState,
-                hand: [...hand, deck[0]],
-            });
-            takeCard("deck");
+        if (getLength(deck) > 0 && getLength(hand) + getLength(run) <= 6) {
+            const data = takeCard("deck");
+            simplePush(`${gameId}/${playerName}/hand/`, data[1]);
         }
     }
 
     function takeFromDiscardPile() {
-        if (discardedDeck.length > 0 && hand.length + run.length <= 6) {
-            setPlayerState({
-                ...playerState,
-                hand: [...hand, discardedDeck[0]],
-            });
-            takeCard("discardedDeck");
+        if (
+            getLength(discardedDeck) > 0 &&
+            getLength(hand) + getLength(run) <= 6
+        ) {
+            const data = takeCard("discardedDeck");
+            simplePush(`${gameId}/${playerName}/hand/`, data[1]);
         }
     }
 
     function drawCarrot() {
-        if (carrotDeck.length > 0) {
-            setPlayerState({
-                ...playerState,
-                carrots: [...carrots, carrotDeck[0]],
-            });
-            takeCard("carrotDeck");
+        if (getLength(carrotDeck) > 0) {
+            const data = takeCard("carrotDeck");
+            simplePush(`${gameId}/${playerName}/carrots/`, data[1]);
         }
     }
 
-    function addDolla(card, deck) {
-        setPlayerState({
-            ...playerState,
-            dolla: [...dolla, card],
-            [deck]: playerState[deck].filter((c) => c.id !== card.id),
-        });
+    function addDolla(idx, card, deck) {
+        simplePush(`${gameId}/${playerName}/dolla/`, card);
+        simpleDelete(`${gameId}/${playerName}/${deck}/${idx}`);
     }
 
-    function addSpecial(card, deck) {
-        if (deck === "playing")
-            setPlayerState({
-                ...playerState,
-                special: [...special, card],
-                playingCard: emptyPlayingCard,
-            });
-        else
-            setPlayerState({
-                ...playerState,
-                special: [...special, card],
-                [deck]: playerState[deck].filter((c) => c.id !== card.id),
-            });
+    function addSpecial(idx, card, deck) {
+        if (deck === "playing") {
+            simplePush(`${gameId}/${playerName}/special/`, card);
+            simpleUpdate(
+                `${gameId}/${playerName}/`,
+                "playingCard",
+                emptyPlayingCard
+            );
+        } else {
+            simplePush(`${gameId}/${playerName}/special/`, card);
+            simpleDelete(`${gameId}/${playerName}/${deck}/${idx}`);
+        }
     }
 
     function addBunny(card) {
-        setPlayerState({
-            ...playerState,
-            bunnies: [...bunnies, card],
-            playingCard: emptyPlayingCard,
-        });
+        simplePush(`${gameId}/${playerName}/bunnies/`, card);
+        simpleUpdate(
+            `${gameId}/${playerName}/`,
+            "playingCard",
+            emptyPlayingCard
+        );
     }
 
-    function discard(card, deck) {
+    function discard(idx, card, deck) {
         if (deck === "playing")
-            setPlayerState({
-                ...playerState,
-                playingCard: emptyPlayingCard,
-            });
-        else
-            setPlayerState({
-                ...playerState,
-                [deck]: playerState[deck].filter((c) => c.id !== card.id),
-            });
+            simpleUpdate(
+                `${gameId}/${playerName}/`,
+                "playingCard",
+                emptyPlayingCard
+            );
+        else simpleDelete(`${gameId}/${playerName}/${deck}/${idx}`);
         discardCard(card);
     }
 
     function changeMarket(card) {
-        setPlayerState({
-            ...playerState,
-            playingCard: emptyPlayingCard,
-        });
+        simpleUpdate(
+            `${gameId}/${playerName}/`,
+            "playingCard",
+            emptyPlayingCard
+        );
         setMarket(card);
     }
 
-    function discardCarrot(card, deck) {
-        setPlayerState({
-            ...playerState,
-            [deck]: playerState[deck].filter((c) => c.id !== card.id),
-        });
+    function discardCarrot(idx, card, deck) {
+        simpleDelete(`${gameId}/${playerName}/${deck}/${idx}`);
         discardCarrotCard(card);
     }
 
-    function playRun(cardMoved) {
-        if (run.length >= 2) return;
-
-        setPlayerState({
-            ...playerState,
-            hand: hand.filter((card) => cardMoved.id !== card.id),
-            run: [...run, cardMoved],
-        });
+    function playRun(idx, cardMoved) {
+        if (getLength(run) >= 2) return;
+        simpleUpdate(`${gameId}/${playerName}/run`, getLength(run), cardMoved);
+        simpleDelete(`${gameId}/${playerName}/hand/${idx}`);
     }
 
     const basicFunctions = {
@@ -167,75 +153,21 @@ function Player({
 
     function playCard() {
         if (playingCard.id !== 0) return;
-        setPlayerState({
-            ...playerState,
-            playingCard: run[0],
-            run: run.filter((card, idx) => idx !== 0),
-        });
-    }
 
-    // function playCard(card) {
-    //     if (card.type === "bunny") {
-    //
-    //     } else if (card.type === "carrot") {
-    //         if (bunnies.length === 0) {
-    //             setPlayerState({
-    //                 ...playerState,
-    //                 playingCard: emptyPlayingCard,
-    //             });
-    //             discardCard(card);
-    //         } else {
-    //             setPlayerState({
-    //                 ...playerState,
-    //                 playingCard: emptyPlayingCard,
-    //                 carrots: [...carrots, carrotDeck[0]],
-    //             });
-    //             discardCard(card);
-    //             takeCard("carrotDeck");
-    //         }
-    //     } else if (card.type == "weapon") {
-    //         if (bunnies.length === 0) {
-    //             setPlayerState({
-    //                 ...playerState,
-    //                 playingCard: emptyPlayingCard,
-    //             });
-    //             discardCard(card);
-    //         }
-    //     } else if (card.type == "feed") {
-    //         if (bunnies.length === 0) {
-    //             setPlayerState({
-    //                 ...playerState,
-    //                 playingCard: emptyPlayingCard,
-    //             });
-    //             discardCard(card);
-    //         }
-    //     } else {
-    //         console.log("click");
-    //     }
-    // }
+        simpleUpdate(`${gameId}/${playerName}`, "playingCard", run[0]);
+
+        if (getLength(run) == 2) {
+            simpleUpdate(`${gameId}/${playerName}/run`, "0", run[1]);
+            simpleDelete(`${gameId}/${playerName}/run/1`);
+        } else simpleDelete(`${gameId}/${playerName}/run/0`);
+    }
 
     return (
         <Col md>
-            {
-                // bunnies.map((card, idx) => (
-                //     <Cell
-                //         card={card}
-                //         idx={idx}
-                //         key={idx}
-                //         handleClick={() => console.log("click")}
-                //         title={card.name}
-                //     />
-                // ))
-            }
-
-            {
-                // <div style={{ padding: "1em" }}>{/* Dolla: {dolla} */}</div>
-            }
-
             <Row>
                 <Deck
                     card={{ cardType: "Deck" }}
-                    title={`Deck : ${gameState.deck.length} Cards`}
+                    title={`Deck : ${getLength(gameState.deck)} Cards`}
                     handleClick={() => draw()}
                     actionTitle="Draw"
                     picture="/blue.png"
@@ -243,7 +175,7 @@ function Player({
 
                 <Deck
                     card={{ cardType: "Carrots" }}
-                    title={`Carrots : ${gameState.carrotDeck.length} Cards`}
+                    title={`Carrots : ${getLength(gameState.carrotDeck)} Cards`}
                     handleClick={() => drawCarrot()}
                     actionTitle="Draw"
                     picture="/carrot.png"
@@ -259,21 +191,29 @@ function Player({
 
                 <Deck
                     card={{ cardType: "Discarded" }}
-                    title={`Discarded Cards : ${gameState.discardedDeck.length} Cards`}
+                    title={`Discarded Cards : ${
+                        gameState.discardedDeck
+                            ? getLength(gameState.discardedDeck)
+                            : 0
+                    } Cards`}
                     handleClick={() => takeFromDiscardPile()}
                     actionTitle="Draw"
                     picture={
-                        gameState.discardedDeck.length
-                            ? `blue/${gameState.discardedDeck[0].id}.png`
+                        gameState.discardedDeck &&
+                        getLength(gameState.discardedDeck)
+                            ? `blue/${
+                                  Object.entries(gameState.discardedDeck)[
+                                      getLength(gameState.discardedDeck) - 1
+                                  ][1].id
+                              }.png`
                             : ``
                     }
                 />
             </Row>
-
             <div style={{ padding: "1em" }}></div>
 
             <Row>
-                {playingCard.id !== 0 && (
+                {playingCard && playingCard.id !== 0 && (
                     <Col>
                         <div>Playing</div>
                         <PlayingCard
@@ -284,16 +224,17 @@ function Player({
                         />
                     </Col>
                 )}
-                {run.map((card, idx) => (
-                    <Deck
-                        card={card}
-                        title={`Run ${idx + 1}`}
-                        handleClick={() => playCard()}
-                        actionTitle="Move in Run"
-                        picture="/carrot.png"
-                        key={idx}
-                    />
-                ))}
+                {run &&
+                    Object.entries(run).map((card, idx) => (
+                        <Deck
+                            card={card}
+                            title={`Run ${idx + 1}`}
+                            handleClick={() => playCard()}
+                            actionTitle="Move in Run"
+                            picture="/carrot.png"
+                            key={idx}
+                        />
+                    ))}
             </Row>
             <div style={{ padding: "1em" }}></div>
 

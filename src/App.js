@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Button, Container, Row } from "react-bootstrap";
 import Player from "./killerBunnies/Player";
 import {
@@ -6,90 +6,139 @@ import {
     carrotDeckDefault,
     marketStarterCard,
 } from "./killerBunnies/bluedeck";
-import { shuffleArray } from "./killerBunnies/utils";
+import { getLength, shuffleArray } from "./killerBunnies/utils";
 import "./App.css";
-import { GetAllData } from "./_firebase/getData";
-import { simpleAdd } from "./_firebase/simpleCD";
+import { GetGameState } from "./_firebase/getData";
+import { simpleAdd, simpleUpdate } from "./_firebase/simpleCD";
 
-const initialGameState = {
-    deck: [],
-    carrotDeck: [],
-    discardedDeck: [],
-    market: marketStarterCard,
+const emptyPlayingCard = {
+    id: 0,
 };
 
 function App() {
-    const [gameState, setGameState] = useState(initialGameState);
+    const gameId = "12345";
+    const gameState = GetGameState(gameId);
+    const [playerName, setPlayerName] = useState("player1");
+    const { discardedDeck } = gameState;
 
-    useEffect(() => {
-        setGameState({
-            ...gameState,
-            deck: shuffleArray(deckDefault),
-            carrotDeck: shuffleArray(carrotDeckDefault),
-            smallCarrotDeck: shuffleArray(carrotDeckDefault),
-        });
-    }, []);
-
-    useEffect(() => {
-        console.log(gameState);
-    }, [gameState]);
-
-    function takeCard(pile) {
-        setGameState({
-            ...gameState,
-            [pile]: gameState[pile].filter((card, idx) => {
-                if (idx !== 0) return card;
-            }),
-        });
-    }
+    const takeCard = (pile) => {
+        let cardToTake = {};
+        const deckSize = getLength(gameState[pile]);
+        const updatedPile = Object.entries(gameState[pile]).filter(
+            (card, idx) => {
+                if (idx !== deckSize - 1) return card;
+                else cardToTake = card;
+            }
+        );
+        simpleUpdate(
+            `${gameId}/gameState`,
+            pile,
+            Object.fromEntries(updatedPile)
+        );
+        return cardToTake;
+    };
 
     function discardCard(card) {
-        setGameState({
-            ...gameState,
-            discardedDeck: [card, ...gameState.discardedDeck],
-        });
+        simpleAdd(
+            `${gameId}/gameState/discardedDeck/${getLength(discardedDeck)}`,
+            card
+        );
     }
 
     function discardCarrotCard(card) {
-        setGameState({
-            ...gameState,
-            carrotDeck: [...gameState.carrotDeck, card],
-        });
+        simpleAdd(
+            `${gameId}/gameState/carrotDeck/${getLength(discardedDeck)}`,
+            card
+        );
     }
 
     function setMarket(card) {
-        setGameState({
-            ...gameState,
-            market: card,
-        });
+        simpleUpdate(`${gameId}/gameState`, "market", card);
     }
-
-    console.log(GetAllData());
 
     return (
         <Container>
             <Button
                 onClick={() => {
-                    simpleAdd(`12345/gameState`, { hello: "hello" });
+                    simpleAdd(`${gameId}/gameState`, {
+                        deck: shuffleArray(deckDefault),
+                        carrotDeck: shuffleArray(carrotDeckDefault),
+                        smallCarrotDeck: shuffleArray(carrotDeckDefault),
+                        discardedDeck: [],
+                        market: marketStarterCard,
+                    });
+                    simpleAdd(`${gameId}/Lizzie`, {
+                        hand: [],
+                        run: [],
+                        dolla: [],
+                        special: [],
+                        bunnies: [],
+                        carrots: [],
+                        playingCard: emptyPlayingCard,
+                    });
+                    simpleAdd(`${gameId}/Marie`, {
+                        hand: [],
+                        run: [],
+                        dolla: [],
+                        special: [],
+                        bunnies: [],
+                        carrots: [],
+                        playingCard: emptyPlayingCard,
+                    });
+                    simpleAdd(`${gameId}/Justin`, {
+                        hand: [],
+                        run: [],
+                        dolla: [],
+                        special: [],
+                        bunnies: [],
+                        carrots: [],
+                        playingCard: emptyPlayingCard,
+                    });
                 }}
             >
-                Click
+                Start Game!
             </Button>
             <Row>
-                <Player
-                    gameState={gameState}
-                    takeCard={takeCard}
-                    discardCard={discardCard}
-                    discardCarrotCard={discardCarrotCard}
-                    setMarket={setMarket}
-                />
-                <Player
-                    gameState={gameState}
-                    takeCard={takeCard}
-                    discardCard={discardCard}
-                    discardCarrotCard={discardCarrotCard}
-                    setMarket={setMarket}
-                />
+                <select onChange={(e) => setPlayerName(e.target.value)}>
+                    <option value="Marie">Marie</option>
+                    <option value="Lizzie">Lizzie</option>
+                    <option value="Justin">Justin</option>
+                </select>
+            </Row>
+            <Row>
+                {playerName === "Lizzie" && gameState && gameState.deck && (
+                    <Player
+                        gameId={gameId}
+                        gameState={gameState}
+                        playerName={playerName}
+                        takeCard={takeCard}
+                        discardCard={discardCard}
+                        discardCarrotCard={discardCarrotCard}
+                        setMarket={setMarket}
+                    />
+                )}
+                {playerName === "Marie" && gameState && gameState.deck && (
+                    <Player
+                        gameId={gameId}
+                        gameState={gameState}
+                        playerName={playerName}
+                        takeCard={takeCard}
+                        discardCard={discardCard}
+                        discardCarrotCard={discardCarrotCard}
+                        setMarket={setMarket}
+                    />
+                )}
+                {playerName === "Justin" && gameState && gameState.deck && (
+                    <Player
+                        gameId={gameId}
+                        gameState={gameState}
+                        playerName={playerName}
+                        takeCard={takeCard}
+                        discardCard={discardCard}
+                        discardCarrotCard={discardCarrotCard}
+                        setMarket={setMarket}
+                    />
+                )}
             </Row>
         </Container>
     );

@@ -41,15 +41,15 @@ export function PlayingCard({ card, idx, basicFunctions, deck }) {
                 transition
             >
                 {card.type === "run" && deck === "hand" && (
-                    <MenuItem onClick={() => playRun(card)}>Run</MenuItem>
+                    <MenuItem onClick={() => playRun(idx, card)}>Run</MenuItem>
                 )}
                 {card.type === "special" && deck === "hand" && (
-                    <MenuItem onClick={() => playRun(card)}>Run</MenuItem>
+                    <MenuItem onClick={() => playRun(idx, card)}>Run</MenuItem>
                 )}
                 {card.type === "special" &&
                     deck !== "hand" &&
                     deck != "special" && (
-                        <MenuItem onClick={() => addSpecial(card, deck)}>
+                        <MenuItem onClick={() => addSpecial(idx, card, deck)}>
                             Add to Special Cards
                         </MenuItem>
                     )}
@@ -59,12 +59,12 @@ export function PlayingCard({ card, idx, basicFunctions, deck }) {
                     </MenuItem>
                 )}
                 {card.type === "dolla" && deck !== "dolla" && (
-                    <MenuItem onClick={() => addDolla(card, deck)}>
+                    <MenuItem onClick={() => addDolla(idx, card, deck)}>
                         Add Dolla
                     </MenuItem>
                 )}
                 {card.type === "verySpecial" && deck !== "special" && (
-                    <MenuItem onClick={() => addSpecial(card, deck)}>
+                    <MenuItem onClick={() => addSpecial(idx, card, deck)}>
                         Add to Special Cards
                     </MenuItem>
                 )}
@@ -76,13 +76,13 @@ export function PlayingCard({ card, idx, basicFunctions, deck }) {
                         </MenuItem>
                     )}
                 {card.kind !== "carrotCard" && (
-                    <MenuItem onClick={() => discard(card, deck)}>
+                    <MenuItem onClick={() => discard(idx, card, deck)}>
                         Discard
                     </MenuItem>
                 )}
 
                 {card.kind === "carrotCard" && deck === "carrots" && (
-                    <MenuItem onClick={() => discardCarrot(card, deck)}>
+                    <MenuItem onClick={() => discardCarrot(idx, card, deck)}>
                         Discard Carrot
                     </MenuItem>
                 )}

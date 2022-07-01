@@ -1,15 +1,16 @@
 import { useState, useEffect } from "react";
 import { database } from "./firebase";
 
-import { getDatabase, ref, child, get } from "firebase/database";
+import { getDatabase, ref, child, get, onValue } from "firebase/database";
 
 const dbRef = ref(getDatabase());
+const db = getDatabase();
 
-export const GetAllData = () => {
+export const GetAllData = (gameId) => {
     const [data, setData] = useState({});
 
     useEffect(() => {
-        get(child(dbRef, "12345"))
+        get(child(dbRef, `${gameId}`))
             .then((snapshot) => {
                 if (snapshot.exists()) {
                     setData({
@@ -27,94 +28,28 @@ export const GetAllData = () => {
     return data;
 };
 
-// const GetData = (option) => {
-//   const [values, setValues] = useState({});
+export const GetGameState = (gameId) => {
+    const [data, setData] = useState({});
+    const dbRef = ref(db, `${gameId}/gameState`);
 
-//   useEffect(() => {
-//     firebaseDb.child(option).on("value", (snapshot) => {
-//       if (snapshot.val() != null) {
-//         setValues({
-//           ...snapshot.val(),
-//         });
-//       } else setValues({});
-//     });
-//   }, [option]);
+    useEffect(() => {
+        onValue(dbRef, (snapshot) => {
+            setData(snapshot.toJSON());
+        });
+    }, []);
 
-//   return values;
-// };
+    return data;
+};
 
-// const GetTitleFromClassificationId = (type, id) => {
-//   const [groupingName, setGroupingName] = useState("");
+export const GetPlayerState = (gameId, player) => {
+    const [data, setData] = useState({});
+    const dbRef = ref(db, `${gameId}/${player}`);
 
-//   useEffect(() => {
-//     firebaseDb.child(`${type}/${id}/title`).on("value", (snapshot) => {
-//       if (snapshot.val() != null) {
-//         setGroupingName(snapshot.val());
-//       }
-//     });
-//   }, [type, id]);
+    useEffect(() => {
+        onValue(dbRef, (snapshot) => {
+            setData(snapshot.toJSON());
+        });
+    }, [gameId, player]);
 
-//   return groupingName;
-// };
-
-// const GetTitleFromPackageId = (id) => {
-//   const [packageName, setPackageName] = useState("");
-
-//   useEffect(() => {
-//     firebaseDb.child(`packages/${id}/title`).on("value", (snapshot) => {
-//       if (snapshot.val() != null) {
-//         setPackageName(snapshot.val());
-//       }
-//     });
-//   }, [id]);
-
-//   return packageName;
-// };
-
-// const GetNameFromClientId = (clientId) => {
-//   const [value, setValue] = useState("");
-
-//   useEffect(() => {
-//     firebaseDb.child(`contacts/${clientId}`).on("value", (snapshot) => {
-//       if (snapshot.val() != null) {
-//         setValue(`${snapshot.val().first} ${snapshot.val().last}`);
-//       }
-//     });
-//   }, [clientId]);
-
-//   return value;
-// };
-
-// const GetClientsUnderClassification = (type, id) => {
-//   const [options, setOptions] = useState({});
-
-//   useEffect(() => {
-//     firebaseDb.child(`${type}/${id}/clients`).on("value", (snapshot) => {
-//       if (snapshot.val() != null) {
-//         setOptions({
-//           ...snapshot.val(),
-//         });
-//       }
-//     });
-//   }, [type, id]);
-
-//   return options;
-// };
-
-// const GetEmailsUnderClassification = (type, id) => {
-//   const [options, setOptions] = useState([]);
-
-//   useEffect(() => {
-//     firebaseDb.child(`${type}/${id}/clients`).on("value", (snapshot) => {
-//       if (snapshot.val() != null) {
-//         Object.keys(snapshot.val()).map((item) =>
-//           firebaseDb.child(`contacts/${item}/email`).on("value", (email) => {
-//             setOptions((options) => [...options, email.val()]);
-//           })
-//         );
-//       }
-//     });
-//   }, [type, id]);
-
-//   return options;
-// };
+    return data;
+};
