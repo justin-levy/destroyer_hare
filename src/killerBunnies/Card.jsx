@@ -48,7 +48,7 @@ export function PlayingCard({ card, idx, basicFunctions, deck }) {
                 )}
                 {card.type === "special" &&
                     deck !== "hand" &&
-                    deck != "special" && (
+                    deck !== "special" && (
                         <MenuItem onClick={() => addSpecial(idx, card, deck)}>
                             Add to Special Cards
                         </MenuItem>
@@ -92,21 +92,21 @@ export function PlayingCard({ card, idx, basicFunctions, deck }) {
 }
 
 export function Deck({ card, handleClick, title, actionTitle, picture }) {
-    const handleMultiClicks = (e, card) => {
-        switch (e.detail) {
-            case 1:
-                console.log("click");
-                break;
-            case 2:
-                console.log("double click");
-                break;
-            case 3:
-                console.log("triple click");
-                break;
-            default:
-                return;
-        }
-    };
+    // const handleMultiClicks = (e, card) => {
+    //     switch (e.detail) {
+    //         case 1:
+    //             console.log("click");
+    //             break;
+    //         case 2:
+    //             console.log("double click");
+    //             break;
+    //         case 3:
+    //             console.log("triple click");
+    //             break;
+    //         default:
+    //             return;
+    //     }
+    // };
 
     return (
         <>

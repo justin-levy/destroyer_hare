@@ -23,7 +23,7 @@ export const GetAllData = (gameId) => {
             .catch((error) => {
                 console.error(error);
             });
-    }, []);
+    }, [gameId]);
 
     return data;
 };

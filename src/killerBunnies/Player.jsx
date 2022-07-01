@@ -1,12 +1,7 @@
-import React, { useEffect, useState } from "react";
-import { Col, Button, Row, Tabs, Tab } from "react-bootstrap";
+import React from "react";
+import { Col, Row, Tabs, Tab } from "react-bootstrap";
 import { GetPlayerState } from "../_firebase/getData";
-import {
-    simpleAdd,
-    simpleDelete,
-    simplePush,
-    simpleUpdate,
-} from "../_firebase/simpleCD";
+import { simpleDelete, simplePush, simpleUpdate } from "../_firebase/simpleCD";
 import { Deck, PlayingCard } from "./Card";
 import { getLength } from "./utils";
 
@@ -156,7 +151,7 @@ function Player({
 
         simpleUpdate(`${gameId}/${playerName}`, "playingCard", run[0]);
 
-        if (getLength(run) == 2) {
+        if (getLength(run) === 2) {
             simpleUpdate(`${gameId}/${playerName}/run`, "0", run[1]);
             simpleDelete(`${gameId}/${playerName}/run/1`);
         } else simpleDelete(`${gameId}/${playerName}/run/0`);
@@ -250,7 +245,7 @@ function Player({
                         basicFunctions={basicFunctions}
                     />
                 </Tab>
-                <Tab eventKey="bunnies" title="Bunnies">
+                <Tab eventKey="bunnies" title={`${getLength(bunnies)} Bunnies`}>
                     <DisplayCardsIcons
                         name={"bunnies"}
                         cards={bunnies}

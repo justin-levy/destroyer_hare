@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, Container, Row } from "react-bootstrap";
+import { Col, Container, Dropdown, Row } from "react-bootstrap";
 import Player from "./killerBunnies/Player";
 import {
     deckDefault,
@@ -56,55 +56,75 @@ function App() {
         simpleUpdate(`${gameId}/gameState`, "market", card);
     }
 
+    function startNewGame() {
+        simpleAdd(`${gameId}/gameState`, {
+            deck: shuffleArray(deckDefault),
+            carrotDeck: shuffleArray(carrotDeckDefault),
+            smallCarrotDeck: shuffleArray(carrotDeckDefault),
+            discardedDeck: [],
+            market: marketStarterCard,
+        });
+        simpleAdd(`${gameId}/Lizzie`, {
+            hand: [],
+            run: [],
+            dolla: [],
+            special: [],
+            bunnies: [],
+            carrots: [],
+            playingCard: emptyPlayingCard,
+        });
+        simpleAdd(`${gameId}/Marie`, {
+            hand: [],
+            run: [],
+            dolla: [],
+            special: [],
+            bunnies: [],
+            carrots: [],
+            playingCard: emptyPlayingCard,
+        });
+        simpleAdd(`${gameId}/Justin`, {
+            hand: [],
+            run: [],
+            dolla: [],
+            special: [],
+            bunnies: [],
+            carrots: [],
+            playingCard: emptyPlayingCard,
+        });
+    }
+
     return (
         <Container>
-            <Button
-                onClick={() => {
-                    simpleAdd(`${gameId}/gameState`, {
-                        deck: shuffleArray(deckDefault),
-                        carrotDeck: shuffleArray(carrotDeckDefault),
-                        smallCarrotDeck: shuffleArray(carrotDeckDefault),
-                        discardedDeck: [],
-                        market: marketStarterCard,
-                    });
-                    simpleAdd(`${gameId}/Lizzie`, {
-                        hand: [],
-                        run: [],
-                        dolla: [],
-                        special: [],
-                        bunnies: [],
-                        carrots: [],
-                        playingCard: emptyPlayingCard,
-                    });
-                    simpleAdd(`${gameId}/Marie`, {
-                        hand: [],
-                        run: [],
-                        dolla: [],
-                        special: [],
-                        bunnies: [],
-                        carrots: [],
-                        playingCard: emptyPlayingCard,
-                    });
-                    simpleAdd(`${gameId}/Justin`, {
-                        hand: [],
-                        run: [],
-                        dolla: [],
-                        special: [],
-                        bunnies: [],
-                        carrots: [],
-                        playingCard: emptyPlayingCard,
-                    });
-                }}
-            >
-                Start Game!
-            </Button>
             <Row>
-                <select onChange={(e) => setPlayerName(e.target.value)}>
-                    <option value="Marie">Marie</option>
-                    <option value="Lizzie">Lizzie</option>
-                    <option value="Justin">Justin</option>
-                </select>
+                <Col sm={{ order: 12 }}>
+                    <Dropdown>
+                        <Dropdown.Toggle variant="success" id="dropdown-basic">
+                            Settings
+                        </Dropdown.Toggle>
+
+                        <Dropdown.Menu>
+                            <Dropdown.Item
+                                onClick={() => {
+                                    startNewGame();
+                                }}
+                            >
+                                Start New Game!
+                            </Dropdown.Item>
+                        </Dropdown.Menu>
+                    </Dropdown>
+                </Col>
+                <Col lg={10}>
+                    <select onChange={(e) => setPlayerName(e.target.value)}>
+                        <option value="" defaultValue>
+                            Choose a Player!
+                        </option>
+                        <option value="Marie">Marie</option>
+                        <option value="Lizzie">Lizzie</option>
+                        <option value="Justin">Justin</option>
+                    </select>
+                </Col>
             </Row>
+
             <Row>
                 {playerName === "Lizzie" && gameState && gameState.deck && (
                     <Player
