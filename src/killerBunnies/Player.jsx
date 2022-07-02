@@ -6,30 +6,12 @@ import {
     GetPlayingCards,
 } from "../_firebase/getData";
 import { simpleDelete, simplePush, simpleUpdate } from "../_firebase/simpleCD";
-import { Deck, PlayingCard } from "./Card";
+import { Deck, PlayingCard, DisplayCardsIcons } from "./Card";
 import { capitalizeFirstLetter, getLength } from "./utils";
 
 const emptyPlayingCard = {
     id: 0,
 };
-
-function DisplayCardsIcons({ cards, basicFunctions, name }) {
-    return (
-        <>
-            {cards &&
-                Object.entries(cards).map((card) => (
-                    <PlayingCard
-                        card={card[1]}
-                        idx={card[0]}
-                        key={card[0]}
-                        basicFunctions={basicFunctions}
-                        title={card[1].name}
-                        deck={name}
-                    />
-                ))}
-        </>
-    );
-}
 
 function Player({
     gameId,
@@ -60,12 +42,30 @@ function Player({
     //     console.log(playerState);
     // }, [playerState]);
 
+    function removePlayingCard() {
+        simpleUpdate(
+            `${gameId}/${playerName}/`,
+            "playingCard",
+            emptyPlayingCard
+        );
+    }
+
     function draw() {
         if (getLength(deck) > 0 && getLength(hand) + getLength(run) <= 6) {
             const data = takeCard("deck");
             simplePush(`${gameId}/${playerName}/hand/`, data[1]);
         }
     }
+    // const drawRemaining = async () => {
+    //     console.log("Start");
+    //     while (getLength(deck) > 0 && getLength(hand) + getLength(run) <= 6) {
+    //         const data = takeCard("deck");
+    //         simplePush(`${gameId}/${playerName}/hand/`, data[1]);
+    //         await wait(300);
+    //         console.log("runnning");
+    //     }
+    //     console.log("Finish");
+    // };
 
     function takeFromDiscardPile() {
         if (
@@ -92,11 +92,7 @@ function Player({
     function addSpecial(idx, card, deck) {
         if (deck === "playing") {
             simplePush(`${gameId}/${playerName}/special/`, card);
-            simpleUpdate(
-                `${gameId}/${playerName}/`,
-                "playingCard",
-                emptyPlayingCard
-            );
+            removePlayingCard();
         } else {
             simplePush(`${gameId}/${playerName}/special/`, card);
             simpleDelete(`${gameId}/${playerName}/${deck}/${idx}`);
@@ -105,30 +101,28 @@ function Player({
 
     function addBunny(card) {
         simplePush(`${gameId}/${playerName}/bunnies/`, card);
-        simpleUpdate(
-            `${gameId}/${playerName}/`,
-            "playingCard",
-            emptyPlayingCard
+        removePlayingCard();
+    }
+
+    function addToBunny(player, bunnyId) {
+        if (playingCard.id === 0) return;
+        if (player === "") return;
+
+        simplePush(
+            `${gameId}/${player}/bunnies/${bunnyId}/modifiers/`,
+            playingCard
         );
+        removePlayingCard();
     }
 
     function discard(idx, card, deck) {
-        if (deck === "playing")
-            simpleUpdate(
-                `${gameId}/${playerName}/`,
-                "playingCard",
-                emptyPlayingCard
-            );
+        if (deck === "playing") removePlayingCard();
         else simpleDelete(`${gameId}/${playerName}/${deck}/${idx}`);
         discardCard(card);
     }
 
     function changeMarket(card) {
-        simpleUpdate(
-            `${gameId}/${playerName}/`,
-            "playingCard",
-            emptyPlayingCard
-        );
+        removePlayingCard();
         setMarket(card);
     }
 
@@ -145,6 +139,7 @@ function Player({
 
     const basicFunctions = {
         addBunny,
+        addToBunny,
         addDolla,
         addSpecial,
         discard,
@@ -191,24 +186,35 @@ function Player({
                 <Deck
                     card={{ cardType: "Deck" }}
                     title={`Deck : ${getLength(gameState.deck)} Cards`}
-                    handleClick={() => draw()}
-                    actionTitle="Draw"
+                    // actions={[{ actionTitle: "Draw", handleClick: draw }]}
+                    doubleClick={() => draw()}
                     picture="blue.png"
                 />
 
-                <Deck
+                {/* <Deck
                     card={{ cardType: "Carrots" }}
                     title={`Carrots : ${getLength(gameState.carrotDeck)} Cards`}
-                    handleClick={() => drawCarrot()}
-                    actionTitle="Draw"
-                    picture="carrot.png"
-                />
+                /> */}
 
                 <Deck
                     card={{ cardType: "Market" }}
                     title={`Market`}
-                    handleClick={() => console.log()}
-                    actionTitle=""
+                    actions={[
+                        {
+                            actionTitle: "Buy Cabbage Card",
+                            handleClick: console.log,
+                        },
+                        {
+                            actionTitle: "Buy Water Card",
+                            handleClick: console.log,
+                        },
+                        {
+                            actionTitle: `Buy Carrot (${getLength(
+                                gameState.carrotDeck
+                            )} Left)`,
+                            handleClick: drawCarrot,
+                        },
+                    ]}
                     picture={`${gameState.market.deck}/${gameState.market.id}.png`}
                 />
 
@@ -219,8 +225,12 @@ function Player({
                             ? getLength(gameState.discardedDeck)
                             : 0
                     } Cards`}
-                    handleClick={() => takeFromDiscardPile()}
-                    actionTitle="Draw"
+                    actions={[
+                        {
+                            actionTitle: "Draw",
+                            handleClick: takeFromDiscardPile,
+                        },
+                    ]}
                     picture={
                         gameState.discardedDeck &&
                         getLength(gameState.discardedDeck)
@@ -240,7 +250,12 @@ function Player({
                     <DisplayCardsIcons
                         name={"bunnies"}
                         cards={bunnyCircle.justin}
+                        player={"Justin"}
                         basicFunctions={basicFunctions}
+                        // allowOptions={
+                        //     playerName === "Justin" ||
+                        //     playerName === currentPlayer
+                        // }
                     />
                 </Col>
 
@@ -249,7 +264,12 @@ function Player({
                     <DisplayCardsIcons
                         name={"bunnies"}
                         cards={bunnyCircle.lizzie}
+                        player={"Lizzie"}
                         basicFunctions={basicFunctions}
+                        // allowOptions={
+                        //     playerName === "Lizzie" ||
+                        //     playerName === currentPlayer
+                        // }
                     />
                 </Col>
                 <Col>
@@ -257,7 +277,12 @@ function Player({
                     <DisplayCardsIcons
                         name={"bunnies"}
                         cards={bunnyCircle.marie}
+                        player={"Marie"}
                         basicFunctions={basicFunctions}
+                        // allowOptions={
+                        //     playerName === "Marie" ||
+                        //     playerName === currentPlayer
+                        // }
                     />
                 </Col>
             </Row>
@@ -275,8 +300,12 @@ function Player({
                                 <Deck
                                     card={card}
                                     title={`Run ${idx + 1}`}
-                                    handleClick={() => playCard()}
-                                    actionTitle="Move in Run"
+                                    actions={[
+                                        {
+                                            actionTitle: "Move in Run",
+                                            handleClick: playCard,
+                                        },
+                                    ]}
                                     picture="blue.png"
                                     key={idx}
                                 />
@@ -287,13 +316,6 @@ function Player({
                             basicFunctions={basicFunctions}
                         />
                     </Row>
-                </Tab>
-                <Tab eventKey="bunnies" title={`${getLength(bunnies)} Bunnies`}>
-                    <DisplayCardsIcons
-                        name={"bunnies"}
-                        cards={bunnies}
-                        basicFunctions={basicFunctions}
-                    />
                 </Tab>
                 <Tab eventKey="dolla" title="Dolla">
                     <DisplayCardsIcons
@@ -316,6 +338,7 @@ function Player({
                         basicFunctions={basicFunctions}
                     />
                 </Tab>
+                <Tab eventKey="cabbageAndWater" title="Cabbage and Water"></Tab>
             </Tabs>
         </Col>
     );

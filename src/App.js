@@ -5,6 +5,8 @@ import {
     deckDefault,
     carrotDeckDefault,
     marketStarterCard,
+    cabbage,
+    water,
 } from "./killerBunnies/bluedeck";
 import { getLength, shuffleArray } from "./killerBunnies/utils";
 import "./App.css";
@@ -60,6 +62,8 @@ function App() {
         simpleAdd(`${gameId}/gameState`, {
             deck: shuffleArray(deckDefault),
             carrotDeck: shuffleArray(carrotDeckDefault),
+            cabbageDeck: shuffleArray(cabbage),
+            waterDeck: shuffleArray(water),
             smallCarrotDeck: shuffleArray(carrotDeckDefault),
             discardedDeck: [],
             market: marketStarterCard,
