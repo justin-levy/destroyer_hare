@@ -16,6 +16,11 @@ body {
   display: inline-block;
   margin: 1px;
 }
+.card-text {
+  color: black;
+  top: -30px;
+  position: relative;
+}
 .szh-menu-container {
   display: inline-block;
 }

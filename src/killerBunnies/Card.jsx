@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, Carousel, Col, Row } from "react-bootstrap";
+import { Card, Carousel, Col } from "react-bootstrap";
 
 import { Menu, MenuItem } from "@szhsin/react-menu";
 import "@szhsin/react-menu/dist/index.css";
@@ -29,6 +29,68 @@ export function DisplayCardsIcons({
                     />
                 ))}
         </>
+    );
+}
+
+export function DisplayResources({ cabbage, water, player }) {
+    return (
+        <>
+            {cabbage &&
+                Object.entries(cabbage).map((card) => (
+                    <ResourceCard
+                        card={card[1]}
+                        type={"cabbage"}
+                        player={player}
+                        id={card[0]}
+                    />
+                ))}
+            {water &&
+                Object.entries(water).map((card) => (
+                    <ResourceCard
+                        card={card[1]}
+                        type={"water"}
+                        player={player}
+                        id={card[0]}
+                    />
+                ))}
+            {/* {cards &&
+                Object.entries(cards).map((card) => (
+                    <PlayingCard
+                        card={card[1]}
+                        idx={card[0]}
+                        key={card[0]}
+                        basicFunctions={basicFunctions}
+                        player={player}
+                        title={card[1].name}
+                        deck={name}
+                        allowOptions={allowOptions}
+                    />
+                ))} */}
+        </>
+    );
+}
+
+export function ResourceCard({ card, type, player, id }) {
+    if (!card) return;
+
+    return (
+        <Menu
+            menuButton={
+                <Card>
+                    <Card.Body className="p-1">
+                        <Card.Img src={`${type}.png`}></Card.Img>
+                    </Card.Body>
+                    <Card.Text>{card}</Card.Text>
+                </Card>
+            }
+            transition
+        >
+            <MenuItem
+                onClick={() => simpleDelete(`12345/${player}/${type}/${id}`)}
+            >
+                Discard
+            </MenuItem>
+        </Menu>
     );
 }
 

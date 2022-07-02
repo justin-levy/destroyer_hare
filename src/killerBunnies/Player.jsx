@@ -6,7 +6,7 @@ import {
     GetPlayingCards,
 } from "../_firebase/getData";
 import { simpleDelete, simplePush, simpleUpdate } from "../_firebase/simpleCD";
-import { Deck, PlayingCard, DisplayCardsIcons } from "./Card";
+import { Deck, PlayingCard, DisplayCardsIcons, DisplayResources } from "./Card";
 import { capitalizeFirstLetter, getLength } from "./utils";
 
 const emptyPlayingCard = {
@@ -52,13 +52,15 @@ function Player({
     discardCarrotCard,
     setMarket,
 }) {
-    const { deck, carrotDeck, discardedDeck } = gameState;
+    const { deck, carrotDeck, discardedDeck, cabbageDeck, waterDeck } =
+        gameState;
 
     const playerState = GetPlayerState(gameId, playerName);
     // console.log(playerName, playerState);
     if (!playerState) return;
 
-    const { hand, run, dolla, special, carrots, playingCard } = playerState;
+    const { hand, run, dolla, special, carrots, playingCard, cabbage, water } =
+        playerState;
 
     const allPlayingCards = GetPlayingCards(gameId);
     const bunnyCircle = GetBunnyCircle(gameId);
@@ -92,6 +94,20 @@ function Player({
         if (getLength(carrotDeck) > 0) {
             const data = takeCard("carrotDeck");
             simplePush(`${gameId}/${playerName}/carrots/`, data[1]);
+        }
+    }
+
+    function drawCabbage() {
+        if (getLength(cabbageDeck) > 0) {
+            const data = takeCard("cabbageDeck");
+            simplePush(`${gameId}/${playerName}/cabbage/`, data[1]);
+        }
+    }
+
+    function drawWater() {
+        if (getLength(waterDeck) > 0) {
+            const data = takeCard("waterDeck");
+            simplePush(`${gameId}/${playerName}/water/`, data[1]);
         }
     }
 
@@ -217,15 +233,19 @@ function Player({
                         title={`Market`}
                         actions={[
                             {
-                                actionTitle: "Buy Cabbage Card",
-                                handleClick: console.log,
+                                actionTitle: `Cabbage Card (${getLength(
+                                    gameState.cabbageDeck
+                                )} Left)`,
+                                handleClick: drawCabbage,
                             },
                             {
-                                actionTitle: "Buy Water Card",
-                                handleClick: console.log,
+                                actionTitle: `Water Card (${getLength(
+                                    gameState.waterDeck
+                                )} Left)`,
+                                handleClick: drawWater,
                             },
                             {
-                                actionTitle: `Buy Carrot (${getLength(
+                                actionTitle: `Carrot (${getLength(
                                     gameState.carrotDeck
                                 )} Left)`,
                                 handleClick: drawCarrot,
@@ -358,10 +378,13 @@ function Player({
                             basicFunctions={basicFunctions}
                         />
                     </Tab>
-                    <Tab
-                        eventKey="cabbageAndWater"
-                        title="Cabbage and Water"
-                    ></Tab>
+                    <Tab eventKey="cabbageAndWater" title="Cabbage and Water">
+                        <DisplayResources
+                            cabbage={cabbage}
+                            water={water}
+                            player={playerName}
+                        />
+                    </Tab>
                 </Tabs>
             </Footer>
         </>
