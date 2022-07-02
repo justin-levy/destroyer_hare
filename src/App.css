@@ -1,5 +1,5 @@
 body {
-  padding: 30px;
+  padding: 20px;
   background-color: #fffef2;
 }
 
@@ -18,4 +18,14 @@ body {
 }
 .szh-menu-container {
   display: inline-block;
+}
+.container {
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  max-width: 100%;
+}
+
+.tab-content>.active {
+  display: inline-flex;
 }

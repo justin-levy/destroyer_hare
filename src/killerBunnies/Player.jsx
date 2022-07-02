@@ -13,6 +13,36 @@ const emptyPlayingCard = {
     id: 0,
 };
 
+const footerStyle = {
+    backgroundColor: "grey",
+    color: "white",
+    borderTop: "1px solid #E7E7E7",
+    paddingLeft: "20px",
+    paddingRight: "40px",
+    position: "fixed",
+    left: "0",
+    bottom: "0",
+    height: "300px",
+    width: "100%",
+    zIndex: "100",
+};
+
+const phantomStyle = {
+    display: "block",
+    padding: "20px",
+    height: "400px",
+    width: "100%",
+};
+
+function Footer({ children }) {
+    return (
+        <div>
+            <div style={phantomStyle} />
+            <div style={footerStyle}>{children}</div>
+        </div>
+    );
+}
+
 function Player({
     gameId,
     gameState,
@@ -151,178 +181,190 @@ function Player({
     }
 
     return (
-        <Col md>
-            <Row>
-                <Col>
-                    <PlayingCard
-                        card={allPlayingCards[currentPlayer] || playingCard}
-                        idx={0}
-                        basicFunctions={basicFunctions}
-                        deck="playing"
-                        allowOptions={
-                            playerName === capitalizeFirstLetter(currentPlayer)
-                        }
+        <>
+            <Col md={10}>
+                <Row>
+                    <Col>
+                        <PlayingCard
+                            card={allPlayingCards[currentPlayer] || playingCard}
+                            idx={0}
+                            basicFunctions={basicFunctions}
+                            deck="playing"
+                            allowOptions={
+                                playerName ===
+                                capitalizeFirstLetter(currentPlayer)
+                            }
+                        />
+                        <div>
+                            Playing : {capitalizeFirstLetter(currentPlayer)}
+                        </div>
+                    </Col>
+                    <Deck
+                        card={{ cardType: "Deck" }}
+                        title={`Deck : ${getLength(gameState.deck)} Cards`}
+                        // actions={[{ actionTitle: "Draw", handleClick: draw }]}
+                        doubleClick={() => draw()}
+                        picture="blue.png"
                     />
-                    <div>Playing : {capitalizeFirstLetter(currentPlayer)}</div>
-                </Col>
-                <Deck
-                    card={{ cardType: "Deck" }}
-                    title={`Deck : ${getLength(gameState.deck)} Cards`}
-                    // actions={[{ actionTitle: "Draw", handleClick: draw }]}
-                    doubleClick={() => draw()}
-                    picture="blue.png"
-                />
 
-                {/* <Deck
+                    {/* <Deck
                     card={{ cardType: "Carrots" }}
                     title={`Carrots : ${getLength(gameState.carrotDeck)} Cards`}
                 /> */}
 
-                <Deck
-                    card={{ cardType: "Market" }}
-                    title={`Market`}
-                    actions={[
-                        {
-                            actionTitle: "Buy Cabbage Card",
-                            handleClick: console.log,
-                        },
-                        {
-                            actionTitle: "Buy Water Card",
-                            handleClick: console.log,
-                        },
-                        {
-                            actionTitle: `Buy Carrot (${getLength(
-                                gameState.carrotDeck
-                            )} Left)`,
-                            handleClick: drawCarrot,
-                        },
-                    ]}
-                    picture={`${gameState.market.deck}/${gameState.market.id}.png`}
-                />
+                    <Deck
+                        card={{ cardType: "Market" }}
+                        title={`Market`}
+                        actions={[
+                            {
+                                actionTitle: "Buy Cabbage Card",
+                                handleClick: console.log,
+                            },
+                            {
+                                actionTitle: "Buy Water Card",
+                                handleClick: console.log,
+                            },
+                            {
+                                actionTitle: `Buy Carrot (${getLength(
+                                    gameState.carrotDeck
+                                )} Left)`,
+                                handleClick: drawCarrot,
+                            },
+                        ]}
+                        picture={`${gameState.market.deck}/${gameState.market.id}.png`}
+                    />
 
-                <Deck
-                    card={{ cardType: "Discarded" }}
-                    title={`Discarded Cards : ${
-                        gameState.discardedDeck
-                            ? getLength(gameState.discardedDeck)
-                            : 0
-                    } Cards`}
-                    actions={[
-                        {
-                            actionTitle: "Draw",
-                            handleClick: takeFromDiscardPile,
-                        },
-                    ]}
-                    picture={
-                        gameState.discardedDeck &&
-                        getLength(gameState.discardedDeck)
-                            ? `blue/${
-                                  Object.entries(gameState.discardedDeck)[
-                                      getLength(gameState.discardedDeck) - 1
-                                  ][1].id
-                              }.png`
-                            : ``
-                    }
-                />
-            </Row>
+                    <Deck
+                        card={{ cardType: "Discarded" }}
+                        title={`Discarded Cards : ${
+                            gameState.discardedDeck
+                                ? getLength(gameState.discardedDeck)
+                                : 0
+                        } Cards`}
+                        actions={[
+                            {
+                                actionTitle: "Draw",
+                                handleClick: takeFromDiscardPile,
+                            },
+                        ]}
+                        picture={
+                            gameState.discardedDeck &&
+                            getLength(gameState.discardedDeck)
+                                ? `blue/${
+                                      Object.entries(gameState.discardedDeck)[
+                                          getLength(gameState.discardedDeck) - 1
+                                      ][1].id
+                                  }.png`
+                                : ``
+                        }
+                    />
+                </Row>
+            </Col>
             <div style={{ padding: ".5em" }}></div>
-            <Row>
-                <Col>
-                    <div>Justin</div>
-                    <DisplayCardsIcons
-                        name={"bunnies"}
-                        cards={bunnyCircle.justin}
-                        player={"Justin"}
-                        basicFunctions={basicFunctions}
-                        // allowOptions={
-                        //     playerName === "Justin" ||
-                        //     playerName === currentPlayer
-                        // }
-                    />
-                </Col>
-
-                <Col>
-                    <div>Lizzie</div>
-                    <DisplayCardsIcons
-                        name={"bunnies"}
-                        cards={bunnyCircle.lizzie}
-                        player={"Lizzie"}
-                        basicFunctions={basicFunctions}
-                        // allowOptions={
-                        //     playerName === "Lizzie" ||
-                        //     playerName === currentPlayer
-                        // }
-                    />
-                </Col>
-                <Col>
-                    <div>Marie</div>
-                    <DisplayCardsIcons
-                        name={"bunnies"}
-                        cards={bunnyCircle.marie}
-                        player={"Marie"}
-                        basicFunctions={basicFunctions}
-                        // allowOptions={
-                        //     playerName === "Marie" ||
-                        //     playerName === currentPlayer
-                        // }
-                    />
-                </Col>
-            </Row>
-            <div style={{ padding: ".5em" }}></div>
-
-            <Tabs
-                defaultActiveKey="hand"
-                id="uncontrolled-tab-example"
-                className="mb-3"
-            >
-                <Tab eventKey="hand" title="Hand">
-                    <Row>
-                        {run &&
-                            Object.entries(run).map((card, idx) => (
-                                <Deck
-                                    card={card}
-                                    title={`Run ${idx + 1}`}
-                                    actions={[
-                                        {
-                                            actionTitle: "Move in Run",
-                                            handleClick: playCard,
-                                        },
-                                    ]}
-                                    picture={`${card[1].deck}/${card[1].id}.png`}
-                                    key={idx}
-                                />
-                            ))}
+            <Col md={12}>
+                <Row>
+                    <Col>
+                        <div>Justin</div>
                         <DisplayCardsIcons
-                            name={"hand"}
-                            cards={hand}
+                            name={"bunnies"}
+                            cards={bunnyCircle.justin}
+                            player={"Justin"}
+                            basicFunctions={basicFunctions}
+                            // allowOptions={
+                            //     playerName === "Justin" ||
+                            //     playerName === currentPlayer
+                            // }
+                        />
+                    </Col>
+
+                    <Col>
+                        <div>Lizzie</div>
+                        <DisplayCardsIcons
+                            name={"bunnies"}
+                            cards={bunnyCircle.lizzie}
+                            player={"Lizzie"}
+                            basicFunctions={basicFunctions}
+                            // allowOptions={
+                            //     playerName === "Lizzie" ||
+                            //     playerName === currentPlayer
+                            // }
+                        />
+                    </Col>
+                    <Col>
+                        <div>Marie</div>
+                        <DisplayCardsIcons
+                            name={"bunnies"}
+                            cards={bunnyCircle.marie}
+                            player={"Marie"}
+                            basicFunctions={basicFunctions}
+                            // allowOptions={
+                            //     playerName === "Marie" ||
+                            //     playerName === currentPlayer
+                            // }
+                        />
+                    </Col>
+                </Row>
+            </Col>
+            <div style={{ padding: ".5em" }}></div>
+
+            <Footer>
+                <Tabs
+                    defaultActiveKey="hand"
+                    id="uncontrolled-tab-example"
+                    className="mb-3"
+                >
+                    <Tab eventKey="hand" title="Hand">
+                        <Row>
+                            {run &&
+                                Object.entries(run).map((card, idx) => (
+                                    <Deck
+                                        card={card}
+                                        title={`Run ${idx + 1}`}
+                                        actions={[
+                                            {
+                                                actionTitle: "Move in Run",
+                                                handleClick: playCard,
+                                            },
+                                        ]}
+                                        picture={`${card[1].deck}/${card[1].id}.png`}
+                                        key={idx}
+                                    />
+                                ))}
+                            <DisplayCardsIcons
+                                name={"hand"}
+                                cards={hand}
+                                basicFunctions={basicFunctions}
+                            />
+                        </Row>
+                    </Tab>
+                    <Tab eventKey="dolla" title="Dolla">
+                        <DisplayCardsIcons
+                            name={"dolla"}
+                            cards={dolla}
                             basicFunctions={basicFunctions}
                         />
-                    </Row>
-                </Tab>
-                <Tab eventKey="dolla" title="Dolla">
-                    <DisplayCardsIcons
-                        name={"dolla"}
-                        cards={dolla}
-                        basicFunctions={basicFunctions}
-                    />
-                </Tab>
-                <Tab eventKey="special" title="Special">
-                    <DisplayCardsIcons
-                        name={"special"}
-                        cards={special}
-                        basicFunctions={basicFunctions}
-                    />
-                </Tab>
-                <Tab eventKey="carrots" title="Carrots">
-                    <DisplayCardsIcons
-                        name={"carrots"}
-                        cards={carrots}
-                        basicFunctions={basicFunctions}
-                    />
-                </Tab>
-                <Tab eventKey="cabbageAndWater" title="Cabbage and Water"></Tab>
-            </Tabs>
-        </Col>
+                    </Tab>
+                    <Tab eventKey="special" title="Special">
+                        <DisplayCardsIcons
+                            name={"special"}
+                            cards={special}
+                            basicFunctions={basicFunctions}
+                        />
+                    </Tab>
+                    <Tab eventKey="carrots" title="Carrots">
+                        <DisplayCardsIcons
+                            name={"carrots"}
+                            cards={carrots}
+                            basicFunctions={basicFunctions}
+                        />
+                    </Tab>
+                    <Tab
+                        eventKey="cabbageAndWater"
+                        title="Cabbage and Water"
+                    ></Tab>
+                </Tabs>
+            </Footer>
+        </>
     );
 }
 

@@ -101,7 +101,7 @@ function App() {
     return (
         <Container>
             <Row>
-                <Col sm={{ order: 12 }}>
+                <Col md={2}>
                     <Dropdown>
                         <Dropdown.Toggle variant="success" id="dropdown-basic">
                             Settings
@@ -117,8 +117,6 @@ function App() {
                             </Dropdown.Item>
                         </Dropdown.Menu>
                     </Dropdown>
-                </Col>
-                <Col lg={10}>
                     <select onChange={(e) => setPlayerName(e.target.value)}>
                         <option value="" defaultValue>
                             Choose a Player!
@@ -128,9 +126,7 @@ function App() {
                         <option value="Justin">Justin</option>
                     </select>
                 </Col>
-            </Row>
 
-            <Row>
                 {playerName === "Lizzie" && gameState && gameState.deck && (
                     <Player
                         gameId={gameId}

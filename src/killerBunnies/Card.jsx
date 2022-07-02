@@ -14,7 +14,7 @@ export function DisplayCardsIcons({
     allowOptions = true,
 }) {
     return (
-        <Row>
+        <>
             {cards &&
                 Object.entries(cards).map((card) => (
                     <PlayingCard
@@ -28,7 +28,7 @@ export function DisplayCardsIcons({
                         allowOptions={allowOptions}
                     />
                 ))}
-        </Row>
+        </>
     );
 }
 
