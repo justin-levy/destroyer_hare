@@ -663,6 +663,17 @@ const carrotDeckDefault = [
     { id: 110, number: "Carrot #8", name: "Seth", kind: "carrotCard" },
 ];
 
+const smallCarrotDeck = [
+    { id: 103, number: "Carrot #1", name: "Tucker", kind: "carrotCard" },
+    { id: 104, number: "Carrot #2", name: "Abu", kind: "carrotCard" },
+    { id: 105, number: "Carrot #3", name: "Hikaru", kind: "carrotCard" },
+    { id: 106, number: "Carrot #4", name: "Flo", kind: "carrotCard" },
+    { id: 107, number: "Carrot #5", name: "Remington", kind: "carrotCard" },
+    { id: 108, number: "Carrot #6", name: "Butch", kind: "carrotCard" },
+    { id: 109, number: "Carrot #7", name: "Presto", kind: "carrotCard" },
+    { id: 110, number: "Carrot #8", name: "Seth", kind: "carrotCard" },
+];
+
 const cabbage = [
     "1 Cabbage",
     "1 Cabbage",
@@ -692,7 +703,7 @@ const water = [
     "5 Water",
     "5 Water",
     "10 Water",
-]
+];
 
 const deckDefault = [
     ...bunny,
@@ -706,4 +717,11 @@ const deckDefault = [
     ...dolla,
 ];
 
-export { deckDefault, carrotDeckDefault, marketStarterCard, cabbage, water };
+export {
+    deckDefault,
+    carrotDeckDefault,
+    smallCarrotDeck,
+    marketStarterCard,
+    cabbage,
+    water,
+};

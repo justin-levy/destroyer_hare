@@ -28,19 +28,10 @@ function Player({
     // console.log(playerName, playerState);
     if (!playerState) return;
 
-    const { hand, run, dolla, special, bunnies, carrots, playingCard } =
-        playerState;
+    const { hand, run, dolla, special, carrots, playingCard } = playerState;
 
     const allPlayingCards = GetPlayingCards(gameId);
     const bunnyCircle = GetBunnyCircle(gameId);
-
-    // useEffect(() => {
-    //     console.log(discardedDeck);
-    // }, [discardedDeck]);
-
-    // useEffect(() => {
-    //     console.log(playerState);
-    // }, [playerState]);
 
     function removePlayingCard() {
         simpleUpdate(
@@ -56,16 +47,6 @@ function Player({
             simplePush(`${gameId}/${playerName}/hand/`, data[1]);
         }
     }
-    // const drawRemaining = async () => {
-    //     console.log("Start");
-    //     while (getLength(deck) > 0 && getLength(hand) + getLength(run) <= 6) {
-    //         const data = takeCard("deck");
-    //         simplePush(`${gameId}/${playerName}/hand/`, data[1]);
-    //         await wait(300);
-    //         console.log("runnning");
-    //     }
-    //     console.log("Finish");
-    // };
 
     function takeFromDiscardPile() {
         if (
@@ -143,6 +124,7 @@ function Player({
         addDolla,
         addSpecial,
         discard,
+        discardCard,
         playRun,
         discardCarrot,
         changeMarket,
@@ -306,7 +288,7 @@ function Player({
                                             handleClick: playCard,
                                         },
                                     ]}
-                                    picture="blue.png"
+                                    picture={`${card[1].deck}/${card[1].id}.png`}
                                     key={idx}
                                 />
                             ))}

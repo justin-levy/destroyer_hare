@@ -7,8 +7,9 @@ import {
     marketStarterCard,
     cabbage,
     water,
+    smallCarrotDeck,
 } from "./killerBunnies/bluedeck";
-import { getLength, shuffleArray } from "./killerBunnies/utils";
+import { getLength, shuffleArray, shuffleArray2 } from "./killerBunnies/utils";
 import "./App.css";
 import { GetGameState } from "./_firebase/getData";
 import { simpleAdd, simpleUpdate } from "./_firebase/simpleCD";
@@ -64,7 +65,7 @@ function App() {
             carrotDeck: shuffleArray(carrotDeckDefault),
             cabbageDeck: shuffleArray(cabbage),
             waterDeck: shuffleArray(water),
-            smallCarrotDeck: shuffleArray(carrotDeckDefault),
+            smallCarrotDeck: shuffleArray2(smallCarrotDeck),
             discardedDeck: [],
             market: marketStarterCard,
         });
