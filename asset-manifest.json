@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/destroyer_hare/static/css/main.6141f6eb.css",
-    "main.js": "/destroyer_hare/static/js/main.a86652a1.js",
+    "main.css": "/destroyer_hare/static/css/main.63352447.css",
+    "main.js": "/destroyer_hare/static/js/main.c6d44b81.js",
     "static/js/787.e54eb4d0.chunk.js": "/destroyer_hare/static/js/787.e54eb4d0.chunk.js",
     "index.html": "/destroyer_hare/index.html",
-    "main.6141f6eb.css.map": "/destroyer_hare/static/css/main.6141f6eb.css.map",
-    "main.a86652a1.js.map": "/destroyer_hare/static/js/main.a86652a1.js.map",
+    "main.63352447.css.map": "/destroyer_hare/static/css/main.63352447.css.map",
+    "main.c6d44b81.js.map": "/destroyer_hare/static/js/main.c6d44b81.js.map",
     "787.e54eb4d0.chunk.js.map": "/destroyer_hare/static/js/787.e54eb4d0.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.6141f6eb.css",
-    "static/js/main.a86652a1.js"
+    "static/css/main.63352447.css",
+    "static/js/main.c6d44b81.js"
   ]
 }
