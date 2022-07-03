@@ -67,18 +67,6 @@ const bunny = [
     },
 ];
 
-// 0111	Congenial Bunny - Yellow
-// 0112	Gleeful Bunny - Yellow
-// 0113	Lumbering Bunny - Yellow
-// 0114	Sinister Bunny - Yellow
-// 0115	Timid Bunny - Yellow
-// 0116	Congenial Bunny - Violet
-// 0117	Gleeful Bunny - Violet
-// 0118	Lumbering Bunny - Violet
-// 0119	Sinister Bunny - Violet
-// 0120	Timid Bunny - Violet
-// 0138	Free Agent
-
 // 0121	Choose a Carrot
 // 0122	Choose a Carrot
 // 0123	Choose 2 Carrots

@@ -34,3 +34,7 @@ body {
 .tab-content>.active {
   display: inline-flex;
 }
+.workingTab {
+  background-color: grey;
+  width: 100px;
+}

@@ -2,12 +2,16 @@ import React from "react";
 import { Col, Row, Tabs, Tab } from "react-bootstrap";
 import {
     GetBunnyCircle,
+    GetDolla,
     GetPlayerState,
     GetPlayingCards,
+    GetSpecial,
 } from "../_firebase/getData";
 import { simpleDelete, simplePush, simpleUpdate } from "../_firebase/simpleCD";
 import { Deck, PlayingCard, DisplayCardsIcons, DisplayResources } from "./Card";
 import { capitalizeFirstLetter, getLength } from "./utils";
+
+const players = ["lizzie", "marie", "justin"];
 
 const emptyPlayingCard = {
     id: 0,
@@ -64,6 +68,8 @@ function Player({
 
     const allPlayingCards = GetPlayingCards(gameId);
     const bunnyCircle = GetBunnyCircle(gameId);
+    const otherDolla = GetDolla(gameId, playerName);
+    const otherSpecial = GetSpecial(gameId, playerName);
 
     function removePlayingCard() {
         simpleUpdate(
@@ -285,43 +291,49 @@ function Player({
                 <Row>
                     <Col>
                         <div>Justin</div>
-                        <DisplayCardsIcons
-                            name={"bunnies"}
-                            cards={bunnyCircle.justin}
-                            player={"Justin"}
-                            basicFunctions={basicFunctions}
-                            // allowOptions={
-                            //     playerName === "Justin" ||
-                            //     playerName === currentPlayer
-                            // }
-                        />
+                        <Row>
+                            <DisplayCardsIcons
+                                name={"bunnies"}
+                                cards={bunnyCircle.justin}
+                                player={"Justin"}
+                                basicFunctions={basicFunctions}
+                                // allowOptions={
+                                //     playerName === "Justin" ||
+                                //     playerName === currentPlayer
+                                // }
+                            />
+                        </Row>
                     </Col>
 
                     <Col>
                         <div>Lizzie</div>
-                        <DisplayCardsIcons
-                            name={"bunnies"}
-                            cards={bunnyCircle.lizzie}
-                            player={"Lizzie"}
-                            basicFunctions={basicFunctions}
-                            // allowOptions={
-                            //     playerName === "Lizzie" ||
-                            //     playerName === currentPlayer
-                            // }
-                        />
+                        <Row>
+                            <DisplayCardsIcons
+                                name={"bunnies"}
+                                cards={bunnyCircle.lizzie}
+                                player={"Lizzie"}
+                                basicFunctions={basicFunctions}
+                                // allowOptions={
+                                //     playerName === "Lizzie" ||
+                                //     playerName === currentPlayer
+                                // }
+                            />
+                        </Row>
                     </Col>
                     <Col>
                         <div>Marie</div>
-                        <DisplayCardsIcons
-                            name={"bunnies"}
-                            cards={bunnyCircle.marie}
-                            player={"Marie"}
-                            basicFunctions={basicFunctions}
-                            // allowOptions={
-                            //     playerName === "Marie" ||
-                            //     playerName === currentPlayer
-                            // }
-                        />
+                        <Row>
+                            <DisplayCardsIcons
+                                name={"bunnies"}
+                                cards={bunnyCircle.marie}
+                                player={"Marie"}
+                                basicFunctions={basicFunctions}
+                                // allowOptions={
+                                //     playerName === "Marie" ||
+                                //     playerName === currentPlayer
+                                // }
+                            />
+                        </Row>
                     </Col>
                 </Row>
             </Col>
@@ -385,6 +397,48 @@ function Player({
                             player={playerName}
                         />
                     </Tab>
+                    <Tab title="" tabClassName="workingTab"></Tab>
+
+                    {players.map(
+                        (player) =>
+                            playerName !== capitalizeFirstLetter(player) && (
+                                <Tab
+                                    key={player}
+                                    eventKey={`${player}Dolla`}
+                                    title={`${capitalizeFirstLetter(
+                                        player
+                                    )}'s Dolla`}
+                                    style={{}}
+                                >
+                                    <DisplayCardsIcons
+                                        name={"dolla"}
+                                        cards={otherDolla[player]}
+                                        basicFunctions={basicFunctions}
+                                        allowOptions={false}
+                                    />
+                                </Tab>
+                            )
+                    )}
+                    {players.map(
+                        (player) =>
+                            playerName !== capitalizeFirstLetter(player) && (
+                                <Tab
+                                    key={player}
+                                    eventKey={`${player}Special`}
+                                    title={`${capitalizeFirstLetter(
+                                        player
+                                    )}'s Special Cards`}
+                                    style={{}}
+                                >
+                                    <DisplayCardsIcons
+                                        name={"special"}
+                                        cards={otherSpecial[player]}
+                                        basicFunctions={basicFunctions}
+                                        allowOptions={false}
+                                    />
+                                </Tab>
+                            )
+                    )}
                 </Tabs>
             </Footer>
         </>

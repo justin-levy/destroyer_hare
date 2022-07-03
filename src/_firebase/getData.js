@@ -99,3 +99,55 @@ export const GetBunnyCircle = (gameId) => {
 
     return { lizzie, marie, justin };
 };
+
+export const GetDolla = (gameId, player) => {
+    const [lizzie, setLizzie] = useState({});
+    const [marie, setMarie] = useState({});
+    const [justin, setJustin] = useState({});
+    const dbRef1 = ref(db, `${gameId}/Lizzie/dolla`);
+    const dbRef2 = ref(db, `${gameId}/Marie/dolla`);
+    const dbRef3 = ref(db, `${gameId}/Justin/dolla`);
+
+    useEffect(() => {
+        if (player !== "Lizzie")
+            onValue(dbRef1, (snapshot) => {
+                setLizzie(snapshot.toJSON());
+            });
+        if (player !== "Marie")
+            onValue(dbRef2, (snapshot) => {
+                setMarie(snapshot.toJSON());
+            });
+        if (player !== "Justin")
+            onValue(dbRef3, (snapshot) => {
+                setJustin(snapshot.toJSON());
+            });
+    }, [gameId]);
+
+    return { lizzie, marie, justin };
+};
+
+export const GetSpecial = (gameId, player) => {
+    const [lizzie, setLizzie] = useState({});
+    const [marie, setMarie] = useState({});
+    const [justin, setJustin] = useState({});
+    const dbRef1 = ref(db, `${gameId}/Lizzie/special`);
+    const dbRef2 = ref(db, `${gameId}/Marie/special`);
+    const dbRef3 = ref(db, `${gameId}/Justin/special`);
+
+    useEffect(() => {
+        if (player !== "Lizzie")
+            onValue(dbRef1, (snapshot) => {
+                setLizzie(snapshot.toJSON());
+            });
+        if (player !== "Marie")
+            onValue(dbRef2, (snapshot) => {
+                setMarie(snapshot.toJSON());
+            });
+        if (player !== "Justin")
+            onValue(dbRef3, (snapshot) => {
+                setJustin(snapshot.toJSON());
+            });
+    }, [gameId]);
+
+    return { lizzie, marie, justin };
+};
