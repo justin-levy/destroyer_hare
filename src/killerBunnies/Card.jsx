@@ -138,7 +138,7 @@ export function PlayingCard({
                                     <Card>
                                         <Card.Body className="p-1">
                                             <Card.Img
-                                                src={`blue/${modifier[1].id}.png`}
+                                                src={`${modifier[1].deck}/${modifier[1].id}.png`}
                                             ></Card.Img>
                                         </Card.Body>
                                     </Card>
@@ -165,7 +165,7 @@ export function PlayingCard({
                                 <Card>
                                     <Card.Body className="p-1">
                                         <Card.Img
-                                            src={`blue/${cardImg}.png`}
+                                            src={`${card.deck}/${cardImg}.png`}
                                         ></Card.Img>
                                     </Card.Body>
                                 </Card>
@@ -281,7 +281,9 @@ export function PlayingCard({
                         <Card>
                             <Card.Body className="p-1">
                                 <Card.Img
-                                    src={`blue/${cardImg}.png`}
+                                    src={`${
+                                        card.deck ? card.deck : "blue"
+                                    }/${cardImg}.png`}
                                 ></Card.Img>
                             </Card.Body>
                         </Card>

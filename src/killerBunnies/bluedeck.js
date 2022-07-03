@@ -646,6 +646,18 @@ const dolla = [
     },
 ];
 
+const deckDefault = [
+    ...bunny,
+    ...carrot,
+    ...feed,
+    ...weapon,
+    ...otherRun,
+    ...special,
+    ...verySpecial,
+    ...misfortune,
+    ...dolla,
+];
+
 const marketStarterCard = {
     id: 102,
     kind: "market",
@@ -653,25 +665,121 @@ const marketStarterCard = {
 };
 
 const carrotDeckDefault = [
-    { id: 103, number: "Carrot #1", name: "Tucker", kind: "carrotCard" },
-    { id: 104, number: "Carrot #2", name: "Abu", kind: "carrotCard" },
-    { id: 105, number: "Carrot #3", name: "Hikaru", kind: "carrotCard" },
-    { id: 106, number: "Carrot #4", name: "Flo", kind: "carrotCard" },
-    { id: 107, number: "Carrot #5", name: "Remington", kind: "carrotCard" },
-    { id: 108, number: "Carrot #6", name: "Butch", kind: "carrotCard" },
-    { id: 109, number: "Carrot #7", name: "Presto", kind: "carrotCard" },
-    { id: 110, number: "Carrot #8", name: "Seth", kind: "carrotCard" },
+    {
+        id: 103,
+        number: "Carrot #1",
+        name: "Tucker",
+        kind: "carrotCard",
+        deck: "blue",
+    },
+    {
+        id: 104,
+        number: "Carrot #2",
+        name: "Abu",
+        kind: "carrotCard",
+        deck: "blue",
+    },
+    {
+        id: 105,
+        number: "Carrot #3",
+        name: "Hikaru",
+        kind: "carrotCard",
+        deck: "blue",
+    },
+    {
+        id: 106,
+        number: "Carrot #4",
+        name: "Flo",
+        kind: "carrotCard",
+        deck: "blue",
+    },
+    {
+        id: 107,
+        number: "Carrot #5",
+        name: "Remington",
+        kind: "carrotCard",
+        deck: "blue",
+    },
+    {
+        id: 108,
+        number: "Carrot #6",
+        name: "Butch",
+        kind: "carrotCard",
+        deck: "blue",
+    },
+    {
+        id: 109,
+        number: "Carrot #7",
+        name: "Presto",
+        kind: "carrotCard",
+        deck: "blue",
+    },
+    {
+        id: 110,
+        number: "Carrot #8",
+        name: "Seth",
+        kind: "carrotCard",
+        deck: "blue",
+    },
 ];
 
 const smallCarrotDeck = [
-    { id: 103, number: "Carrot #1", name: "Tucker", kind: "carrotCard" },
-    { id: 104, number: "Carrot #2", name: "Abu", kind: "carrotCard" },
-    { id: 105, number: "Carrot #3", name: "Hikaru", kind: "carrotCard" },
-    { id: 106, number: "Carrot #4", name: "Flo", kind: "carrotCard" },
-    { id: 107, number: "Carrot #5", name: "Remington", kind: "carrotCard" },
-    { id: 108, number: "Carrot #6", name: "Butch", kind: "carrotCard" },
-    { id: 109, number: "Carrot #7", name: "Presto", kind: "carrotCard" },
-    { id: 110, number: "Carrot #8", name: "Seth", kind: "carrotCard" },
+    {
+        id: 103,
+        number: "Carrot #1",
+        name: "Tucker",
+        kind: "carrotCard",
+        deck: "blue",
+    },
+    {
+        id: 104,
+        number: "Carrot #2",
+        name: "Abu",
+        kind: "carrotCard",
+        deck: "blue",
+    },
+    {
+        id: 105,
+        number: "Carrot #3",
+        name: "Hikaru",
+        kind: "carrotCard",
+        deck: "blue",
+    },
+    {
+        id: 106,
+        number: "Carrot #4",
+        name: "Flo",
+        kind: "carrotCard",
+        deck: "blue",
+    },
+    {
+        id: 107,
+        number: "Carrot #5",
+        name: "Remington",
+        kind: "carrotCard",
+        deck: "blue",
+    },
+    {
+        id: 108,
+        number: "Carrot #6",
+        name: "Butch",
+        kind: "carrotCard",
+        deck: "blue",
+    },
+    {
+        id: 109,
+        number: "Carrot #7",
+        name: "Presto",
+        kind: "carrotCard",
+        deck: "blue",
+    },
+    {
+        id: 110,
+        number: "Carrot #8",
+        name: "Seth",
+        kind: "carrotCard",
+        deck: "blue",
+    },
 ];
 
 const cabbage = [
@@ -704,23 +812,11 @@ const water = [
     "10 Water",
 ];
 
-const deckDefault = [
-    ...bunny,
-    ...carrot,
-    ...feed,
-    ...weapon,
-    ...otherRun,
-    ...special,
-    ...verySpecial,
-    ...misfortune,
-    ...dolla,
-];
-
 export {
     deckDefault,
+    marketStarterCard,
     carrotDeckDefault,
     smallCarrotDeck,
-    marketStarterCard,
     cabbage,
     water,
 };

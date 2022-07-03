@@ -117,3 +117,7 @@ const bunny = [
 // 0163	Dex Carrot #10
 // 0164	Rick Carrot #11
 // 0165	Arnie Carrot #12
+
+const yellowDeck = [...bunny];
+
+export { yellowDeck };

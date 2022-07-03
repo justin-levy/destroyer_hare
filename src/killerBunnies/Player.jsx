@@ -244,7 +244,11 @@ function Player({
                         title={`Deck : ${getLength(gameState.deck)} Cards`}
                         // actions={[{ actionTitle: "Draw", handleClick: draw }]}
                         doubleClick={() => draw()}
-                        picture="blue.png"
+                        picture={`${
+                            Object.entries(gameState.deck)[
+                                getLength(gameState.deck) - 1
+                            ][1].deck
+                        }.png`}
                     />
 
                     <Deck
@@ -289,7 +293,11 @@ function Player({
                         picture={
                             gameState.discardedDeck &&
                             getLength(gameState.discardedDeck)
-                                ? `blue/${
+                                ? `${
+                                      Object.entries(gameState.discardedDeck)[
+                                          getLength(gameState.discardedDeck) - 1
+                                      ][1].deck
+                                  }/${
                                       Object.entries(gameState.discardedDeck)[
                                           getLength(gameState.discardedDeck) - 1
                                       ][1].id
@@ -315,7 +323,7 @@ function Player({
                         ]}
                         picture={
                             winningCarrot
-                                ? `blue/${winningCarrot[1].id}.png`
+                                ? `${winningCarrot[1].deck}/${winningCarrot[1].id}.png`
                                 : `smallCarrot.png`
                         }
                     />

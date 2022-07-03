@@ -13,6 +13,7 @@ import { getLength, shuffleArray, shuffleArray2 } from "./killerBunnies/utils";
 import "./App.css";
 import { GetGameState } from "./_firebase/getData";
 import { simpleAdd, simpleUpdate } from "./_firebase/simpleCD";
+import { yellowDeck } from "./killerBunnies/yellowdeck";
 
 const emptyPlayingCard = {
     id: 0,
@@ -59,9 +60,11 @@ function App() {
         simpleUpdate(`${gameId}/gameState`, "market", card);
     }
 
+    const fullDeck = [...deckDefault, ...yellowDeck];
+
     function startNewGame() {
         simpleAdd(`${gameId}/gameState`, {
-            deck: shuffleArray(deckDefault),
+            deck: shuffleArray(fullDeck),
             carrotDeck: shuffleArray(carrotDeckDefault),
             cabbageDeck: shuffleArray(cabbage),
             waterDeck: shuffleArray(water),
@@ -127,7 +130,7 @@ function App() {
                     </select>
                 </Col>
 
-                {playerName === "Lizzie" && gameState && gameState.deck && (
+                {playerName === "Lizzie" && gameState && (
                     <Player
                         gameId={gameId}
                         gameState={gameState}
@@ -138,7 +141,7 @@ function App() {
                         setMarket={setMarket}
                     />
                 )}
-                {playerName === "Marie" && gameState && gameState.deck && (
+                {playerName === "Marie" && gameState && (
                     <Player
                         gameId={gameId}
                         gameState={gameState}
@@ -149,7 +152,7 @@ function App() {
                         setMarket={setMarket}
                     />
                 )}
-                {playerName === "Justin" && gameState && gameState.deck && (
+                {playerName === "Justin" && gameState && (
                     <Player
                         gameId={gameId}
                         gameState={gameState}
