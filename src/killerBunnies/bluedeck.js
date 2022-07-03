@@ -684,7 +684,6 @@ const cabbage = [
     "2 Cabbage",
     "2 Cabbage",
     "2 Cabbage",
-    "2 Cabbage",
     "5 Cabbage",
     "5 Cabbage",
     "10 Cabbage",

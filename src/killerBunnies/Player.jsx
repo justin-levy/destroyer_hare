@@ -316,7 +316,7 @@ function Player({
                         picture={
                             winningCarrot
                                 ? `blue/${winningCarrot[1].id}.png`
-                                : `carrot.png`
+                                : `smallCarrot.png`
                         }
                     />
                 </Row>
