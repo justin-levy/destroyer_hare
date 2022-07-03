@@ -29,6 +29,10 @@ const footerStyle = {
     height: "300px",
     width: "100%",
     zIndex: "100",
+
+    // flex: "1",
+    // display: "flex",
+    overflow: "auto",
 };
 
 const phantomStyle = {
@@ -56,8 +60,15 @@ function Player({
     discardCarrotCard,
     setMarket,
 }) {
-    const { deck, carrotDeck, discardedDeck, cabbageDeck, waterDeck } =
-        gameState;
+    const {
+        deck,
+        carrotDeck,
+        discardedDeck,
+        cabbageDeck,
+        waterDeck,
+        smallCarrotDeck,
+        winningCarrot,
+    } = gameState;
 
     const playerState = GetPlayerState(gameId, playerName);
     // console.log(playerName, playerState);
@@ -202,6 +213,13 @@ function Player({
         } else simpleDelete(`${gameId}/${playerName}/run/0`);
     }
 
+    function getWinningCarrot() {
+        if (getLength(smallCarrotDeck) > 0) {
+            const data = takeCard("smallCarrotDeck");
+            simpleUpdate(`${gameId}/gameState/`, "winningCarrot", data);
+        }
+    }
+
     return (
         <>
             <Col md={10}>
@@ -228,11 +246,6 @@ function Player({
                         doubleClick={() => draw()}
                         picture="blue.png"
                     />
-
-                    {/* <Deck
-                    card={{ cardType: "Carrots" }}
-                    title={`Carrots : ${getLength(gameState.carrotDeck)} Cards`}
-                /> */}
 
                     <Deck
                         card={{ cardType: "Market" }}
@@ -282,6 +295,28 @@ function Player({
                                       ][1].id
                                   }.png`
                                 : ``
+                        }
+                    />
+                    {console.log(winningCarrot)}
+                    <Deck
+                        card={{ cardType: "Carrots" }}
+                        title={
+                            winningCarrot
+                                ? getLength(smallCarrotDeck)
+                                    ? `${getLength(smallCarrotDeck)} Left`
+                                    : "Winner!"
+                                : `Carrots for Winning`
+                        }
+                        actions={[
+                            {
+                                actionTitle: "End Game",
+                                handleClick: getWinningCarrot,
+                            },
+                        ]}
+                        picture={
+                            winningCarrot
+                                ? `blue/${winningCarrot[1].id}.png`
+                                : `carrot.png`
                         }
                     />
                 </Row>
@@ -401,14 +436,14 @@ function Player({
 
                     {players.map(
                         (player) =>
-                            playerName !== capitalizeFirstLetter(player) && (
+                            playerName !== capitalizeFirstLetter(player) && [
                                 <Tab
-                                    key={player}
+                                    key={`${player}Dolla`}
                                     eventKey={`${player}Dolla`}
                                     title={`${capitalizeFirstLetter(
                                         player
                                     )}'s Dolla`}
-                                    style={{}}
+                                    tabClassName={`${player}Tab`}
                                 >
                                     <DisplayCardsIcons
                                         name={"dolla"}
@@ -416,19 +451,14 @@ function Player({
                                         basicFunctions={basicFunctions}
                                         allowOptions={false}
                                     />
-                                </Tab>
-                            )
-                    )}
-                    {players.map(
-                        (player) =>
-                            playerName !== capitalizeFirstLetter(player) && (
+                                </Tab>,
                                 <Tab
-                                    key={player}
+                                    key={`${player}Special`}
                                     eventKey={`${player}Special`}
                                     title={`${capitalizeFirstLetter(
                                         player
                                     )}'s Special Cards`}
-                                    style={{}}
+                                    tabClassName={`${player}Tab`}
                                 >
                                     <DisplayCardsIcons
                                         name={"special"}
@@ -436,8 +466,8 @@ function Player({
                                         basicFunctions={basicFunctions}
                                         allowOptions={false}
                                     />
-                                </Tab>
-                            )
+                                </Tab>,
+                            ]
                     )}
                 </Tabs>
             </Footer>
