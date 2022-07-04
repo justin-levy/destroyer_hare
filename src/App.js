@@ -12,7 +12,7 @@ import {
 import { getLength, shuffleArray, shuffleArray2 } from "./killerBunnies/utils";
 import "./App.css";
 import { GetGameState } from "./_firebase/getData";
-import { simpleAdd, simpleUpdate } from "./_firebase/simpleCD";
+import { simpleAdd, simplePush, simpleUpdate } from "./_firebase/simpleCD";
 import { yellowDeck } from "./killerBunnies/yellowdeck";
 
 const emptyPlayingCard = {
@@ -43,10 +43,7 @@ function App() {
     };
 
     function discardCard(card) {
-        simpleAdd(
-            `${gameId}/gameState/discardedDeck/${getLength(discardedDeck)}`,
-            card
-        );
+        simplePush(`${gameId}/gameState/discardedDeck/`, card);
     }
 
     function discardCarrotCard(card) {

@@ -8,7 +8,13 @@ import {
     GetSpecial,
 } from "../_firebase/getData";
 import { simpleDelete, simplePush, simpleUpdate } from "../_firebase/simpleCD";
-import { Deck, PlayingCard, DisplayCardsIcons, DisplayResources } from "./Card";
+import {
+    Deck,
+    PlayingCard,
+    DisplayCardsIcons,
+    DisplayResources,
+    DiscardDeck,
+} from "./Card";
 import { capitalizeFirstLetter, getLength } from "./utils";
 
 const players = ["lizzie", "marie", "justin"];
@@ -277,35 +283,15 @@ function Player({
                         picture={`${gameState.market.deck}/${gameState.market.id}.png`}
                     />
 
-                    <Deck
-                        card={{ cardType: "Discarded" }}
-                        title={`Discarded Cards : ${
-                            gameState.discardedDeck
-                                ? getLength(gameState.discardedDeck)
-                                : 0
-                        } Cards`}
-                        actions={[
-                            {
-                                actionTitle: "Draw",
-                                handleClick: takeFromDiscardPile,
-                            },
-                        ]}
-                        picture={
-                            gameState.discardedDeck &&
-                            getLength(gameState.discardedDeck)
-                                ? `${
-                                      Object.entries(gameState.discardedDeck)[
-                                          getLength(gameState.discardedDeck) - 1
-                                      ][1].deck
-                                  }/${
-                                      Object.entries(gameState.discardedDeck)[
-                                          getLength(gameState.discardedDeck) - 1
-                                      ][1].id
-                                  }.png`
-                                : ``
-                        }
+                    {/* Discard Deck */}
+                    <DiscardDeck
+                        deck={gameState.discardedDeck}
+                        playerName={playerName}
+                        gameId={gameId}
+                        currentPlayer={currentPlayer}
+                        playingCard={playingCard}
                     />
-                    {console.log(winningCarrot)}
+
                     <Deck
                         card={{ cardType: "Carrots" }}
                         title={
