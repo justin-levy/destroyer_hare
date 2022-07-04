@@ -103,15 +103,15 @@ function Player({
         }
     }
 
-    function takeFromDiscardPile() {
-        if (
-            getLength(discardedDeck) > 0 &&
-            getLength(hand) + getLength(run) <= 6
-        ) {
-            const data = takeCard("discardedDeck");
-            simplePush(`${gameId}/${playerName}/hand/`, data[1]);
-        }
-    }
+    // function takeFromDiscardPile() {
+    //     if (
+    //         getLength(discardedDeck) > 0 &&
+    //         getLength(hand) + getLength(run) <= 6
+    //     ) {
+    //         const data = takeCard("discardedDeck");
+    //         simplePush(`${gameId}/${playerName}/hand/`, data[1]);
+    //     }
+    // }
 
     function drawCarrot() {
         if (getLength(carrotDeck) > 0) {
@@ -285,7 +285,7 @@ function Player({
 
                     {/* Discard Deck */}
                     <DiscardDeck
-                        deck={gameState.discardedDeck}
+                        deck={discardedDeck}
                         playerName={playerName}
                         gameId={gameId}
                         currentPlayer={currentPlayer}
