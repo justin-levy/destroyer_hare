@@ -19,6 +19,7 @@ import {
     yellowSmallCarrotDeck,
 } from "./killerBunnies/yellowdeck";
 import ToggleButton from "react-toggle-button";
+import { advantageousCarrots } from "./killerBunnies/customDecks";
 
 const emptyPlayingCard = {
     id: 0,
@@ -63,10 +64,16 @@ function App() {
         simpleUpdate(`${gameId}/gameState`, "market", card);
     }
 
-    const fullDeck = gameDecks.yellow
+    // Full Deck
+    const yellow = gameDecks.yellow
         ? [...deckDefault, ...yellowDeck]
         : deckDefault;
 
+    const fullDeck = gameDecks.advantageousCarrots
+        ? [...yellow, ...advantageousCarrots]
+        : yellow;
+
+    // Carrot Decks
     const fullCarrotDeck = gameDecks.yellow
         ? [...carrotDeckDefault, ...yellowCarrotDeck]
         : carrotDeckDefault;
@@ -158,6 +165,21 @@ function App() {
                             }
                         />
                         Yellow Deck
+                    </Row>
+                    <div style={{ padding: ".5em" }}></div>
+                    Custom Decks
+                    <Row>
+                        <ToggleButton
+                            value={gameDecks.advantageousCarrots}
+                            onClick={() =>
+                                simpleUpdate(
+                                    `12345/decks`,
+                                    "advantageousCarrots",
+                                    !gameDecks.advantageousCarrots
+                                )
+                            }
+                        />
+                        Advantageous Carrots
                     </Row>
                 </Col>
 
