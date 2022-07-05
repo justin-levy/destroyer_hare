@@ -13,7 +13,11 @@ import { getLength, shuffleArray, shuffleArray2 } from "./killerBunnies/utils";
 import "./App.css";
 import { GetGameState, GetSelectedDecks } from "./_firebase/getData";
 import { simpleAdd, simplePush, simpleUpdate } from "./_firebase/simpleCD";
-import { yellowDeck } from "./killerBunnies/yellowdeck";
+import {
+    yellowCarrotDeck,
+    yellowDeck,
+    yellowSmallCarrotDeck,
+} from "./killerBunnies/yellowdeck";
 import ToggleButton from "react-toggle-button";
 
 const emptyPlayingCard = {
@@ -63,13 +67,21 @@ function App() {
         ? [...deckDefault, ...yellowDeck]
         : deckDefault;
 
+    const fullCarrotDeck = gameDecks.yellow
+        ? [...carrotDeckDefault, ...yellowCarrotDeck]
+        : carrotDeckDefault;
+
+    const fullSmallCarrotDeck = gameDecks.yellow
+        ? [...smallCarrotDeck, ...yellowSmallCarrotDeck]
+        : smallCarrotDeck;
+
     function startNewGame() {
         simpleAdd(`${gameId}/gameState`, {
             deck: shuffleArray(fullDeck),
-            carrotDeck: shuffleArray(carrotDeckDefault),
+            carrotDeck: shuffleArray(fullCarrotDeck),
             cabbageDeck: shuffleArray(cabbage),
             waterDeck: shuffleArray(water),
-            smallCarrotDeck: shuffleArray2(smallCarrotDeck),
+            smallCarrotDeck: shuffleArray2(fullSmallCarrotDeck),
             discardedDeck: [],
             market: marketStarterCard,
         });

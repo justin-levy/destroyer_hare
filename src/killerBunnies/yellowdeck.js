@@ -67,57 +67,334 @@ const bunny = [
     },
 ];
 
-// 0121	Choose a Carrot
-// 0122	Choose a Carrot
-// 0123	Choose 2 Carrots
-// 0124	Choose 2 Carrots
+const carrot = [
+    {
+        id: 121,
+        type: "run",
+        kind: "chooseCarrot",
+        deck: "yellow",
+    },
+    {
+        id: 122,
+        type: "run",
+        kind: "chooseCarrot",
+        deck: "yellow",
+    },
+    {
+        id: 123,
+        type: "run",
+        kind: "chooseCarrot",
+        deck: "yellow",
+    },
+    {
+        id: 124,
+        type: "run",
+        kind: "chooseCarrot",
+        deck: "yellow",
+    },
+];
 
-// 0125	Feed the Bunny 2/2
-// 0126	Feed the Bunny 4/4
-// 0127	Gorge the Bunny 10/10
+const feed = [
+    {
+        id: 125,
+        type: "run",
+        kind: "feed",
+        deck: "yellow",
+    },
+    {
+        id: 126,
+        type: "run",
+        kind: "feed",
+        deck: "yellow",
+    },
+    {
+        id: 127,
+        type: "run",
+        kind: "feed",
+        deck: "yellow",
+    },
+];
 
-// 0128	Sling Shot Weapon Level 01
-// 0129	Scissors Weapon Level 02
-// 0130	Loose Stalactite Weapon level 03
-// 0131	Sea Whiz Mount Weapon Level 10
-// 0132	Miniature Black Hole Weapon Level 11
-// 0133	Stray Asteroid Weapon Level 12
+const weapon = [
+    {
+        id: 128,
+        type: "run",
+        kind: "weapon",
+        deck: "yellow",
+    },
+    {
+        id: 129,
+        type: "run",
+        kind: "weapon",
+        deck: "yellow",
+    },
+    {
+        id: 130,
+        type: "run",
+        kind: "weapon",
+        deck: "yellow",
+    },
+    {
+        id: 131,
+        type: "run",
+        kind: "weapon",
+        deck: "yellow",
+    },
+    {
+        id: 132,
+        type: "run",
+        kind: "weapon",
+        deck: "yellow",
+    },
+    {
+        id: 133,
+        type: "run",
+        kind: "weapon",
+        deck: "yellow",
+    },
+];
 
-// 0134	Area 51
-// 0135	Bunny Block Bid
-// 0136	Carrot Thief
-// 0137	Double No Trouble
-// 0139	Kaballa's Market Low 2/1
-// 0140	Kaballa's Market Closed
-// 0141	Quadruple Lucky Clover
-// 0142	Rock Bottom
-// 0143	Russian Roulette
-// 0144	Weil's Freshness Center
-// 0145	Bug Off
-// 0146	Free Cabbage And Water
-// 0147	The Minilith
-// 0148	Noah's Flood
-// 0149	Rooney's Weapons Exchange
-// 0150	Top Run Rotate
-// 0151	Containment Suit
-// 0152	Reversal of Fortune
+const otherRun = [
+    {
+        id: 134,
+        type: "run",
+        kind: "abduction",
+        deck: "yellow",
+    },
+    {
+        id: 135,
+        type: "run",
+        kind: "other",
+        deck: "yellow",
+    },
+    {
+        id: 136,
+        type: "run",
+        kind: "other",
+        deck: "yellow",
+    },
+    {
+        id: 137,
+        type: "run",
+        kind: "other",
+        deck: "yellow",
+    },
+    {
+        id: 139,
+        type: "run",
+        kind: "market",
+        deck: "yellow",
+    },
+    {
+        id: 140,
+        type: "run",
+        kind: "market",
+        deck: "yellow",
+    },
+    {
+        id: 141,
+        type: "run",
+        kind: "modifier",
+        deck: "yellow",
+    },
+    {
+        id: 142,
+        type: "run",
+        kind: "other",
+        deck: "yellow",
+    },
+    {
+        id: 143,
+        type: "run",
+        kind: "other",
+        deck: "yellow",
+    },
+    {
+        id: 144,
+        type: "run",
+        kind: "other",
+        deck: "yellow",
+    },
+];
 
-// 0153	Terrible Misfortune – BBQ
-// 0154	Terrible Misfortune – Lawn Dart
+const special = [
+    {
+        id: 145,
+        type: "special",
+        deck: "yellow",
+    },
+    {
+        id: 146,
+        type: "special",
+        deck: "yellow",
+    },
+    {
+        id: 147,
+        type: "special",
+        deck: "yellow",
+    },
+    {
+        id: 148,
+        type: "special",
+        deck: "yellow",
+    },
+    {
+        id: 149,
+        type: "special",
+        deck: "yellow",
+    },
+    {
+        id: 150,
+        type: "special",
+        deck: "yellow",
+    },
+];
 
-// 0155	1 Dolla
-// 0156	1 Dolla
-// 0157	1 Dolla
-// 0158	2 Dolla
-// 0159	2 Dolla
-// 0160	5 Dolla
-// 0161	10 Dolla
+const verySpecial = [
+    {
+        id: 151,
+        type: "verySpecial",
+        deck: "yellow",
+    },
+    {
+        id: 152,
+        type: "verySpecial",
+        deck: "yellow",
+    },
+];
 
-// 0162	Norman Carrot #09
-// 0163	Dex Carrot #10
-// 0164	Rick Carrot #11
-// 0165	Arnie Carrot #12
+const misfortune = [
+    {
+        id: 153,
+        type: "playImmediately",
+        kind: "misfortune",
+        deck: "yellow",
+    },
+    {
+        id: 154,
+        type: "playImmediately",
+        kind: "misfortune",
+        deck: "yellow",
+    },
+];
 
-const yellowDeck = [...bunny];
+const dolla = [
+    {
+        id: 155,
+        type: "dolla",
+        kind: "dolla",
+        deck: "yellow",
+    },
+    {
+        id: 156,
+        type: "dolla",
+        kind: "dolla",
+        deck: "yellow",
+    },
+    {
+        id: 157,
+        type: "dolla",
+        kind: "dolla",
+        deck: "yellow",
+    },
+    {
+        id: 158,
+        type: "dolla",
+        kind: "dolla",
+        deck: "yellow",
+    },
+    {
+        id: 159,
+        type: "dolla",
+        kind: "dolla",
+        deck: "yellow",
+    },
+    {
+        id: 160,
+        type: "dolla",
+        kind: "dolla",
+        deck: "yellow",
+    },
+    {
+        id: 161,
+        type: "dolla",
+        kind: "dolla",
+        deck: "yellow",
+    },
+];
 
-export { yellowDeck };
+const yellowDeck = [
+    ...bunny,
+    ...carrot,
+    ...feed,
+    ...weapon,
+    ...otherRun,
+    ...special,
+    ...verySpecial,
+    ...misfortune,
+    ...dolla,
+];
+
+const yellowCarrotDeck = [
+    {
+        id: 162,
+        number: "Carrot #9",
+        name: "Norman",
+        kind: "carrotCard",
+        deck: "yellow",
+    },
+    {
+        id: 163,
+        number: "Carrot #10",
+        name: "Dex",
+        kind: "carrotCard",
+        deck: "yellow",
+    },
+    {
+        id: 164,
+        number: "Carrot #11",
+        name: "Rick",
+        kind: "carrotCard",
+        deck: "yellow",
+    },
+    {
+        id: 165,
+        number: "Carrot #12",
+        name: "Arnie",
+        kind: "carrotCard",
+        deck: "yellow",
+    },
+];
+
+const yellowSmallCarrotDeck = [
+    {
+        id: 162,
+        number: "Carrot #9",
+        name: "Norman",
+        kind: "carrotCard",
+        deck: "yellow",
+    },
+    {
+        id: 163,
+        number: "Carrot #10",
+        name: "Dex",
+        kind: "carrotCard",
+        deck: "yellow",
+    },
+    {
+        id: 164,
+        number: "Carrot #11",
+        name: "Rick",
+        kind: "carrotCard",
+        deck: "yellow",
+    },
+    {
+        id: 165,
+        number: "Carrot #12",
+        name: "Arnie",
+        kind: "carrotCard",
+        deck: "yellow",
+    },
+];
+
+export { yellowDeck, yellowCarrotDeck, yellowSmallCarrotDeck };
