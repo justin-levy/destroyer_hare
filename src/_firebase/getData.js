@@ -41,6 +41,19 @@ export const GetGameState = (gameId) => {
     return data;
 };
 
+export const GetSelectedDecks = (gameId) => {
+    const [data, setData] = useState({});
+    const dbRef = ref(db, `${gameId}/decks`);
+
+    useEffect(() => {
+        onValue(dbRef, (snapshot) => {
+            setData(snapshot.toJSON());
+        });
+    }, []);
+
+    return data;
+};
+
 export const GetPlayerState = (gameId, player) => {
     const [data, setData] = useState({});
     const dbRef = ref(db, `${gameId}/${player}`);

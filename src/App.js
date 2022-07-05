@@ -11,9 +11,10 @@ import {
 } from "./killerBunnies/bluedeck";
 import { getLength, shuffleArray, shuffleArray2 } from "./killerBunnies/utils";
 import "./App.css";
-import { GetGameState } from "./_firebase/getData";
+import { GetGameState, GetSelectedDecks } from "./_firebase/getData";
 import { simpleAdd, simplePush, simpleUpdate } from "./_firebase/simpleCD";
 import { yellowDeck } from "./killerBunnies/yellowdeck";
+import ToggleButton from "react-toggle-button";
 
 const emptyPlayingCard = {
     id: 0,
@@ -22,6 +23,7 @@ const emptyPlayingCard = {
 function App() {
     const gameId = "12345";
     const gameState = GetGameState(gameId);
+    const gameDecks = GetSelectedDecks(gameId);
     const [playerName, setPlayerName] = useState("player1");
     const { discardedDeck } = gameState;
 
@@ -57,7 +59,9 @@ function App() {
         simpleUpdate(`${gameId}/gameState`, "market", card);
     }
 
-    const fullDeck = [...deckDefault, ...yellowDeck];
+    const fullDeck = gameDecks.yellow
+        ? [...deckDefault, ...yellowDeck]
+        : deckDefault;
 
     function startNewGame() {
         simpleAdd(`${gameId}/gameState`, {
@@ -125,6 +129,24 @@ function App() {
                         <option value="Lizzie">Lizzie</option>
                         <option value="Justin">Justin</option>
                     </select>
+                    <div style={{ padding: ".5em" }}></div>
+                    <Row>
+                        <ToggleButton value={gameDecks.blue} />
+                        Blue Deck
+                    </Row>
+                    <Row>
+                        <ToggleButton
+                            value={gameDecks.yellow}
+                            onClick={() =>
+                                simpleUpdate(
+                                    `12345/decks`,
+                                    "yellow",
+                                    !gameDecks.yellow
+                                )
+                            }
+                        />
+                        Yellow Deck
+                    </Row>
                 </Col>
 
                 {playerName === "Lizzie" && gameState && (
