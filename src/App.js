@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Col, Container, Dropdown, Row } from "react-bootstrap";
 import Player from "./killerBunnies/Player";
 import {
-    deckDefault,
+    blueDeck,
     carrotDeckDefault,
     marketStarterCard,
     cabbage,
@@ -20,6 +20,11 @@ import {
 } from "./killerBunnies/yellowdeck";
 import ToggleButton from "react-toggle-button";
 import { advantageousCarrots } from "./killerBunnies/customDecks";
+import {
+    redCCarrotDeck,
+    redCDeck,
+    redCSmallCarrotDeck,
+} from "./killerBunnies/redcdeck";
 
 const emptyPlayingCard = {
     id: 0,
@@ -65,22 +70,32 @@ function App() {
     }
 
     // Full Deck
-    const yellow = gameDecks.yellow
-        ? [...deckDefault, ...yellowDeck]
-        : deckDefault;
+    const yellow = gameDecks.yellow ? [...blueDeck, ...yellowDeck] : blueDeck;
+    const redC = gameDecks.redC ? [...yellow, ...redCDeck] : yellow;
 
     const fullDeck = gameDecks.advantageousCarrots
-        ? [...yellow, ...advantageousCarrots]
-        : yellow;
+        ? [...redC, ...advantageousCarrots]
+        : redC;
 
-    // Carrot Decks
-    const fullCarrotDeck = gameDecks.yellow
+    // Carrot Deck
+
+    const yellowCarrots = gameDecks.yellow
         ? [...carrotDeckDefault, ...yellowCarrotDeck]
         : carrotDeckDefault;
 
-    const fullSmallCarrotDeck = gameDecks.yellow
+    const fullCarrotDeck = gameDecks.redC
+        ? [...yellowCarrots, ...redCCarrotDeck]
+        : yellowCarrots;
+
+    // Small Carrot Deck
+
+    const yellowSmallCarrots = gameDecks.yellow
         ? [...smallCarrotDeck, ...yellowSmallCarrotDeck]
         : smallCarrotDeck;
+
+    const fullSmallCarrotDeck = gameDecks.redC
+        ? [...yellowSmallCarrots, ...redCSmallCarrotDeck]
+        : yellowSmallCarrots;
 
     function startNewGame() {
         simpleAdd(`${gameId}/gameState`, {
@@ -165,6 +180,19 @@ function App() {
                             }
                         />
                         Yellow Deck
+                    </Row>
+                    <Row>
+                        <ToggleButton
+                            value={gameDecks.redC}
+                            onClick={() =>
+                                simpleUpdate(
+                                    `12345/decks`,
+                                    "redC",
+                                    !gameDecks.redC
+                                )
+                            }
+                        />
+                        Red (Conquest)
                     </Row>
                     <div style={{ padding: ".5em" }}></div>
                     Custom Decks

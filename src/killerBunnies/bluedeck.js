@@ -646,7 +646,7 @@ const dolla = [
     },
 ];
 
-const deckDefault = [
+const blueDeck = [
     ...bunny,
     ...carrot,
     ...feed,
@@ -813,7 +813,7 @@ const water = [
 ];
 
 export {
-    deckDefault,
+    blueDeck,
     marketStarterCard,
     carrotDeckDefault,
     smallCarrotDeck,

@@ -1,66 +1,391 @@
-// 0936	Evil Bunny - Red
-// 0937	Hypnotic Bunny - Red
-// 0938	Ludicrous Bunny - Red
-// 0939	Spiffy Bunny - Red
-// 0940	Truculent Bunny - Red
-// 0958	Holographic Bunny
+const bunny = [
+    {
+        id: 936,
+        type: "run",
+        kind: "bunny",
+        deck: "redC",
+    },
+    {
+        id: 937,
+        type: "run",
+        kind: "bunny",
+        deck: "redC",
+    },
+    {
+        id: 938,
+        type: "run",
+        kind: "bunny",
+        deck: "redC",
+    },
+    {
+        id: 939,
+        type: "run",
+        kind: "bunny",
+        deck: "redC",
+    },
+    {
+        id: 940,
+        type: "run",
+        kind: "bunny",
+        deck: "redC",
+    },
+    {
+        id: 958,
+        type: "run",
+        kind: "bunny",
+        deck: "redC",
+    },
+];
 
-// 0941	Choose a Carrot
-// 0942	Choose a Carrot
-// 0943	Choose 2 Carrots
+const carrot = [
+    {
+        id: 941,
+        type: "run",
+        kind: "chooseCarrot",
+        deck: "redC",
+    },
+    {
+        id: 942,
+        type: "run",
+        kind: "chooseCarrot",
+        deck: "redC",
+    },
+    {
+        id: 943,
+        type: "run",
+        kind: "chooseCarrot",
+        deck: "redC",
+    },
+];
 
-// 0944	Feed the Bunny 3/3
-// 0945	Feed All Your Bunnies 1/1
-// 0946	Everyone Feed A Bunny 1/1
+const feed = [
+    {
+        id: 944,
+        type: "run",
+        kind: "feed",
+        deck: "redC",
+    },
+    {
+        id: 945,
+        type: "run",
+        kind: "feed",
+        deck: "redC",
+    },
+    {
+        id: 946,
+        type: "run",
+        kind: "feed",
+        deck: "redC",
+    },
+];
 
-// 0947	Egg Slicer Weapon Level 1
-// 0948	Hindenbomb Weapon Level 3
-// 0949	Grapes of Wrath Weapon Level 5
-// 0950	Black Ooze Weapon Level 7
-// 0951	Faximilian Weapon Level 9
-// 0952	Odd Job Weapon Level 11
+const weapon = [
+    {
+        id: 947,
+        type: "run",
+        kind: "weapon",
+        deck: "redC",
+    },
+    {
+        id: 948,
+        type: "run",
+        kind: "weapon",
+        deck: "redC",
+    },
+    {
+        id: 949,
+        type: "run",
+        kind: "weapon",
+        deck: "redC",
+    },
+    {
+        id: 950,
+        type: "run",
+        kind: "weapon",
+        deck: "redC",
+    },
+    {
+        id: 951,
+        type: "run",
+        kind: "weapon",
+        deck: "redC",
+    },
+    {
+        id: 952,
+        type: "run",
+        kind: "weapon",
+        deck: "redC",
+    },
+];
 
-// 0953	Barrier
-// 0954	Barrier
+const otherRun = [
+    {
+        id: 953,
+        type: "run",
+        kind: "barrier",
+        deck: "redC",
+    },
+    {
+        id: 954,
+        type: "run",
+        kind: "barrier",
+        deck: "redC",
+    },
+    {
+        id: 955,
+        type: "run",
+        kind: "other",
+        deck: "redC",
+    },
+    {
+        id: 956,
+        type: "run",
+        kind: "other",
+        deck: "redC",
+    },
+    {
+        id: 957,
+        type: "run",
+        kind: "other",
+        deck: "redC",
+    },
+    {
+        id: 959,
+        type: "run",
+        kind: "other",
+        deck: "redC",
+    },
+    {
+        id: 960,
+        type: "run",
+        kind: "modifier",
+        deck: "redC",
+    },
+    {
+        id: 962,
+        type: "run",
+        kind: "roaming",
+        deck: "redC",
+    },
+    {
+        id: 964,
+        type: "run",
+        kind: "other",
+        deck: "redC",
+    },
+    {
+        id: 965,
+        type: "run",
+        kind: "other",
+        deck: "redC",
+    },
+    {
+        id: 967,
+        type: "run",
+        kind: "other",
+        deck: "redC",
+    },
+    {
+        id: 975,
+        type: "run",
+        kind: "modifier",
+        deck: "redC",
+    },
+    {
+        id: 976,
+        type: "run",
+        kind: "modifier",
+        deck: "redC",
+    },
+    {
+        id: 977,
+        type: "run",
+        kind: "modifier",
+        deck: "redC",
+    },
+    {
+        id: 978,
+        type: "run",
+        kind: "modifier",
+        deck: "redC",
+    },
+];
 
-// 0955	Bunnies On Film
-// 0956	Carrot Exchange
-// 0957	Eight Is Enough
-// 0959	Kentucky Avenue
-// 0960	Quindruple Lucky Horseshoe
+const special = [
+    {
+        id: 968,
+        type: "special",
+        deck: "redC",
+    },
+    // {
+    //     id: 969,
+    //     type: "special",
+    //     deck: "redC",
+    // },
+    {
+        id: 970,
+        type: "special",
+        deck: "redC",
+    },
+    {
+        id: 971,
+        type: "special",
+        deck: "redC",
+    },
+];
+
+const verySpecial = [
+    {
+        id: 972,
+        type: "verySpecial",
+        deck: "redC",
+    },
+    {
+        id: 973,
+        type: "verySpecial",
+        deck: "redC",
+    },
+    {
+        id: 974,
+        type: "verySpecial",
+        deck: "redC",
+    },
+];
+
+const misfortune = [
+    {
+        id: 979,
+        type: "playImmediately",
+        kind: "misfortune",
+        deck: "redC",
+    },
+    {
+        id: 980,
+        type: "playImmediately",
+        kind: "misfortune",
+        deck: "redC",
+    },
+];
+
+const dolla = [
+    {
+        id: 981,
+        type: "dolla",
+        kind: "dolla",
+        deck: "redC",
+    },
+    {
+        id: 982,
+        type: "dolla",
+        kind: "dolla",
+        deck: "redC",
+    },
+    {
+        id: 983,
+        type: "dolla",
+        kind: "dolla",
+        deck: "redC",
+    },
+    {
+        id: 984,
+        type: "dolla",
+        kind: "dolla",
+        deck: "redC",
+    },
+    {
+        id: 985,
+        type: "dolla",
+        kind: "dolla",
+        deck: "redC",
+    },
+];
+
+const redCDeck = [
+    ...bunny,
+    ...carrot,
+    ...feed,
+    ...weapon,
+    ...otherRun,
+    ...special,
+    ...verySpecial,
+    ...misfortune,
+    ...dolla,
+];
+
+const redCCarrotDeck = [
+    {
+        id: 987,
+        number: "Carrot #33",
+        name: "Amber",
+        kind: "carrotCard",
+        deck: "redC",
+    },
+    {
+        id: 988,
+        number: "Carrot #34",
+        name: "Egon",
+        kind: "carrotCard",
+        deck: "redC",
+    },
+    {
+        id: 989,
+        number: "Carrot #35",
+        name: "Joan",
+        kind: "carrotCard",
+        deck: "redC",
+    },
+    {
+        id: 990,
+        number: "Carrot #36",
+        name: "Neo",
+        kind: "carrotCard",
+        deck: "redC",
+    },
+];
+
+const redCSmallCarrotDeck = [
+    {
+        id: 987,
+        number: "Carrot #33",
+        name: "Amber",
+        kind: "carrotCard",
+        deck: "redC",
+    },
+    {
+        id: 988,
+        number: "Carrot #34",
+        name: "Egon",
+        kind: "carrotCard",
+        deck: "redC",
+    },
+    {
+        id: 989,
+        number: "Carrot #35",
+        name: "Joan",
+        kind: "carrotCard",
+        deck: "redC",
+    },
+    {
+        id: 990,
+        number: "Carrot #36",
+        name: "Neo",
+        kind: "carrotCard",
+        deck: "redC",
+    },
+];
+
+// Unincorporated Cards
+
 // 0961	Morden's Metals Exchange – Copper
-// 0962	Orbital Missile Platform
 // 0963	Rooney's Weapons Emporium Two Closed
-// 0964	Scotty Doesn't Know
-// 0965	Shuffleboard
 // 0966	Surly Smelter
-// 0967	What The Deuce
-// 0975	Shiner Senator
-// 0976	Shiner Senator
-// 0977	Whiner Senator
-// 0978	Whiner Senator
-
-// 0968	Free Radish And Milk
-// 0969	Half Price Coupon (Kaballa's Market Two)
-// 0970	Witch's Spirit
-// 0971	Witch's Spirit
-
-// 0972	Everybody's Dead Dave
-// 0973	Guardian Angel
-// 0974	Lobbyist
-
-// 0979	Terrible Misfortune (Casting) – Holy Grail
-// 0980	Terrible Misfortune (Casting) – Mordor
-
-// 0981	1 Dolla
-// 0982	2 Dolla
-// 0983	3 Dolla
-// 0984	3 Dolla
-// 0985	10 Dolla
-
+// 969
 // 0986	Rooney's Weapons Emporium Two Starter 3/Level
+// 3 Radish
+// 3 Radish
+// 3 Radish
+// 3 Milk
+// 3 Milk
+// 3 Milk
 
-// 0987	Amber Carrot #33
-// 0988	Egon Carrot #34
-// 0989	Joan Carrot #35
-// 0990	Neo Carrot #36
+export { redCDeck, redCCarrotDeck, redCSmallCarrotDeck };
