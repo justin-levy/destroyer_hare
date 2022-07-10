@@ -15,6 +15,7 @@ export function DisplayCardsIcons({
     player = "",
     name,
     allowOptions = true,
+    playerName = "",
 }) {
     return (
         <>
@@ -26,6 +27,7 @@ export function DisplayCardsIcons({
                         key={card[0]}
                         basicFunctions={basicFunctions}
                         player={player}
+                        playerName={playerName}
                         title={card[1].name}
                         deck={name}
                         allowOptions={allowOptions}
@@ -104,6 +106,7 @@ export function PlayingCard({
     player = "",
     deck,
     allowOptions = true,
+    playerName = "",
 }) {
     if (!card) return;
 
@@ -253,15 +256,16 @@ export function PlayingCard({
                                                 Add Bunny
                                             </MenuItem>
                                         )}
-                                    {card.kind !== "carrotCard" && (
-                                        <MenuItem
-                                            onClick={() =>
-                                                discard(idx, card, deck)
-                                            }
-                                        >
-                                            Discard
-                                        </MenuItem>
-                                    )}
+                                    {card.kind !== "carrotCard" &&
+                                        playerName === player && (
+                                            <MenuItem
+                                                onClick={() =>
+                                                    discard(idx, card, deck)
+                                                }
+                                            >
+                                                Discard
+                                            </MenuItem>
+                                        )}
 
                                     {card.kind === "carrotCard" &&
                                         deck === "carrots" && (

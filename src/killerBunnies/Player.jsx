@@ -316,51 +316,42 @@ function Player({
                 </Row>
             </Col>
             <div style={{ padding: ".5em" }}></div>
-            <Col md={12}>
+            <Col md={12} style={{ backgroundColor: "lightgrey" }}>
                 <Row>
                     <Col>
-                        <div>Justin</div>
+                        <div className="bunnyCircle_playerName">Justin</div>
                         <Row>
                             <DisplayCardsIcons
                                 name={"bunnies"}
                                 cards={bunnyCircle.justin}
                                 player={"Justin"}
                                 basicFunctions={basicFunctions}
-                                // allowOptions={
-                                //     playerName === "Justin" ||
-                                //     playerName === currentPlayer
-                                // }
+                                playerName={playerName}
                             />
                         </Row>
                     </Col>
 
                     <Col>
-                        <div>Lizzie</div>
+                        <div className="bunnyCircle_playerName">Lizzie</div>
                         <Row>
                             <DisplayCardsIcons
                                 name={"bunnies"}
                                 cards={bunnyCircle.lizzie}
                                 player={"Lizzie"}
                                 basicFunctions={basicFunctions}
-                                // allowOptions={
-                                //     playerName === "Lizzie" ||
-                                //     playerName === currentPlayer
-                                // }
+                                playerName={playerName}
                             />
                         </Row>
                     </Col>
                     <Col>
-                        <div>Marie</div>
+                        <div className="bunnyCircle_playerName">Marie</div>
                         <Row>
                             <DisplayCardsIcons
                                 name={"bunnies"}
                                 cards={bunnyCircle.marie}
                                 player={"Marie"}
                                 basicFunctions={basicFunctions}
-                                // allowOptions={
-                                //     playerName === "Marie" ||
-                                //     playerName === currentPlayer
-                                // }
+                                playerName={playerName}
                             />
                         </Row>
                     </Col>
