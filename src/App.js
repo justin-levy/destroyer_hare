@@ -8,7 +8,7 @@ import {
     cabbage,
     water,
     smallCarrotDeck,
-} from "./killerBunnies/bluedeck";
+} from "./_decks/bluedeck";
 import { getLength, shuffleArray, shuffleArray2 } from "./killerBunnies/utils";
 import "./App.css";
 import { GetGameState, GetSelectedDecks } from "./_firebase/getData";
@@ -17,14 +17,14 @@ import {
     yellowCarrotDeck,
     yellowDeck,
     yellowSmallCarrotDeck,
-} from "./killerBunnies/yellowdeck";
+} from "./_decks/yellowdeck";
 import ToggleButton from "react-toggle-button";
-import { advantageousCarrots } from "./killerBunnies/customDecks";
+import { advantageousCarrots } from "./_decks/customDecks";
 import {
     redCCarrotDeck,
     redCDeck,
     redCSmallCarrotDeck,
-} from "./killerBunnies/redcdeck";
+} from "./_decks/redcdeck";
 
 const emptyPlayingCard = {
     id: 0,
