@@ -1,5 +1,6 @@
 import React from "react";
 import { Col, Row, Tabs, Tab } from "react-bootstrap";
+import Footer from "../_components/Footer";
 import {
     GetBunnyCircle,
     GetDolla,
@@ -8,54 +9,20 @@ import {
     GetSpecial,
 } from "../_firebase/getData";
 import { simpleDelete, simplePush, simpleUpdate } from "../_firebase/simpleCD";
-import {
-    Deck,
-    PlayingCard,
-    DisplayCardsIcons,
-    DisplayResources,
-    DiscardDeck,
-} from "./Card";
+import { Deck } from "../_components/Deck";
+import { DiscardDeck } from "../_components/DiscardDeck";
+import { PlayingCard } from "../_components/PlayingCard";
+import { DisplayResources } from "../_components/DisplayResources";
+
+import { DisplayCardsIcons } from "../_components/DisplayCardIcons";
 import { capitalizeFirstLetter, getLength } from "./utils";
+import WinningCarrotDeck from "../_components/WinningCarrotDeck";
 
 const players = ["lizzie", "marie", "justin"];
 
 const emptyPlayingCard = {
     id: 0,
 };
-
-const footerStyle = {
-    backgroundColor: "grey",
-    color: "white",
-    borderTop: "1px solid #E7E7E7",
-    paddingLeft: "20px",
-    paddingRight: "40px",
-    position: "fixed",
-    left: "0",
-    bottom: "0",
-    height: "300px",
-    width: "100%",
-    zIndex: "100",
-
-    // flex: "1",
-    // display: "flex",
-    overflow: "auto",
-};
-
-const phantomStyle = {
-    display: "block",
-    padding: "20px",
-    height: "400px",
-    width: "100%",
-};
-
-function Footer({ children }) {
-    return (
-        <div>
-            <div style={phantomStyle} />
-            <div style={footerStyle}>{children}</div>
-        </div>
-    );
-}
 
 function Player({
     gameId,
@@ -219,13 +186,6 @@ function Player({
         } else simpleDelete(`${gameId}/${playerName}/run/0`);
     }
 
-    function getWinningCarrot() {
-        if (getLength(smallCarrotDeck) > 0) {
-            const data = takeCard("smallCarrotDeck");
-            simpleUpdate(`${gameId}/gameState/`, "winningCarrot", data);
-        }
-    }
-
     return (
         <>
             <Col md={10}>
@@ -292,26 +252,11 @@ function Player({
                         playingCard={playingCard}
                     />
 
-                    <Deck
-                        card={{ cardType: "Carrots" }}
-                        title={
-                            winningCarrot
-                                ? getLength(smallCarrotDeck)
-                                    ? `${getLength(smallCarrotDeck)} Left`
-                                    : "Winner!"
-                                : `Carrots for Winning`
-                        }
-                        actions={[
-                            {
-                                actionTitle: "End Game",
-                                handleClick: getWinningCarrot,
-                            },
-                        ]}
-                        picture={
-                            winningCarrot
-                                ? `${winningCarrot[1].deck}/${winningCarrot[1].id}.png`
-                                : `smallCarrot.png`
-                        }
+                    <WinningCarrotDeck
+                        winningCarrot={winningCarrot}
+                        takeCard={takeCard}
+                        smallCarrotDeck={smallCarrotDeck}
+                        gameId={gameId}
                     />
                 </Row>
             </Col>
