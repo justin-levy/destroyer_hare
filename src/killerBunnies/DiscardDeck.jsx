@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, Carousel, Col } from "react-bootstrap";
+import { Card, Carousel } from "react-bootstrap";
 
 import { Menu, MenuItem } from "@szhsin/react-menu";
 import "@szhsin/react-menu/dist/index.css";
@@ -40,7 +40,7 @@ export function DiscardDeck({
     }
 
     return (
-        <Col>
+        <>
             <Carousel
                 nextLabel=""
                 prevLabel=""
@@ -122,6 +122,6 @@ export function DiscardDeck({
             <div style={{ textAlign: "left" }}>{`Discarded Cards : ${getLength(
                 deck
             )} Cards`}</div>
-        </Col>
+        </>
     );
 }

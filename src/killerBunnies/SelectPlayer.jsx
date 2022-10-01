@@ -3,7 +3,7 @@ import React from "react";
 const SelectPlayer = ({ setPlayerName }) => {
     return (
         <select onChange={(e) => setPlayerName(e.target.value)}>
-            <option value="" defaultValue>
+            <option value="player1" defaultValue>
                 Choose a Player!
             </option>
             <option value="Marie">Marie</option>

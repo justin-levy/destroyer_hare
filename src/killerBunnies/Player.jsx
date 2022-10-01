@@ -8,7 +8,12 @@ import {
     GetPlayingCards,
     GetSpecial,
 } from "../_firebase/getData";
-import { simpleDelete, simplePush, simpleUpdate } from "../_firebase/simpleCD";
+import {
+    simpleAdd,
+    simpleDelete,
+    simplePush,
+    simpleUpdate,
+} from "../_firebase/simpleCD";
 import { Deck } from "../_components/Deck";
 import { DiscardDeck } from "./DiscardDeck";
 import { PlayingCard } from "../_components/PlayingCard";
@@ -24,15 +29,7 @@ const emptyPlayingCard = {
     id: 0,
 };
 
-function Player({
-    gameId,
-    gameState,
-    playerName,
-    takeCard,
-    discardCard,
-    discardCarrotCard,
-    setMarket,
-}) {
+function Player({ gameId, gameState, playerName }) {
     const {
         deck,
         carrotDeck,
@@ -44,7 +41,6 @@ function Player({
     } = gameState;
 
     const playerState = GetPlayerState(gameId, playerName);
-    // console.log(playerName, playerState);
     if (!playerState) return;
 
     const { hand, run, dolla, special, carrots, playingCard, cabbage, water } =
@@ -61,6 +57,38 @@ function Player({
             "playingCard",
             emptyPlayingCard
         );
+    }
+
+    const takeCard = (pile) => {
+        let cardToTake = {};
+        const deckSize = getLength(gameState[pile]);
+        const updatedPile = Object.entries(gameState[pile]).filter(
+            (card, idx) => {
+                if (idx !== deckSize - 1) return card;
+                else cardToTake = card;
+            }
+        );
+        simpleUpdate(
+            `${gameId}/gameState`,
+            pile,
+            Object.fromEntries(updatedPile)
+        );
+        return cardToTake;
+    };
+
+    function discardCard(card) {
+        simplePush(`${gameId}/gameState/discardedDeck/`, card);
+    }
+
+    function discardCarrotCard(card) {
+        simpleAdd(
+            `${gameId}/gameState/carrotDeck/${getLength(discardedDeck)}`,
+            card
+        );
+    }
+
+    function setMarket(card) {
+        simpleUpdate(`${gameId}/gameState`, "market", card);
     }
 
     function draw() {
@@ -246,15 +274,15 @@ function Player({
                         />
                     </Col>
 
-                    {/* Discard Deck */}
-                    <DiscardDeck
-                        deck={discardedDeck}
-                        playerName={playerName}
-                        gameId={gameId}
-                        currentPlayer={currentPlayer}
-                        playingCard={playingCard}
-                    />
-
+                    <Col>
+                        <DiscardDeck
+                            deck={discardedDeck}
+                            playerName={playerName}
+                            gameId={gameId}
+                            currentPlayer={currentPlayer}
+                            playingCard={playingCard}
+                        />
+                    </Col>
                     <Col>
                         <WinningCarrotDeck
                             winningCarrot={winningCarrot}
