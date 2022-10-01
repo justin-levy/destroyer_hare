@@ -1,34 +1,14 @@
 import React, { useState } from "react";
-import { Col, Container, Dropdown, Row } from "react-bootstrap";
-import Player from "./killerBunnies/Player";
-import {
-    blueDeck,
-    carrotDeckDefault,
-    marketStarterCard,
-    cabbage,
-    water,
-    smallCarrotDeck,
-} from "./_decks/bluedeck";
-import { getLength, shuffleArray, shuffleArray2 } from "./killerBunnies/utils";
+import { Col, Container, Row } from "react-bootstrap";
+import { getLength } from "./killerBunnies/utils";
 import "./App.css";
 import { GetGameState, GetSelectedDecks } from "./_firebase/getData";
 import { simpleAdd, simplePush, simpleUpdate } from "./_firebase/simpleCD";
-import {
-    yellowCarrotDeck,
-    yellowDeck,
-    yellowSmallCarrotDeck,
-} from "./_decks/yellowdeck";
-import ToggleButton from "react-toggle-button";
-import { advantageousCarrots } from "./_decks/customDecks";
-import {
-    redCCarrotDeck,
-    redCDeck,
-    redCSmallCarrotDeck,
-} from "./_decks/redcdeck";
 
-const emptyPlayingCard = {
-    id: 0,
-};
+import Player from "./killerBunnies/Player";
+import DeckToggle from "./killerBunnies/DeckToggle";
+import Settings from "./killerBunnies/Settings";
+import SelectPlayer from "./killerBunnies/SelectPlayer";
 
 function App() {
     const gameId = "12345";
@@ -69,146 +49,15 @@ function App() {
         simpleUpdate(`${gameId}/gameState`, "market", card);
     }
 
-    // Full Deck
-    const yellow = gameDecks.yellow ? [...blueDeck, ...yellowDeck] : blueDeck;
-    const redC = gameDecks.redC ? [...yellow, ...redCDeck] : yellow;
-
-    const fullDeck = gameDecks.advantageousCarrots
-        ? [...redC, ...advantageousCarrots]
-        : redC;
-
-    // Carrot Deck
-
-    const yellowCarrots = gameDecks.yellow
-        ? [...carrotDeckDefault, ...yellowCarrotDeck]
-        : carrotDeckDefault;
-
-    const fullCarrotDeck = gameDecks.redC
-        ? [...yellowCarrots, ...redCCarrotDeck]
-        : yellowCarrots;
-
-    // Small Carrot Deck
-
-    const yellowSmallCarrots = gameDecks.yellow
-        ? [...smallCarrotDeck, ...yellowSmallCarrotDeck]
-        : smallCarrotDeck;
-
-    const fullSmallCarrotDeck = gameDecks.redC
-        ? [...yellowSmallCarrots, ...redCSmallCarrotDeck]
-        : yellowSmallCarrots;
-
-    function startNewGame() {
-        simpleAdd(`${gameId}/gameState`, {
-            deck: shuffleArray(fullDeck),
-            carrotDeck: shuffleArray(fullCarrotDeck),
-            cabbageDeck: shuffleArray(cabbage),
-            waterDeck: shuffleArray(water),
-            smallCarrotDeck: shuffleArray2(fullSmallCarrotDeck),
-            discardedDeck: [],
-            market: marketStarterCard,
-        });
-        simpleAdd(`${gameId}/Lizzie`, {
-            hand: [],
-            run: [],
-            dolla: [],
-            special: [],
-            bunnies: [],
-            carrots: [],
-            playingCard: emptyPlayingCard,
-        });
-        simpleAdd(`${gameId}/Marie`, {
-            hand: [],
-            run: [],
-            dolla: [],
-            special: [],
-            bunnies: [],
-            carrots: [],
-            playingCard: emptyPlayingCard,
-        });
-        simpleAdd(`${gameId}/Justin`, {
-            hand: [],
-            run: [],
-            dolla: [],
-            special: [],
-            bunnies: [],
-            carrots: [],
-            playingCard: emptyPlayingCard,
-        });
-    }
-
     return (
         <Container>
             <Row>
                 <Col md={2}>
-                    <Dropdown>
-                        <Dropdown.Toggle variant="success" id="dropdown-basic">
-                            Settings
-                        </Dropdown.Toggle>
-
-                        <Dropdown.Menu>
-                            <Dropdown.Item
-                                onClick={() => {
-                                    startNewGame();
-                                }}
-                            >
-                                Start New Game!
-                            </Dropdown.Item>
-                        </Dropdown.Menu>
-                    </Dropdown>
-                    <select onChange={(e) => setPlayerName(e.target.value)}>
-                        <option value="" defaultValue>
-                            Choose a Player!
-                        </option>
-                        <option value="Marie">Marie</option>
-                        <option value="Lizzie">Lizzie</option>
-                        <option value="Justin">Justin</option>
-                    </select>
-                    <div style={{ padding: ".5em" }}></div>
-                    <Row>
-                        <ToggleButton value={gameDecks.blue} />
-                        Blue Deck
-                    </Row>
-                    <Row>
-                        <ToggleButton
-                            value={gameDecks.yellow}
-                            onClick={() =>
-                                simpleUpdate(
-                                    `12345/decks`,
-                                    "yellow",
-                                    !gameDecks.yellow
-                                )
-                            }
-                        />
-                        Yellow Deck
-                    </Row>
-                    <Row>
-                        <ToggleButton
-                            value={gameDecks.redC}
-                            onClick={() =>
-                                simpleUpdate(
-                                    `12345/decks`,
-                                    "redC",
-                                    !gameDecks.redC
-                                )
-                            }
-                        />
-                        Red (Conquest)
-                    </Row>
-                    <div style={{ padding: ".5em" }}></div>
-                    Custom Decks
-                    <Row>
-                        <ToggleButton
-                            value={gameDecks.advantageousCarrots}
-                            onClick={() =>
-                                simpleUpdate(
-                                    `12345/decks`,
-                                    "advantageousCarrots",
-                                    !gameDecks.advantageousCarrots
-                                )
-                            }
-                        />
-                        Advantageous Carrots
-                    </Row>
+                    <Settings gameDecks={gameDecks} gameId={gameId} />
+                    <div style={{ padding: ".5em" }} />
+                    <SelectPlayer setPlayerName={setPlayerName} />
+                    <div style={{ padding: ".5em" }} />
+                    <DeckToggle gameDecks={gameDecks} />
                 </Col>
 
                 {playerName === "Lizzie" && gameState && (

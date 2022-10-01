@@ -1,6 +1,6 @@
 import React from "react";
 import { Deck } from "../_components/Deck";
-import { getLength } from "../killerBunnies/utils";
+import { getLength } from "./utils";
 import { simpleUpdate } from "../_firebase/simpleCD";
 
 const WinningCarrotDeck = ({

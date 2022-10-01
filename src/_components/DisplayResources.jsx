@@ -1,5 +1,5 @@
 import React from "react";
-import { ResourceCard } from "./ResourceCard";
+import ResourceCard from "./ResourceCard";
 
 export function DisplayResources({ cabbage, water, player }) {
     return (
@@ -22,19 +22,6 @@ export function DisplayResources({ cabbage, water, player }) {
                         id={card[0]}
                     />
                 ))}
-            {/* {cards &&
-                Object.entries(cards).map((card) => (
-                    <PlayingCard
-                        card={card[1]}
-                        idx={card[0]}
-                        key={card[0]}
-                        basicFunctions={basicFunctions}
-                        player={player}
-                        title={card[1].name}
-                        deck={name}
-                        allowOptions={allowOptions}
-                    />
-                ))} */}
         </>
     );
 }

@@ -10,13 +10,13 @@ import {
 } from "../_firebase/getData";
 import { simpleDelete, simplePush, simpleUpdate } from "../_firebase/simpleCD";
 import { Deck } from "../_components/Deck";
-import { DiscardDeck } from "../_components/DiscardDeck";
+import { DiscardDeck } from "./DiscardDeck";
 import { PlayingCard } from "../_components/PlayingCard";
 import { DisplayResources } from "../_components/DisplayResources";
 
 import { DisplayCardsIcons } from "../_components/DisplayCardIcons";
 import { capitalizeFirstLetter, getLength } from "./utils";
-import WinningCarrotDeck from "../_components/WinningCarrotDeck";
+import WinningCarrotDeck from "./WinningCarrotDeck";
 
 const players = ["lizzie", "marie", "justin"];
 
@@ -205,43 +205,46 @@ function Player({
                             Playing : {capitalizeFirstLetter(currentPlayer)}
                         </div>
                     </Col>
-                    <Deck
-                        card={{ cardType: "Deck" }}
-                        title={`Deck : ${getLength(gameState.deck)} Cards`}
-                        // actions={[{ actionTitle: "Draw", handleClick: draw }]}
-                        doubleClick={() => draw()}
-                        picture={`${
-                            Object.entries(gameState.deck)[
-                                getLength(gameState.deck) - 1
-                            ][1].deck
-                        }.png`}
-                    />
-
-                    <Deck
-                        card={{ cardType: "Market" }}
-                        title={`Market`}
-                        actions={[
-                            {
-                                actionTitle: `Cabbage Card (${getLength(
-                                    gameState.cabbageDeck
-                                )} Left)`,
-                                handleClick: drawCabbage,
-                            },
-                            {
-                                actionTitle: `Water Card (${getLength(
-                                    gameState.waterDeck
-                                )} Left)`,
-                                handleClick: drawWater,
-                            },
-                            {
-                                actionTitle: `Carrot (${getLength(
-                                    gameState.carrotDeck
-                                )} Left)`,
-                                handleClick: drawCarrot,
-                            },
-                        ]}
-                        picture={`${gameState.market.deck}/${gameState.market.id}.png`}
-                    />
+                    <Col>
+                        <Deck
+                            card={{ cardType: "Deck" }}
+                            title={`Deck : ${getLength(gameState.deck)} Cards`}
+                            // actions={[{ actionTitle: "Draw", handleClick: draw }]}
+                            doubleClick={() => draw()}
+                            picture={`${
+                                Object.entries(gameState.deck)[
+                                    getLength(gameState.deck) - 1
+                                ][1].deck
+                            }.png`}
+                        />
+                    </Col>
+                    <Col>
+                        <Deck
+                            card={{ cardType: "Market" }}
+                            title={`Market`}
+                            actions={[
+                                {
+                                    actionTitle: `Cabbage Card (${getLength(
+                                        gameState.cabbageDeck
+                                    )} Left)`,
+                                    handleClick: drawCabbage,
+                                },
+                                {
+                                    actionTitle: `Water Card (${getLength(
+                                        gameState.waterDeck
+                                    )} Left)`,
+                                    handleClick: drawWater,
+                                },
+                                {
+                                    actionTitle: `Carrot (${getLength(
+                                        gameState.carrotDeck
+                                    )} Left)`,
+                                    handleClick: drawCarrot,
+                                },
+                            ]}
+                            picture={`${gameState.market.deck}/${gameState.market.id}.png`}
+                        />
+                    </Col>
 
                     {/* Discard Deck */}
                     <DiscardDeck
@@ -252,12 +255,14 @@ function Player({
                         playingCard={playingCard}
                     />
 
-                    <WinningCarrotDeck
-                        winningCarrot={winningCarrot}
-                        takeCard={takeCard}
-                        smallCarrotDeck={smallCarrotDeck}
-                        gameId={gameId}
-                    />
+                    <Col>
+                        <WinningCarrotDeck
+                            winningCarrot={winningCarrot}
+                            takeCard={takeCard}
+                            smallCarrotDeck={smallCarrotDeck}
+                            gameId={gameId}
+                        />
+                    </Col>
                 </Row>
             </Col>
             <div style={{ padding: ".5em" }}></div>
@@ -314,18 +319,20 @@ function Player({
                         <Row>
                             {run &&
                                 Object.entries(run).map((card, idx) => (
-                                    <Deck
-                                        card={card}
-                                        title={`Run ${idx + 1}`}
-                                        actions={[
-                                            {
-                                                actionTitle: "Move in Run",
-                                                handleClick: playCard,
-                                            },
-                                        ]}
-                                        picture={`${card[1].deck}/${card[1].id}.png`}
-                                        key={idx}
-                                    />
+                                    <Col>
+                                        <Deck
+                                            card={card}
+                                            title={`Run ${idx + 1}`}
+                                            actions={[
+                                                {
+                                                    actionTitle: "Move in Run",
+                                                    handleClick: playCard,
+                                                },
+                                            ]}
+                                            picture={`${card[1].deck}/${card[1].id}.png`}
+                                            key={idx}
+                                        />
+                                    </Col>
                                 ))}
                             <DisplayCardsIcons
                                 name={"hand"}

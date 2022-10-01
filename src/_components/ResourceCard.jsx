@@ -4,9 +4,10 @@ import { Card } from "react-bootstrap";
 import { Menu, MenuItem } from "@szhsin/react-menu";
 import "@szhsin/react-menu/dist/index.css";
 import "@szhsin/react-menu/dist/transitions/slide.css";
+
 import { simpleDelete } from "../_firebase/simpleCD";
 
-export function ResourceCard({ card, type, player, id }) {
+const ResourceCard = ({ card, type, player, id }) => {
     if (!card) return;
 
     return (
@@ -14,9 +15,9 @@ export function ResourceCard({ card, type, player, id }) {
             menuButton={
                 <Card>
                     <Card.Body className="p-1">
-                        <Card.Img src={`${type}.png`}></Card.Img>
+                        <Card.Img src={`${type}.png`} />
                     </Card.Body>
-                    <Card.Text>{card}</Card.Text>
+                    <Card.Text children={card} />
                 </Card>
             }
             transition
@@ -28,4 +29,6 @@ export function ResourceCard({ card, type, player, id }) {
             </MenuItem>
         </Menu>
     );
-}
+};
+
+export default ResourceCard;

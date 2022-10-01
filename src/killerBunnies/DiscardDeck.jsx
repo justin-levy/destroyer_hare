@@ -5,7 +5,7 @@ import { Menu, MenuItem } from "@szhsin/react-menu";
 import "@szhsin/react-menu/dist/index.css";
 import "@szhsin/react-menu/dist/transitions/slide.css";
 import { simpleDelete, simplePush, simpleUpdate } from "../_firebase/simpleCD";
-import { getLength } from "../killerBunnies/utils";
+import { getLength } from "./utils";
 import { useState } from "react";
 import { useEffect } from "react";
 
