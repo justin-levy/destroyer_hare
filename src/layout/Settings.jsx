@@ -65,11 +65,7 @@ const Settings = ({ gameDecks, gameId }) => {
             </Dropdown.Toggle>
 
             <Dropdown.Menu>
-                <Dropdown.Item
-                    onClick={() => {
-                        startNewGame();
-                    }}
-                >
+                <Dropdown.Item onClick={startNewGame}>
                     Start New Game!
                 </Dropdown.Item>
             </Dropdown.Menu>

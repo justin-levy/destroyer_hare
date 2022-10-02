@@ -3,7 +3,7 @@ import { PlayingCard } from "./PlayingCard";
 
 export function DisplayCardsIcons({
     cards,
-    basicFunctions,
+    gameId,
     player = "",
     name,
     allowOptions = true,
@@ -17,7 +17,7 @@ export function DisplayCardsIcons({
                         card={card[1]}
                         idx={card[0]}
                         key={card[0]}
-                        basicFunctions={basicFunctions}
+                        gameId={gameId}
                         player={player}
                         playerName={playerName}
                         title={card[1].name}
