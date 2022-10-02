@@ -1,7 +1,7 @@
 import React from "react";
-import { Deck } from "../_components/Deck";
-import { getLength } from "./utils";
-import { simpleUpdate } from "../_firebase/simpleCD";
+import { Deck } from "../../_components/Deck";
+import { getLength } from "../utils";
+import { simpleUpdate } from "../../_firebase/simpleCD";
 
 const WinningCarrotDeck = ({
     winningCarrot,

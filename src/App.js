@@ -3,10 +3,10 @@ import { Col, Container, Row } from "react-bootstrap";
 import "./App.css";
 import { GetGameState, GetSelectedDecks } from "./_firebase/getData";
 
-import Player from "./killerBunnies/Player";
-import DeckToggle from "./killerBunnies/DeckToggle";
-import Settings from "./killerBunnies/Settings";
-import SelectPlayer from "./killerBunnies/SelectPlayer";
+import Player from "./layout/Player";
+import DeckToggle from "./layout/DeckToggle";
+import Settings from "./layout/Settings";
+import SelectPlayer from "./layout/SelectPlayer";
 
 function App() {
     const gameId = "12345";

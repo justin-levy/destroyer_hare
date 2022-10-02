@@ -15,13 +15,15 @@ import {
     simpleUpdate,
 } from "../_firebase/simpleCD";
 import { Deck } from "../_components/Deck";
-import { DiscardDeck } from "./DiscardDeck";
+import { DiscardDeck } from "./Decks/DiscardDeck";
 import { PlayingCard } from "../_components/PlayingCard";
 import { DisplayResources } from "../_components/DisplayResources";
 
 import { DisplayCardsIcons } from "../_components/DisplayCardIcons";
 import { capitalizeFirstLetter, getLength } from "./utils";
-import WinningCarrotDeck from "./WinningCarrotDeck";
+import WinningCarrotDeck from "./Decks/WinningCarrotDeck";
+import Market from "./Decks/Market";
+import DrawingDeck from "./Decks/DrawingDeck";
 
 const players = ["lizzie", "marie", "justin"];
 
@@ -30,15 +32,7 @@ const emptyPlayingCard = {
 };
 
 function Player({ gameId, gameState, playerName }) {
-    const {
-        deck,
-        carrotDeck,
-        discardedDeck,
-        cabbageDeck,
-        waterDeck,
-        smallCarrotDeck,
-        winningCarrot,
-    } = gameState;
+    const { discardedDeck, smallCarrotDeck, winningCarrot } = gameState;
 
     const playerState = GetPlayerState(gameId, playerName);
     if (!playerState) return;
@@ -91,13 +85,6 @@ function Player({ gameId, gameState, playerName }) {
         simpleUpdate(`${gameId}/gameState`, "market", card);
     }
 
-    function draw() {
-        if (getLength(deck) > 0 && getLength(hand) + getLength(run) <= 6) {
-            const data = takeCard("deck");
-            simplePush(`${gameId}/${playerName}/hand/`, data[1]);
-        }
-    }
-
     // function takeFromDiscardPile() {
     //     if (
     //         getLength(discardedDeck) > 0 &&
@@ -107,27 +94,6 @@ function Player({ gameId, gameState, playerName }) {
     //         simplePush(`${gameId}/${playerName}/hand/`, data[1]);
     //     }
     // }
-
-    function drawCarrot() {
-        if (getLength(carrotDeck) > 0) {
-            const data = takeCard("carrotDeck");
-            simplePush(`${gameId}/${playerName}/carrots/`, data[1]);
-        }
-    }
-
-    function drawCabbage() {
-        if (getLength(cabbageDeck) > 0) {
-            const data = takeCard("cabbageDeck");
-            simplePush(`${gameId}/${playerName}/cabbage/`, data[1]);
-        }
-    }
-
-    function drawWater() {
-        if (getLength(waterDeck) > 0) {
-            const data = takeCard("waterDeck");
-            simplePush(`${gameId}/${playerName}/water/`, data[1]);
-        }
-    }
 
     function addDolla(idx, card, deck) {
         simplePush(`${gameId}/${playerName}/dolla/`, card);
@@ -234,43 +200,20 @@ function Player({ gameId, gameState, playerName }) {
                         </div>
                     </Col>
                     <Col>
-                        <Deck
-                            card={{ cardType: "Deck" }}
-                            title={`Deck : ${getLength(gameState.deck)} Cards`}
-                            // actions={[{ actionTitle: "Draw", handleClick: draw }]}
-                            doubleClick={() => draw()}
-                            picture={`${
-                                Object.entries(gameState.deck)[
-                                    getLength(gameState.deck) - 1
-                                ][1].deck
-                            }.png`}
+                        <DrawingDeck
+                            gameState={gameState}
+                            playerState={playerState}
+                            takeCard={takeCard}
+                            gameId={gameId}
+                            playerName={playerName}
                         />
                     </Col>
                     <Col>
-                        <Deck
-                            card={{ cardType: "Market" }}
-                            title={`Market`}
-                            actions={[
-                                {
-                                    actionTitle: `Cabbage Card (${getLength(
-                                        gameState.cabbageDeck
-                                    )} Left)`,
-                                    handleClick: drawCabbage,
-                                },
-                                {
-                                    actionTitle: `Water Card (${getLength(
-                                        gameState.waterDeck
-                                    )} Left)`,
-                                    handleClick: drawWater,
-                                },
-                                {
-                                    actionTitle: `Carrot (${getLength(
-                                        gameState.carrotDeck
-                                    )} Left)`,
-                                    handleClick: drawCarrot,
-                                },
-                            ]}
-                            picture={`${gameState.market.deck}/${gameState.market.id}.png`}
+                        <Market
+                            playerName={playerName}
+                            gameId={gameId}
+                            takeCard={takeCard}
+                            gameState={gameState}
                         />
                     </Col>
 

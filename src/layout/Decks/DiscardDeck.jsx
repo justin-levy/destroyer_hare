@@ -1,13 +1,15 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Card, Carousel } from "react-bootstrap";
-
 import { Menu, MenuItem } from "@szhsin/react-menu";
 import "@szhsin/react-menu/dist/index.css";
 import "@szhsin/react-menu/dist/transitions/slide.css";
-import { simpleDelete, simplePush, simpleUpdate } from "../_firebase/simpleCD";
-import { getLength } from "./utils";
-import { useState } from "react";
-import { useEffect } from "react";
+
+import {
+    simpleDelete,
+    simplePush,
+    simpleUpdate,
+} from "../../_firebase/simpleCD";
+import { getLength } from "../utils";
 
 export function DiscardDeck({
     deck,
