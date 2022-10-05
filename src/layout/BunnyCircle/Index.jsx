@@ -3,7 +3,7 @@ import { Col, Row } from "react-bootstrap";
 import { DisplayCardsIcons } from "../../_components/DisplayCardIcons";
 import { GetBunnyCircle } from "../../_firebase/getData";
 
-const BunnyCircleLayout = ({ gameId, playerName }) => {
+const BunnyCircleLayout = ({ gameId, playerName, gameState, playerState }) => {
     const bunnyCircle = GetBunnyCircle(gameId);
 
     return (
@@ -17,6 +17,8 @@ const BunnyCircleLayout = ({ gameId, playerName }) => {
                         player={"Justin"}
                         gameId={gameId}
                         playerName={playerName}
+                        gameState={gameState}
+                        playerState={playerState}
                     />
                 </Row>
             </Col>
@@ -30,6 +32,8 @@ const BunnyCircleLayout = ({ gameId, playerName }) => {
                         player={"Lizzie"}
                         gameId={gameId}
                         playerName={playerName}
+                        gameState={gameState}
+                        playerState={playerState}
                     />
                 </Row>
             </Col>
@@ -42,6 +46,8 @@ const BunnyCircleLayout = ({ gameId, playerName }) => {
                         player={"Marie"}
                         gameId={gameId}
                         playerName={playerName}
+                        gameState={gameState}
+                        playerState={playerState}
                     />
                 </Row>
             </Col>

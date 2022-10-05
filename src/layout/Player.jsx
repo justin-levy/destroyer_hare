@@ -39,6 +39,8 @@ function Player({ gameId, gameState, playerName }) {
                     <BunnyCircleLayout
                         gameId={gameId}
                         playerName={playerName}
+                        gameState={gameState}
+                        playerState={playerState}
                     />
                 </Row>
             </Col>
@@ -50,6 +52,7 @@ function Player({ gameId, gameState, playerName }) {
                     playerName={playerName}
                     playerState={playerState}
                     currentPlayer={currentPlayer}
+                    gameState={gameState}
                 />
             </Footer>
         </>

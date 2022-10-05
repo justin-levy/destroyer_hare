@@ -59,6 +59,9 @@ const DeckLayout = ({
                     allowOptions={
                         playerName === capitalizeFirstLetter(currentPlayer)
                     }
+                    gameState={gameState}
+                    playerState={playerState}
+                    playerName={playerName}
                 />
                 <div>Playing : {capitalizeFirstLetter(currentPlayer)}</div>
             </Col>

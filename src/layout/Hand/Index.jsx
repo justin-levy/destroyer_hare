@@ -10,7 +10,13 @@ import { simpleDelete, simpleUpdate } from "../../_firebase/simpleCD";
 
 const players = ["lizzie", "marie", "justin"];
 
-const Hand = ({ gameId, playerName, playerState, currentPlayer }) => {
+const Hand = ({
+    gameId,
+    playerName,
+    playerState,
+    currentPlayer,
+    gameState,
+}) => {
     const otherDolla = GetDolla(gameId, playerName);
     const otherSpecial = GetSpecial(gameId, playerName);
 
@@ -58,6 +64,9 @@ const Hand = ({ gameId, playerName, playerState, currentPlayer }) => {
                         name={"hand"}
                         cards={hand}
                         gameId={gameId}
+                        gameState={gameState}
+                        playerState={playerState}
+                        playerName={playerName}
                     />
                 </Row>
             </Tab>
@@ -66,6 +75,9 @@ const Hand = ({ gameId, playerName, playerState, currentPlayer }) => {
                     name={"dolla"}
                     cards={dolla}
                     gameId={gameId}
+                    gameState={gameState}
+                    playerState={playerState}
+                    playerName={playerName}
                 />
             </Tab>
             <Tab eventKey="special" title="Special">
@@ -73,6 +85,9 @@ const Hand = ({ gameId, playerName, playerState, currentPlayer }) => {
                     name={"special"}
                     cards={special}
                     gameId={gameId}
+                    gameState={gameState}
+                    playerState={playerState}
+                    playerName={playerName}
                 />
             </Tab>
             <Tab eventKey="carrots" title="Carrots">
@@ -80,6 +95,9 @@ const Hand = ({ gameId, playerName, playerState, currentPlayer }) => {
                     name={"carrots"}
                     cards={carrots}
                     gameId={gameId}
+                    gameState={gameState}
+                    playerState={playerState}
+                    playerName={playerName}
                 />
             </Tab>
             <Tab eventKey="cabbageAndWater" title="Cabbage and Water">
@@ -87,6 +105,8 @@ const Hand = ({ gameId, playerName, playerState, currentPlayer }) => {
                     cabbage={cabbage}
                     water={water}
                     player={playerName}
+                    gameState={gameState}
+                    playerState={playerState}
                 />
             </Tab>
             <Tab title="" tabClassName="workingTab"></Tab>
@@ -105,6 +125,9 @@ const Hand = ({ gameId, playerName, playerState, currentPlayer }) => {
                                 cards={otherDolla[player]}
                                 gameId={gameId}
                                 allowOptions={false}
+                                gameState={gameState}
+                                playerState={playerState}
+                                playerName={playerName}
                             />
                         </Tab>,
                         <Tab
@@ -120,6 +143,9 @@ const Hand = ({ gameId, playerName, playerState, currentPlayer }) => {
                                 cards={otherSpecial[player]}
                                 gameId={gameId}
                                 allowOptions={false}
+                                gameState={gameState}
+                                playerState={playerState}
+                                playerName={playerName}
                             />
                         </Tab>,
                     ]

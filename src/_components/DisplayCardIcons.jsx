@@ -8,6 +8,8 @@ export function DisplayCardsIcons({
     name,
     allowOptions = true,
     playerName = "",
+    gameState,
+    playerState,
 }) {
     return (
         <>
@@ -23,6 +25,8 @@ export function DisplayCardsIcons({
                         title={card[1].name}
                         deck={name}
                         allowOptions={allowOptions}
+                        gameState={gameState}
+                        playerState={playerState}
                     />
                 ))}
         </>

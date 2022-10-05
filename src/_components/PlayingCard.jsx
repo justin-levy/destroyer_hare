@@ -24,8 +24,13 @@ export function PlayingCard({
     allowOptions = true,
     playerName = "",
     gameId,
+    gameState,
+    playerState,
 }) {
     if (!card) return;
+
+    const { discardedDeck } = gameState;
+    const { run, playingCard } = playerState;
 
     const cardImg = card.id ? card.id : "0";
     const modifiers = card.modifiers;
