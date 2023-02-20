@@ -105,11 +105,15 @@ export function DiscardDeck({
                                     </MenuItem>
                                 )}
 
-                                <MenuItem
-                                    onClick={() => playCard(card[0], card[1])}
-                                >
-                                    Move to Playing
-                                </MenuItem>
+                                {card[1].kind !== "dolla" && (
+                                    <MenuItem
+                                        onClick={() =>
+                                            playCard(card[0], card[1])
+                                        }
+                                    >
+                                        Move to Playing
+                                    </MenuItem>
+                                )}
                             </Menu>
                         </Carousel.Item>
                     ))

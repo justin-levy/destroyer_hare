@@ -1,34 +1,34 @@
 import React from "react";
-import { simplePush } from "../../_firebase/simpleCD";
+import { simplePush, takeCard } from "../../_firebase/simpleCD";
 import { getLength } from "../utils";
-import { Deck } from "../../_components/Deck";
+import { DeckWithMenu } from "../../_components/DeckWithMenu";
 
-const Market = ({ gameState, takeCard, playerName, gameId }) => {
+const Market = ({ gameId, gameState, playerName }) => {
     const { carrotDeck, cabbageDeck, waterDeck } = gameState;
 
     function drawCarrot() {
         if (getLength(carrotDeck) > 0) {
-            const data = takeCard("carrotDeck");
+            const data = takeCard(gameId, gameState, "carrotDeck");
             simplePush(`${gameId}/${playerName}/carrots/`, data[1]);
         }
     }
 
     function drawCabbage() {
         if (getLength(cabbageDeck) > 0) {
-            const data = takeCard("cabbageDeck");
+            const data = takeCard(gameId, gameState, "cabbageDeck");
             simplePush(`${gameId}/${playerName}/cabbage/`, data[1]);
         }
     }
 
     function drawWater() {
         if (getLength(waterDeck) > 0) {
-            const data = takeCard("waterDeck");
+            const data = takeCard(gameId, gameState, "waterDeck");
             simplePush(`${gameId}/${playerName}/water/`, data[1]);
         }
     }
 
     return (
-        <Deck
+        <DeckWithMenu
             card={{ cardType: "Market" }}
             title={`Market`}
             actions={[

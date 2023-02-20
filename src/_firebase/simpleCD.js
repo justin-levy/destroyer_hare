@@ -1,4 +1,5 @@
 import { getDatabase, push, ref, remove, set, update } from "firebase/database";
+import { getLength } from "../layout/utils";
 const db = getDatabase();
 
 export const simpleAdd = (path, obj) => {
@@ -27,6 +28,17 @@ export const simpleDelete = (path) => {
     //   }
 
     remove(ref(db, path));
+};
+
+export const takeCard = (gameId, gameState, pile) => {
+    let cardToTake = {};
+    const deckSize = getLength(gameState[pile]);
+    const updatedPile = Object.entries(gameState[pile]).filter((card, idx) => {
+        if (idx !== deckSize - 1) return card;
+        else cardToTake = card;
+    });
+    simpleUpdate(`${gameId}/gameState`, pile, Object.fromEntries(updatedPile));
+    return cardToTake;
 };
 
 // const simpleDeleteNoConfirm = (path, id) => {

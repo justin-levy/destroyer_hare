@@ -1,23 +1,20 @@
 import React from "react";
-import { Deck } from "../../_components/Deck";
 import { getLength } from "../utils";
-import { simpleUpdate } from "../../_firebase/simpleCD";
+import { simpleUpdate, takeCard } from "../../_firebase/simpleCD";
+import { DeckWithMenu } from "../../_components/DeckWithMenu";
 
-const WinningCarrotDeck = ({
-    winningCarrot,
-    takeCard,
-    smallCarrotDeck,
-    gameId,
-}) => {
+const WinningCarrotDeck = ({ gameId, gameState }) => {
+    const { smallCarrotDeck, winningCarrot } = gameState;
+
     function getWinningCarrot() {
         if (getLength(smallCarrotDeck) > 0) {
-            const data = takeCard("smallCarrotDeck");
+            const data = takeCard(gameId, gameState, "smallCarrotDeck");
             simpleUpdate(`${gameId}/gameState/`, "winningCarrot", data);
         }
     }
 
     return (
-        <Deck
+        <DeckWithMenu
             card={{ cardType: "Carrots" }}
             title={
                 winningCarrot
