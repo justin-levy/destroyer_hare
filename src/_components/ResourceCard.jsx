@@ -7,7 +7,7 @@ import "@szhsin/react-menu/dist/transitions/slide.css";
 
 import { simpleDelete } from "../_firebase/simpleCD";
 
-const ResourceCard = ({ card, type, player, id }) => {
+const ResourceCard = ({ card, type, player, id, gameId }) => {
     if (!card) return;
 
     return (
@@ -23,7 +23,9 @@ const ResourceCard = ({ card, type, player, id }) => {
             transition
         >
             <MenuItem
-                onClick={() => simpleDelete(`12345/${player}/${type}/${id}`)}
+                onClick={() =>
+                    simpleDelete(`${gameId}/${player}/${type}/${id}`)
+                }
             >
                 Discard
             </MenuItem>

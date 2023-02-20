@@ -22,7 +22,7 @@ function App() {
                     <div style={{ padding: ".5em" }} />
                     <SelectPlayer setPlayerName={setPlayerName} />
                     <div style={{ padding: ".5em" }} />
-                    <DeckToggle gameDecks={gameDecks} />
+                    <DeckToggle gameDecks={gameDecks} gameId={gameId} />
                 </Col>
 
                 {gameState && playerName !== "player1" && (

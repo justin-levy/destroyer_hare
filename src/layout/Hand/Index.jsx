@@ -107,6 +107,7 @@ const Hand = ({
                     player={playerName}
                     gameState={gameState}
                     playerState={playerState}
+                    gameId={gameId}
                 />
             </Tab>
             <Tab title="" tabClassName="workingTab"></Tab>

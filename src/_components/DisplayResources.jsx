@@ -1,7 +1,7 @@
 import React from "react";
 import ResourceCard from "./ResourceCard";
 
-export function DisplayResources({ cabbage, water, player }) {
+export function DisplayResources({ cabbage, water, player, gameId }) {
     return (
         <>
             {cabbage &&
@@ -11,6 +11,7 @@ export function DisplayResources({ cabbage, water, player }) {
                         type={"cabbage"}
                         player={player}
                         id={card[0]}
+                        gameId={gameId}
                     />
                 ))}
             {water &&
@@ -20,6 +21,7 @@ export function DisplayResources({ cabbage, water, player }) {
                         type={"water"}
                         player={player}
                         id={card[0]}
+                        gameId={gameId}
                     />
                 ))}
         </>

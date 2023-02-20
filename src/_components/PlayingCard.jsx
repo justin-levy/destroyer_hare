@@ -138,7 +138,7 @@ export function PlayingCard({
                                 onClick={() => {
                                     discardCard(modifier[1]);
                                     simpleDelete(
-                                        `12345/${player}/bunnies/${idx}/modifiers/${modifier[0]}`
+                                        `${gameId}/${player}/bunnies/${idx}/modifiers/${modifier[0]}`
                                     );
                                 }}
                             >

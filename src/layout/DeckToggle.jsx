@@ -3,7 +3,7 @@ import { Row } from "react-bootstrap";
 import { simpleUpdate } from "../_firebase/simpleCD";
 import ToggleButton from "react-toggle-button";
 
-const DeckToggle = ({ gameDecks }) => {
+const DeckToggle = ({ gameDecks, gameId }) => {
     return (
         <>
             <Row>
@@ -14,7 +14,11 @@ const DeckToggle = ({ gameDecks }) => {
                 <ToggleButton
                     value={gameDecks.yellow}
                     onClick={() =>
-                        simpleUpdate(`12345/decks`, "yellow", !gameDecks.yellow)
+                        simpleUpdate(
+                            `${gameId}/decks`,
+                            "yellow",
+                            !gameDecks.yellow
+                        )
                     }
                 />
                 Yellow Deck
@@ -23,7 +27,7 @@ const DeckToggle = ({ gameDecks }) => {
                 <ToggleButton
                     value={gameDecks.redC}
                     onClick={() =>
-                        simpleUpdate(`12345/decks`, "redC", !gameDecks.redC)
+                        simpleUpdate(`${gameId}/decks`, "redC", !gameDecks.redC)
                     }
                 />
                 Red (Conquest)
@@ -35,7 +39,7 @@ const DeckToggle = ({ gameDecks }) => {
                     value={gameDecks.advantageousCarrots}
                     onClick={() =>
                         simpleUpdate(
-                            `12345/decks`,
+                            `${gameId}/decks`,
                             "advantageousCarrots",
                             !gameDecks.advantageousCarrots
                         )
