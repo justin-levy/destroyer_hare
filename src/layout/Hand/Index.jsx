@@ -67,6 +67,7 @@ const Hand = ({
                         gameState={gameState}
                         playerState={playerState}
                         playerName={playerName}
+                        player={playerName}
                     />
                 </Row>
             </Tab>
@@ -78,6 +79,7 @@ const Hand = ({
                     gameState={gameState}
                     playerState={playerState}
                     playerName={playerName}
+                    player={playerName}
                 />
             </Tab>
             <Tab eventKey="special" title="Special">
@@ -88,6 +90,7 @@ const Hand = ({
                     gameState={gameState}
                     playerState={playerState}
                     playerName={playerName}
+                    player={playerName}
                 />
             </Tab>
             <Tab eventKey="carrots" title="Carrots">
@@ -98,6 +101,7 @@ const Hand = ({
                     gameState={gameState}
                     playerState={playerState}
                     playerName={playerName}
+                    player={playerName}
                 />
             </Tab>
             <Tab eventKey="cabbageAndWater" title="Cabbage and Water">
@@ -129,6 +133,7 @@ const Hand = ({
                                 gameState={gameState}
                                 playerState={playerState}
                                 playerName={playerName}
+                                player={playerName}
                             />
                         </Tab>,
                         <Tab
@@ -147,6 +152,7 @@ const Hand = ({
                                 gameState={gameState}
                                 playerState={playerState}
                                 playerName={playerName}
+                                player={playerName}
                             />
                         </Tab>,
                     ]
